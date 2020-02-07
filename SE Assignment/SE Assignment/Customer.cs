@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SE_Assignment
 {
-    public class Customer
+    class Customer
     {
         public Customer()
         {
