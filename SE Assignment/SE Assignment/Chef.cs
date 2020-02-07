@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Program
+    class Chef : Employee
     {
-        static void Main(string[] args)
-        {
-            
+        
 
-            Console.ReadLine();
+        public void prepareOrder()
+        {
+
         }
     }
 }

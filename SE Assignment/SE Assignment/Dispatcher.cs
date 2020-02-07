@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Program
+    class Dispatcher : Employee
     {
-        static void Main(string[] args)
-        {
-            
+        private double totalCommision;
 
-            Console.ReadLine();
+        public double TotalCommission { get; set; }
+
+        public void dispatchOrder()
+        {
+
         }
     }
 }

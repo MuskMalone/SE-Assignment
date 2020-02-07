@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Program
+    class Manager : Employee
     {
-        static void Main(string[] args)
-        {
-            
+        private DateTime companyStartDate;
 
-            Console.ReadLine();
-        }
+        public DateTime CompanyStartDate { get; set; }
     }
 }
