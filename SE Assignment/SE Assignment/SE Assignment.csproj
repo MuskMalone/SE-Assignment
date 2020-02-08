@@ -44,7 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee.cs" />
+    <Compile Include="Food.cs" />
+    <Compile Include="FoodAggregate.cs" />
+    <Compile Include="FoodCollection.cs" />
+    <Compile Include="FoodIterator.cs" />
     <Compile Include="NewState.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="OrderState.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Program.cs" />
