@@ -10,7 +10,11 @@ namespace SE_Assignment
     {
         private double totalCommision;
 
-        public double TotalCommission { get; set; }
+        public double TotalCommission
+        {
+            get { return totalCommision; }
+            set { totalCommision = value; }
+        }
 
         public void dispatchOrder()
         {
