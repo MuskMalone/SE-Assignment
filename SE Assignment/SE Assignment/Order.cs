@@ -10,7 +10,8 @@ namespace SE_Assignment
     {
         public FoodIterator CreateFoodIterator()
         {
-            
+            FoodIterator fi = new FoodCollection();
+            return fi;
         }
     }
 }

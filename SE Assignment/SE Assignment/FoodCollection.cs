@@ -11,9 +11,14 @@ namespace SE_Assignment
         public List<Food> foodList = new List<Food>();
         public int position = 0;
 
+        public Food GetCurrent()
+        {
+            return foodList[position];
+        }
+
         public Food NextFood()
         {
-            if (position < foodList.Count)
+            if (position < foodList.Count()-1)
             {
                 position++;
                 return foodList[position];
@@ -23,7 +28,7 @@ namespace SE_Assignment
 
         public bool HasNextFood()
         {
-            if (position < foodList.Count)
+            if (position < foodList.Count()-1)
                 return true;
             return false;
         }
@@ -31,11 +36,31 @@ namespace SE_Assignment
         public void AddFood(Food f)
         {
             foodList.Add(f);
+            Console.WriteLine(f.Title+" Added Successfully!");
         }
 
-        public void RemoveFood(Food f)
+        public void editFood(int id, Food f)
         {
-            foodList.RemoveAt(position);
+            for (int i = 0; i < foodList.Count()-1; i++)
+            {
+                if (foodList[i].FoodID == id)
+                {
+                    foodList[i] = f;
+                    Console.WriteLine("Successfully Edited Food Item!");
+                }
+            }
+        }
+
+        public void RemoveFood(int id)
+        {
+            for (int i = 0; i < foodList.Count() - 1; i++)
+            {
+                if (foodList[i].FoodID == id)
+                {
+                    foodList.RemoveAt(i);
+                    Console.WriteLine("Successfully Deleted Food Item!");
+                }
+            }
         }
     }
 }

@@ -8,12 +8,16 @@ namespace SE_Assignment
 {
     public interface FoodIterator
     {
+        Food GetCurrent();
+
         Food NextFood();
 
         bool HasNextFood();
 
         void AddFood(Food f);
 
-        void RemoveFood(Food f);
+        void editFood(int id, Food f);
+
+        void RemoveFood(int id);
     }
 }
