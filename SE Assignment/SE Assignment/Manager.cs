@@ -10,6 +10,10 @@ namespace SE_Assignment
     {
         private DateTime companyStartDate;
 
-        public DateTime CompanyStartDate { get; set; }
+        public DateTime CompanyStartDate
+        {
+            get { return companyStartDate; }
+            set { companyStartDate = value; }
+        }
     }
 }
