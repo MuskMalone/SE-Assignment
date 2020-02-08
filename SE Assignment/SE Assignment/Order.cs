@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class Order : FoodAggregate
+    public class Order
     {
         private string orderStatus;
         public String OrderStatus { get; set; }
 
-
-        public FoodIterator CreateFoodIterator()
-        {
-            FoodIterator fi = new FoodCollection();
-            return fi;
-        }
 
         public void registerCustomer()
         {

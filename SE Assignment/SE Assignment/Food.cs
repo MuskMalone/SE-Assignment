@@ -36,12 +36,17 @@ namespace SE_Assignment
         }
         //public string Set { get; set; }
 
-        public Food(int id, string t, string c, double p)
+        public Food(int id, string _title, string _category, double _price)
         {
             foodID = id;
-            title = t;
-            category = c;
-            price = p;
+            title = _title;
+            category = _category;
+            price = _price;
+        }
+
+        public override string ToString()
+        {
+            return "Food " + foodID + ": " + title + ", Category: " + category + ", Price: " + price;
         }
     }
 }
