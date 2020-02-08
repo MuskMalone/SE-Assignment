@@ -21,7 +21,12 @@ namespace SE_Assignment
             oc.AddOrder(o2);
             oc.AddOrder(o3);
             oc.AddOrder(o4);
+            Console.WriteLine(oc.GetOrder(1).OrderStatus);
             Console.WriteLine(oc.HasNextOrder().ToString());
+            while (oc.HasNextOrder())
+            {
+                Console.WriteLine(oc.NextOrder().OrderStatus);
+            }
         }
     }
 }

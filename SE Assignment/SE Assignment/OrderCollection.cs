@@ -20,7 +20,7 @@ namespace SE_Assignment
         }
         public bool HasNextOrder()
         {
-            if (position < OrderList.Count())
+            if (position < OrderList.Count()-1)
             {
                 return true;
             }
@@ -28,9 +28,13 @@ namespace SE_Assignment
         }
         public Order NextOrder()
         {
-            position++;
-            Order o = OrderList[position];
-            return o;
+            if (position < OrderList.Count())
+            {
+                position++;
+                Order o = OrderList[position];
+                return o;
+            }
+            return null;
         }
         public Order GetOrder(int orderID)
         {
