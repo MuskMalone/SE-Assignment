@@ -8,7 +8,8 @@ namespace SE_Assignment
 {
     public class Chef: Employee
     {
-        public Chef(string name, int id, string nric, char gender, DateTime datejoined, string status)
+        private OrderCollection ordercollection;
+        public Chef(string name, int id, string nric, char gender, DateTime datejoined, string status, OrderCollection oc)
         {
             Name = name;
             EmployeeId = id;
@@ -16,6 +17,7 @@ namespace SE_Assignment
             Gender = gender;
             DateJoined = datejoined;
             Status = status;
+            ordercollection = oc;
         }
 
         public void PrepareOrder()
