@@ -14,7 +14,7 @@ namespace SE_Assignment
             OrderCollection oc = new OrderCollection();
             Chef c = new Chef("bob", 1, "zzz", 'M', DateTime.UtcNow, "yes", oc);
             Order o1 = new Order(1, "new");
-            Order o2 = new Order(2, "new");
+            Order o2 = new Order(2, "preparing");
             Order o3 = new Order(3, "new");
             Order o4 = new Order(4, "preparing");
             oc.AddOrder(o1);
@@ -25,7 +25,10 @@ namespace SE_Assignment
             Console.WriteLine(oc.HasNextOrder().ToString());
             while (oc.HasNextOrder())
             {
-                Console.WriteLine(oc.NextOrder().OrderStatus);
+                Order o = oc.GetNextOrderWhereState("preparing");
+                
+                Console.WriteLine(oc.GetNextOrderWhereState("preparing").OrderStatus);
+                if (o == null) { break; }
             }
         }
     }

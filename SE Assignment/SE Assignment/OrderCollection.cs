@@ -50,10 +50,12 @@ namespace SE_Assignment
         }
         public Order GetNextOrderWhereState(string state)
         {
-            for (int i = position; i < OrderList.Count(); i++)
+            for (int i = position+1; i < OrderList.Count(); i++)
             {
                 if (OrderList[i].OrderStatus == state)
                 {
+                    position = i;
+                    Console.WriteLine(i);
                     return OrderList[i];
                 }
             }
