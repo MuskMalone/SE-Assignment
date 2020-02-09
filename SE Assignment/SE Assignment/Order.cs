@@ -3,7 +3,7 @@ namespace SE_Assignment
 {
     public class Order
     {
-        private string OrderStatus;
+        private string orderStatus;
         public String OrderStatus { get; set; }
         public readonly int OrderID;
 

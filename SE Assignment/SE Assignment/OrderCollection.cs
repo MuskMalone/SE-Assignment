@@ -55,7 +55,7 @@ namespace SE_Assignment
                 if (OrderList[i].OrderStatus == state)
                 {
                     position = i;
-                    Console.WriteLine(i);
+                    // Console.WriteLine(i);
                     return OrderList[i];
                 }
             }

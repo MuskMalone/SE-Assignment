@@ -9,11 +9,11 @@ namespace SE_Assignment
     public class Chef: Employee
     {
         private OrderCollection ordercollection;
-        public Chef(string name, int id, string nric, char gender, DateTime datejoined, string status, OrderCollection oc)
+        public Chef(string n, int id, string ic, char gender, DateTime datejoined, string status, OrderCollection oc)
         {
-            Name = name;
-            EmployeeId = id;
-            Nric = nric;
+            name = n;
+            EmployeeID = id;
+            nric = ic;
             Gender = gender;
             DateJoined = datejoined;
             Status = status;
