@@ -10,10 +10,10 @@ namespace SE_Assignment
     {
         /*private Order myOrder;
 
-        public DispatchedState(Order order)
-        {
-            myOrder = order;
-        }*/
+       public DispatchedState(Order order)
+       {
+           myOrder = order;
+       }*/
 
         public void prepareOrder()
         {
