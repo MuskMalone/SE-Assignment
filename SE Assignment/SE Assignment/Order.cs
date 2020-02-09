@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace SE_Assignment
 {
     public class Order
     {
-        private string OrderStatus;
+        private string orderStatus;
         public String OrderStatus { get; set; }
         public readonly int OrderID;
 
@@ -37,6 +42,5 @@ namespace SE_Assignment
         public Order()
         {
         }
-
     }
 }
