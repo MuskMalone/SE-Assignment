@@ -11,10 +11,13 @@ namespace SE_Assignment
         static void Main(string[] args)
         {
             OrderCollection oc = new OrderCollection();
+            Chef chef = new Chef("coom", 1, "zzz", 'm', DateTime.UtcNow, "Active", oc);
 
-            Console.WriteLine(oc.GetNextOrderWhereState("preparing").OrderID);
-            Console.WriteLine(oc.GetNextOrderWhereState("preparing").OrderID);
-            
+            Console.WriteLine(chef.getOrderCollection().GetOrder(1).OrderStatus);
+            chef.getOrderCollection().GetOrder(1).getCurrentState().prepareOrder();
+            Console.WriteLine(chef.getOrderCollection().GetOrder(1).OrderStatus);
+            chef.getOrderCollection().GetOrder(1).getCurrentState().completeOrder();
+            Console.WriteLine(chef.getOrderCollection().GetOrder(1).OrderStatus);
             Console.ReadLine();
         }
     }

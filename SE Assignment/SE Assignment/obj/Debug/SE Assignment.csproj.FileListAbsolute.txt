@@ -3,3 +3,4 @@ C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\bin\De
 C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\bin\Debug\SE Assignment.pdb
 C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\obj\Debug\SE Assignment.exe
 C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\obj\Debug\SE Assignment.pdb
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\obj\Debug\SE Assignment.csprojAssemblyReference.cache

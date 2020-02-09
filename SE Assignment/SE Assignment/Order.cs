@@ -28,7 +28,7 @@ namespace SE_Assignment
             readyState = new ReadyState(this);
             dispatchedState = new DispatchedState(this);
             deliveredState = new DeliveredState(this);
-            currentState = newState;
+            setState(newState);
         }
         public void setState(OrderState os)
         {

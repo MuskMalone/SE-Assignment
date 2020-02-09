@@ -20,6 +20,7 @@ namespace SE_Assignment
             ordercollection = oc;
         }
 
+        public OrderCollection getOrderCollection() { return ordercollection; }
         public void PrepareOrder()
         {
 
