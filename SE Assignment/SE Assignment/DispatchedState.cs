@@ -8,12 +8,17 @@ namespace SE_Assignment
 {
     class DispatchedState : OrderState
     {
-        /*private Order myOrder;
+        private string name = "dispatched";
+        private Order myOrder;
 
         public DispatchedState(Order order)
         {
             myOrder = order;
-        }*/
+        }
+        public string getStateName()
+        {
+            return name;
+        }
 
         public void prepareOrder()
         {
@@ -33,6 +38,7 @@ namespace SE_Assignment
         public void confirmOrder()
         {
             Console.WriteLine("Order has been received");
+            myOrder.setState(myOrder.getDeliveredState());
             // Code
         }
 

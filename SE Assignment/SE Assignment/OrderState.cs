@@ -8,6 +8,7 @@ namespace SE_Assignment
 {
     public interface OrderState
     {
+        string getStateName();
         void prepareOrder();
 
         void completeOrder();

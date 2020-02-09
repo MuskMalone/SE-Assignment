@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chef.cs" />
+    <Compile Include="DeliveredState.cs" />
     <Compile Include="DispatchedState.cs" />
     <Compile Include="Dispatcher.cs" />
     <Compile Include="Employee.cs" />

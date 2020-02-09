@@ -8,16 +8,22 @@ namespace SE_Assignment
 {
     class NewState : OrderState
     {
-        /*private Order myOrder;
+        private string name = "new";
+        private Order myOrder;
 
         public NewState(Order order)
         {
             myOrder = order;
-        }*/
-        
+        }
+        public string getStateName()
+        {
+            return name;
+        }
+
         public void prepareOrder()
         {
             Console.WriteLine("Order preparation has started");
+            myOrder.setState(myOrder.getPreparingState());
             // Code
         }
 
