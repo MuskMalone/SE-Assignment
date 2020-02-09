@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Employee
+    public class Employee
     {
         protected string Name;
         protected int EmployeeId;
@@ -15,7 +15,7 @@ namespace SE_Assignment
         protected DateTime DateJoined;
         protected string Status;
         
-        public int EmployeeID
+        /*public int EmployeeID
         {
             get { return employeeID; }
             set { employeeID = value; }
@@ -44,6 +44,6 @@ namespace SE_Assignment
         {
             get { return dateJoined; }
             set { dateJoined = value; }
-        }
+        }*/
     }
 }

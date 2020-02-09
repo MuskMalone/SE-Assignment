@@ -19,9 +19,9 @@ namespace SE_Assignment
         public Manager(int id, string _name, string _nric, char _gender, string _status, 
                        DateTime _dateJoined, DateTime startDate)
         {
-            EmployeeID = id;
+            EmployeeId = id;
             Name = _name;
-            NRIC = _nric;
+            Nric = _nric;
             Gender = _gender;
             Status = _status;
             DateJoined = _dateJoined;
