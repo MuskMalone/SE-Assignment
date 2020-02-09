@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class DispatchedState : OrderState
+    class DeliveredState: OrderState
     {
-        private string name = "dispatched";
+        private string name = "delivered";
         private Order myOrder;
 
-        public DispatchedState(Order order)
+        public DeliveredState(Order order)
         {
             myOrder = order;
         }
@@ -37,14 +37,13 @@ namespace SE_Assignment
 
         public void confirmOrder()
         {
-            Console.WriteLine("Order has been received");
-            myOrder.setState(myOrder.getDeliveredState());
+            Console.WriteLine("Order has already been received");
             // Code
         }
 
         public void archiveOrder()
         {
-            Console.WriteLine("Order has been cancelled");
+            Console.WriteLine("Order has been archived");
             // Code
         }
     }

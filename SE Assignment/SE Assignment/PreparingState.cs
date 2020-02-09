@@ -8,12 +8,17 @@ namespace SE_Assignment
 {
     class PreparingState : OrderState
     {
-        /*private Order myOrder;
+        private string name = "preparing";
+        private Order myOrder;
 
+        public string getStateName()
+        {
+            return name;
+        }
         public PreparingState(Order order)
         {
             myOrder = order;
-        }*/
+        }
         
         public void prepareOrder()
         {
@@ -23,6 +28,7 @@ namespace SE_Assignment
         public void completeOrder()
         {
             Console.WriteLine("Order is ready");
+            myOrder.setState(myOrder.getReadyState());
             // Code
 
         }

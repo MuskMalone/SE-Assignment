@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Manager : Employee
+    public class Manager : Employee
     {
+        private OrderCollection orderCollection;
         private DateTime companyStartDate;
 
         public DateTime CompanyStartDate
@@ -16,15 +17,18 @@ namespace SE_Assignment
             set { companyStartDate = value; }
         }
 
-        public Manager(int id, string _name, string _nric, char _gender, string _status, 
-                       DateTime _dateJoined, DateTime startDate)
+        public Manager() { }
+
+        public Manager(int id, string _name, string _nric, char _gender, string _status,
+                       OrderCollection oc, DateTime _dateJoined, DateTime startDate)
         {
-            EmployeeId = id;
-            Name = _name;
-            Nric = _nric;
-            Gender = _gender;
-            Status = _status;
-            DateJoined = _dateJoined;
+            employeeID = id;
+            name = _name;
+            nric = _nric;
+            gender = _gender;
+            status = _status;
+            orderCollection = oc;
+            dateJoined = _dateJoined;
             companyStartDate = startDate;
         }
 
@@ -35,6 +39,26 @@ namespace SE_Assignment
             while (mc.HasNextFood())
             {
                 Console.WriteLine(mc.NextFood().ToString());
+            }
+        }
+        
+        public string getManagerDetails()
+        {
+            return ("Employee ID: " + employeeID + "\n" +
+                    "Name : " + name + "\n" +
+                    "NRIC : " + nric + "\n" +
+                    "Gender : " + gender + "\n" +
+                    "Status : " + status + "\n" +
+                    "Date Joined : " + dateJoined + "\n" +
+                    "Company Start Date : " + companyStartDate);
+        }        
+
+        public void viewAllManagers(List<Manager> mList)
+        {
+            foreach (Manager m in mList)
+            {
+                Console.WriteLine("==================================");
+                Console.WriteLine(m.getManagerDetails());
             }
         }
     }
