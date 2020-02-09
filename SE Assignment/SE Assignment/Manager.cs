@@ -8,6 +8,7 @@ namespace SE_Assignment
 {
     class Manager : Employee, FoodAggregate
     {
+        private OrderCollection orderCollection;
         private DateTime companyStartDate;
 
         public DateTime CompanyStartDate
@@ -16,14 +17,17 @@ namespace SE_Assignment
             set { companyStartDate = value; }
         }
 
-        public Manager(int id, string _name, string _nric, char _gender, string _status, 
-                       DateTime _dateJoined, DateTime startDate)
+        public Manager() { }
+
+        public Manager(int id, string _name, string _nric, char _gender, string _status,
+                       OrderCollection oc, DateTime _dateJoined, DateTime startDate)
         {
             employeeID = id;
             name = _name;
             nric = _nric;
             gender = _gender;
             status = _status;
+            orderCollection = oc
             dateJoined = _dateJoined;
             companyStartDate = startDate;
         }
@@ -74,6 +78,27 @@ namespace SE_Assignment
                     menuList.RemoveAt(i);
                     Console.WriteLine("Menu Successfully Deleted!");
                 }
+
+            }
+        }
+
+        public string getManagerDetails()
+        {
+            return ("Employee ID: " + EmployeeID + "\n" +
+                    "Name : " + Name + "\n" +
+                    "NRIC : " + NRIC + "\n" +
+                    "Gender : " + Gender + "\n" +
+                    "Status : " + Status + "\n" +
+                    "Date Joined : " + DateJoined + "\n" +
+                    "Company Start Date : " + CompanyStartDate);
+        }        
+
+        public void viewAllManagers(List<Manager> mList)
+        {
+            foreach (Manager m in mList)
+            {
+                Console.WriteLine("==================================");
+                Console.WriteLine(m.getManagerDetails());
             }
         }
     }

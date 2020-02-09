@@ -18,6 +18,16 @@ namespace SE_Assignment
         private OrderState deliveredState;
 
         private OrderState currentState;
+        /*private string orderStatus;
+        public String OrderStatus { get; set; }
+        public readonly int OrderID;
+
+        public Order(int id, string status) //status should be removed 
+        {
+            OrderID = id;
+            OrderStatus = status;
+            //OrderStatus = "new";
+        }*/
 
         public Order(int id, string status) //status should be removed 
         {

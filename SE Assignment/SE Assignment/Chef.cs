@@ -9,6 +9,8 @@ namespace SE_Assignment
     public class Chef : Employee
     {
         private OrderCollection ordercollection;
+
+        public Chef() { }
         public Chef(string n, int id, string ic, char gender, DateTime datejoined, string status, OrderCollection oc)
         {
             name = n;
@@ -21,6 +23,7 @@ namespace SE_Assignment
         }
 
         public OrderCollection getOrderCollection() { return ordercollection; }
+        
         public void PrepareOrder()
         {
 
