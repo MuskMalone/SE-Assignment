@@ -11,14 +11,14 @@ namespace SE_Assignment
         private OrderCollection ordercollection;
 
         public Chef() { }
-        public Chef(string n, int id, string ic, char gender, DateTime datejoined, string status, OrderCollection oc)
+        public Chef(string n, int id, string ic, char _gender, DateTime _datejoined, string _status, OrderCollection oc)
         {
             name = n;
-            EmployeeID = id;
+            employeeID = id;
             nric = ic;
-            Gender = gender;
-            DateJoined = datejoined;
-            Status = status;
+            gender = _gender;
+            dateJoined = _datejoined;
+            status = _status;
             ordercollection = oc;
         }
 

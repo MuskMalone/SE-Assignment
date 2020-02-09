@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Dispatcher : Employee
+    public class Dispatcher : Employee
     {
         private Order order;
         private OrderCollection orderCollection;
-
-        private double totalCommission;
+        
+        private double totalCommision;
 
         public double TotalCommission
         {
@@ -27,25 +27,25 @@ namespace SE_Assignment
 
         public Dispatcher() { }
 
-        public Dispatcher(string name, int employeeId, string nric, char gender, DateTime datejoined, string status, OrderCollection oc)
+        public Dispatcher(string _name, int _employeeId, string _nric, char _gender, DateTime _datejoined, string _status, OrderCollection oc)
         {
-            Name = name;
-            EmployeeID = employeeId;
-            NRIC = nric;
-            Gender = gender;
-            DateJoined = datejoined;
-            Status = status;
+            name = _name;
+            employeeID = _employeeId;
+            nric = _nric;
+            gender = _gender;
+            dateJoined = _datejoined;
+            status = _status;
             orderCollection = oc;
         }
         
         public string getDispatcherDetails()
         {
-            return ("Employee ID: " + EmployeeID + "\n" +
-                    "Name : " + Name + "\n" +
-                    "NRIC : " + NRIC + "\n" +
-                    "Gender : " + Gender + "\n" +
-                    "Status : " + Status + "\n" +
-                    "Date Joined : " + DateJoined + "\n" +
+            return ("Employee ID: " + employeeID + "\n" +
+                    "Name : " + name + "\n" +
+                    "NRIC : " + nric + "\n" +
+                    "Gender : " + gender + "\n" +
+                    "Status : " + status + "\n" +
+                    "Date Joined : " + dateJoined + "\n" +
                     "Total comission : " + TotalCommission);
         }
 
