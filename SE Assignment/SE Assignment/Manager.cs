@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Manager : Employee, FoodAggregate
+     public class Manager : Employee, FoodAggregate
     {
         private OrderCollection orderCollection;
         private DateTime companyStartDate;
@@ -27,7 +27,7 @@ namespace SE_Assignment
             nric = _nric;
             gender = _gender;
             status = _status;
-            orderCollection = oc
+            orderCollection = oc;
             dateJoined = _dateJoined;
             companyStartDate = startDate;
         }
@@ -84,13 +84,13 @@ namespace SE_Assignment
 
         public string getManagerDetails()
         {
-            return ("Employee ID: " + EmployeeID + "\n" +
-                    "Name : " + Name + "\n" +
-                    "NRIC : " + NRIC + "\n" +
-                    "Gender : " + Gender + "\n" +
-                    "Status : " + Status + "\n" +
-                    "Date Joined : " + DateJoined + "\n" +
-                    "Company Start Date : " + CompanyStartDate);
+            return ("Employee ID: " + employeeID + "\n" +
+                    "Name : " + name + "\n" +
+                    "NRIC : " + nric + "\n" +
+                    "Gender : " + gender + "\n" +
+                    "Status : " + status + "\n" +
+                    "Date Joined : " + dateJoined + "\n" +
+                    "Company Start Date : " + companyStartDate);
         }        
 
         public void viewAllManagers(List<Manager> mList)
