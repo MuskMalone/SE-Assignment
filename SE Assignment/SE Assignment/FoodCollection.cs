@@ -12,25 +12,19 @@ namespace SE_Assignment
         private string name;
         private int size = 0;
 
-        public int MenuID
-        {
-            get { return menuID; }
-            set { menuID = value; }
-        }
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        public int Size
-        {
-            get { return size; }
-            set { size = value; }
-        }
         public FoodCollection(int id, string menuName)
         {
             menuID = id;
             name = menuName;
+        }
+
+        public int GetID()
+        {
+            return menuID;
+        }
+        public string GetName()
+        {
+            return name;
         }
 
         List<Food> foodList = new List<Food>();
@@ -67,7 +61,7 @@ namespace SE_Assignment
             Console.WriteLine(f.Title+" Added Successfully!");
         }
 
-        public void editFood(int id, Food f)
+        public void EditFood(int id, Food f)
         {
             for (int i = 0; i < size-1; i++)
             {
@@ -81,15 +75,21 @@ namespace SE_Assignment
 
         public void RemoveFood(int id)
         {
-            for (int i = 0; i < size-1; i++)
+            for (int i = 0; i < size; i++)
             {
                 if (foodList[i].FoodID == id)
                 {
+                    string removedFood = foodList[i].Title;
                     foodList.RemoveAt(i);
                     size -= 1;
-                    Console.WriteLine("Successfully Deleted "+foodList[i].Title+"!");
+                    Console.WriteLine("Successfully Deleted " + removedFood + "!");
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return "Menu " + menuID + ": " + name + ", Size: " + size;
         }
     }
 }

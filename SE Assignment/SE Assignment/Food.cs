@@ -12,7 +12,7 @@ namespace SE_Assignment
         private string title;
         private string category;
         private double price;
-        //private string set;
+        private string status;
 
         public int FoodID
         {
@@ -34,14 +34,19 @@ namespace SE_Assignment
             get { return price; }
             set { price = value; }
         }
-        //public string Set { get; set; }
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
 
-        public Food(int id, string _title, string _category, double _price)
+        public Food(int id, string _title, string _category, double _price, string _status)
         {
             foodID = id;
             title = _title;
             category = _category;
             price = _price;
+            status = _status;
         }
 
         public override string ToString()

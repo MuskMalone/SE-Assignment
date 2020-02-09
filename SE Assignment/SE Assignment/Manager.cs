@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Manager : Employee, FoodAggregate
+    class Manager : Employee
     {
         private DateTime companyStartDate;
 
@@ -28,52 +28,13 @@ namespace SE_Assignment
             companyStartDate = startDate;
         }
 
-        List<FoodCollection> menuList = new List<FoodCollection>();
 
-        public void ViewAllMenus()
+        public void ViewAllMenus(MenuCollection mc)
         {
-            for (int i = 0; i < menuList.Count(); i++)
+            Console.WriteLine(mc.GetCurrent());
+            while (mc.HasNextFood())
             {
-                Console.WriteLine();
-                Console.WriteLine("Menu "+ menuList[i].MenuID+": "+menuList[i].Name);
-                Console.WriteLine("Size: " + menuList[i].Size);
-                Console.WriteLine(menuList[i].GetCurrent());
-                while (menuList[i].HasNextFood())
-                {
-                    Console.WriteLine(menuList[i].NextFood().ToString());
-                }
-            }
-        }
-
-        public FoodIterator CreateFoodIterator(int id, string menuName)
-        {
-            FoodCollection fi = new FoodCollection(id, menuName);
-            menuList.Add(fi);
-            Console.WriteLine("Created Menu Successfully!");
-            return fi;
-        }
-
-        public void editMenu(int id, FoodCollection fc)
-        {
-            for (int i = 0; i < menuList.Count() - 1; i++)
-            {
-                if (menuList[i].MenuID == id)
-                {
-                    menuList[i] = fc;
-                    Console.WriteLine("Successfully Edited "+fc.Name+"!");
-                }
-            }
-        }
-
-        public void deleteMenu(int id)
-        {
-            for (int i = 0; i < menuList.Count() - 1; i++)
-            {
-                if (menuList[i].MenuID == id)
-                {
-                    menuList.RemoveAt(i);
-                    Console.WriteLine("Menu Successfully Deleted!");
-                }
+                Console.WriteLine(mc.NextFood().ToString());
             }
         }
     }
