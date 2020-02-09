@@ -12,7 +12,14 @@ namespace SE_Assignment
         private int position = 0;
         public OrderCollection()
         {
-
+            Order o1 = new Order(1, "new");
+            Order o2 = new Order(2, "preparing");
+            Order o3 = new Order(3, "new");
+            Order o4 = new Order(4, "preparing");
+            AddOrder(o1);
+            AddOrder(o2);
+            AddOrder(o3);
+            AddOrder(o4);
         }
         public void AddOrder(Order o)
         {

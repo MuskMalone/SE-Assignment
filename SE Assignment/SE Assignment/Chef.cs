@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class Chef: Employee
+    public class Chef : Employee
     {
         private OrderCollection ordercollection;
         public Chef(string n, int id, string ic, char gender, DateTime datejoined, string status, OrderCollection oc)
