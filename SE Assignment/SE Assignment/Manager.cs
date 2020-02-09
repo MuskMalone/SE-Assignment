@@ -19,12 +19,12 @@ namespace SE_Assignment
         public Manager(int id, string _name, string _nric, char _gender, string _status, 
                        DateTime _dateJoined, DateTime startDate)
         {
-            EmployeeId = id;
-            Name = _name;
-            Nric = _nric;
-            Gender = _gender;
-            Status = _status;
-            DateJoined = _dateJoined;
+            employeeID = id;
+            name = _name;
+            nric = _nric;
+            gender = _gender;
+            status = _status;
+            dateJoined = _dateJoined;
             companyStartDate = startDate;
         }
 
