@@ -43,13 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chef.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="Order.cs" />
+    <Compile Include="NewState.cs" />
+    <Compile Include="OrderState.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="OrderCollection.cs" />
+    <Compile Include="Chef.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="Order.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
