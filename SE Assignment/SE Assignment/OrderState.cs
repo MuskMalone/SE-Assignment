@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    interface OrderState
+    public interface OrderState
     {
+        string getStateName();
         void prepareOrder();
 
         void completeOrder();
