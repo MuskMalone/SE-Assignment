@@ -9,7 +9,7 @@ namespace SE_Assignment
     class Program
     {
         // OBJECTS CREATED HERE
-        static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
+        static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList, List<Food> fList)
         {
             OrderCollection oc = new OrderCollection();
             
@@ -25,8 +25,14 @@ namespace SE_Assignment
             oc.AddOrder(o4);
             oc.AddOrder(o5);
 
-            Manager m1 = new Manager("Cheng En", 1, "S6666666X", 'M', DateTime.UtcNow, "On Duty", oc, DateTime.UtcNow);
-            Manager m2 = new Manager("En En", 1, "S6666667X", 'M', DateTime.UtcNow, "On Duty", oc, DateTime.UtcNow);
+            //Food burger = new Food(1, "Beef Burger", "Lunch set", 7.50, "available");
+            //Food steak = new Food(2, "steak", "dinner set", 13.50, "available");
+            //fList.Add(steak);
+            //fList.Add(burger);
+
+
+            Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
+            Manager m2 = new Manager(1,"cheng en", "S6666667X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
             mList.Add(m1);
             mList.Add(m2);
 
@@ -177,22 +183,94 @@ namespace SE_Assignment
         }
 
         // CUSTOMER SCREEN
-        static void customerScreen(Customer c, Receipt r, List<Receipt> rList)
+        static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList)
         {
             while (true)
             {
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
-                Console.WriteLine("[1] View all receipts");
+                Console.WriteLine("[2] Make New Order");
+                Console.WriteLine("[1] View All Receipts");
+                Console.WriteLine("[0] Homepage");
+                double publicamount = 0.00;
 
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
 
                 if (option == "1")
                 {
-                    r.viewAllReceipt(rList);
+                    Console.WriteLine("\n ======= select resteraunt =======");
+                    Console.WriteLine("[1] Krusty Krab");
+                    Console.Write("Select an option: ");
+                    string resterauntoption = Console.ReadLine();
+
+                     
+                    if (resterauntoption == "1")
+                    {
+                        Console.WriteLine("\n ======= Food Items =======");
+                        f.viewAllFood(fList);
+                        Console.Write("select food item: ");
+                        string foodoption = Console.ReadLine();
+                        Console.WriteLine("\n ======= Delivery option =======");
+                        Console.WriteLine("[1] Standard delivery");
+                        Console.WriteLine("[2] Express delivery");
+                        Console.Write("Select an option: ");
+                        string deliveryoption = Console.ReadLine();
+
+                        foreach (Food finder in fList)
+                        {
+
+                           if (finder.FoodID.ToString() == foodoption)
+                            {
+                               
+
+                                if (deliveryoption == "1")
+                                {
+                                    double paymentamount = finder.Price;
+                                    //no express fee, delivery 
+                                    Console.WriteLine("total to pay is " + paymentamount.ToString());
+                                    publicamount = paymentamount;
+                                }
+
+                               else
+                                {
+                                    double paymentamount = finder.Price;
+                                    //express fee is 3 dollars
+                                    paymentamount = paymentamount + 3.00;
+                                    Console.WriteLine("total to pay is " + paymentamount.ToString());
+                                    publicamount = paymentamount;
+                                } 
+                            }
+
+                        }
+
+                        Console.WriteLine("\n ======= Payment option =======");
+                        Console.WriteLine("[1] Credit Card");
+                        Console.WriteLine("[2] Paypal");
+                        Console.Write("Select an option: ");
+                        string paymentoption = Console.ReadLine();
+
+                        if (paymentoption == "1")
+                        {
+                            Console.WriteLine("Credit Card selected");
+                        }
+
+                        if (paymentoption == "2")
+                        {
+                            Console.WriteLine("Paypal selected");
+                        }
+
+
+
+
+                    }
                 }
                 if (option == "2")
                 {
+                    r.viewAllReceipt(rList);
+                }
+                if (option == "0")
+                {
+                   Main();
                 }
             }
         }
@@ -214,7 +292,10 @@ namespace SE_Assignment
             List<Receipt> rList = new List<Receipt>();
             Receipt r = new Receipt();
 
-            initalizer(mList, dList, cList, customerList, rList);
+            List<Food> fList = new List<Food>();
+            Food f = new Food();
+
+            initalizer(mList, dList, cList, customerList, rList, fList);
 
             string accountType;
 
@@ -225,7 +306,7 @@ namespace SE_Assignment
 
 
             Console.WriteLine("\n ======= EXIT? =======");
-            Console.WriteLine("[0] Fuck this I'm out");
+           
 
             Console.Write("\n Select an Account type: ");
 
@@ -246,7 +327,7 @@ namespace SE_Assignment
             // GOTO CUSTOMER SCREEN
             else if (accountType == "2")
             {
-                customerScreen(customer, r, rList);
+                customerScreen(customer, r, rList, f, fList);
             }
             Console.ReadKey();
             

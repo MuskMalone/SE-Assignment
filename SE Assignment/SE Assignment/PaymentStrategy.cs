@@ -4,6 +4,6 @@ namespace SE_Assignment
     public interface PaymentStrategy
 
     {
-        public void pay(double amount);
+        void pay(double amount);
     }
 }

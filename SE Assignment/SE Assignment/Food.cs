@@ -13,6 +13,7 @@ namespace SE_Assignment
         private string category;
         private double price;
         private string status;
+       
 
         public int FoodID
         {
@@ -40,6 +41,8 @@ namespace SE_Assignment
             set { status = value; }
         }
 
+       
+
         public Food(int id, string _title, string _category, double _price, string _status)
         {
             foodID = id;
@@ -47,11 +50,29 @@ namespace SE_Assignment
             category = _category;
             price = _price;
             status = _status;
+           
+        }
+
+        public Food()
+        {
         }
 
         public override string ToString()
         {
             return "Food " + foodID + ": " + title + ", Category: " + category + ", Price: " + price;
+        }
+
+        public void viewAllFood(List<Food> fList)
+        {
+           
+            Console.WriteLine("==================================");
+            foreach (Food f in fList)
+            {
+              
+                Console.WriteLine(f.FoodID + " " + f.ToString());
+                
+            }
+           
         }
     }
 }

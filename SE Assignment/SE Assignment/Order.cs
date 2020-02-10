@@ -10,7 +10,8 @@ namespace SE_Assignment
     {
         public string OrderStatus { get; set; }
         public readonly int OrderID;
-
+      
+        
         private OrderState newState;
         private OrderState preparingState;
         private OrderState readyState;
