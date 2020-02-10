@@ -27,7 +27,7 @@ namespace SE_Assignment
             return name;
         }
 
-        List<Food> foodList = new List<Food>();
+        public List<Food> foodList = new List<Food>();
         int position = 0;
 
         public Food GetCurrent()
@@ -90,6 +90,21 @@ namespace SE_Assignment
         public override string ToString()
         {
             return "Menu " + menuID + ": " + name + ", Size: " + size;
+        }
+
+        
+        public double GetTotalAmount()
+        {
+            double amount = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                amount += foodList[i].Price;
+                size += 1;
+               
+            }
+
+            return amount;
         }
     }
 }

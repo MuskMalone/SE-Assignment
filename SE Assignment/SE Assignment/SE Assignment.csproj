@@ -64,6 +64,9 @@
     <Compile Include="Customer.cs" />
     <Compile Include="ReadyState.cs" />
     <Compile Include="Receipt.cs" />
+    <Compile Include="PaymentStrategy.cs" />
+    <Compile Include="Paypal.cs" />
+    <Compile Include="CreditCard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
