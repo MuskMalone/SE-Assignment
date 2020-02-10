@@ -23,5 +23,7 @@ namespace SE_Assignment
         void EditFood(int id, Food f);
 
         void RemoveFood(int id);
+
+        double GetTotalAmount();
     }
 }
