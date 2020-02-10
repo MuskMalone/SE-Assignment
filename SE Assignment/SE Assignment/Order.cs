@@ -72,12 +72,5 @@ namespace SE_Assignment
             // Code
         }
 
-
-
-        public void pay(Order o, PaymentStrategy paymentMethod)
-        {
-            int amount = o.GetTotalAmount();
-            paymentMethod.pay(amount);
-        }
     }
 }
