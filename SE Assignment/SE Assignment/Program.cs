@@ -297,7 +297,7 @@ namespace SE_Assignment
                         }
                         else if (orderOption == "2")
                         {
-                            alcM.GetCurrent().ToString();
+                            Console.WriteLine(alcM.GetCurrent().ToString());
                             Console.Write("Add to Cart: ");
                             string foodChoice = Console.ReadLine();
                             // Call customer function
