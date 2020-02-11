@@ -186,22 +186,26 @@ namespace SE_Assignment
                 Console.WriteLine("\n ======= DISPATCHER SCREEN =======");
                 Console.WriteLine("[1] View all dispatcher details");
                 Console.WriteLine("[2] View orders to dispatch");
-                Console.WriteLine("[3] Return to Employee Screen");
+                Console.WriteLine("[3] Select order to dispatch");
+                Console.WriteLine("[4] Return to Employee Screen");
 
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
-                /*
+
+                // [1] View all dispatcher detail
                 if (option == "1")
                 {
                     d.viewAllDispatchers(dList);
                 }
-                */
-                if (option == "1")
+
+                // [2] View orders to dispatch
+                else if (option == "2")
                 {
-                    dList[0].getAllReadyOrders();
+                    dList[0].GetAllCompletedOrders();
                 }
 
-                else if (option == "2")
+                // [3] Select order to dispatch
+                else if (option == "3")
                 {
                     Console.WriteLine("Enter Order ID: ");
                     int orderid = Int32.Parse(Console.ReadLine());
@@ -209,10 +213,12 @@ namespace SE_Assignment
                     Console.WriteLine("Order " + orderid + " has been dispatched.");
                 }
 
-                else if (option == "3")
+                // [4] Return to Employee Screen
+                else if (option == "4")
                 {
                     employeeScreen(m, mList, c, cList, d, dList);
                 }
+                
             }
         }
 

@@ -73,7 +73,8 @@ namespace SE_Assignment
                 Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
             }
         }
-        
+
+        /*
         public void viewDispatchedOrders()
         {
             Console.WriteLine("\n");
@@ -84,10 +85,22 @@ namespace SE_Assignment
                 Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
             }
         }
+        */
+        
+        public void GetAllCompletedOrders()
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("========= ORDERS TO BE DISPATCHED ========\n");
+            List<Order> oList = orderCollection.GetAllOrdersWhereState("preparing");
+            for (int i = 0; i < oList.Count(); i++)
+            {
+                Console.WriteLine(oList[i].OrderID + ": " + oList[i].getCurrentState().getStateName());
+            }
+        }
 
         public void DispatchOrder(int orderid)
         {
-            orderCollection.GetOrder(orderid).getCurrentState().completeOrder();
+            orderCollection.GetOrder(orderid).getCurrentState().dispatchOrder();
         }
 
         // TO BE IMPLEMENTED
