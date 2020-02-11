@@ -92,23 +92,9 @@ namespace SE_Assignment
             return oL;
         }
         
-        /*
-        public List<Order> GetAllOrdersState()
+        public void getAllOrderStates()
         {
-            List<Order> oList = new List<Order>();
-            for (int i = 0; i < OrderList.Count(); i++)
-            {
-                if (OrderList[i].OrderStatus == "new" || 
-                    OrderList[i].OrderStatus == "ready" ||
-                    OrderList[i].OrderStatus == "preparing" || 
-                    OrderList[i].OrderStatus == "dispatched" ||
-                    OrderList[i].OrderStatus == "delivered")
-                {
-                    oList.Add(OrderList[i]);
-                }
-            }
-            return oList;
+            // Code
         }
-        */
     }
 }
