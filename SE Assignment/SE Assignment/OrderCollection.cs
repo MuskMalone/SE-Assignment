@@ -44,6 +44,15 @@ namespace SE_Assignment
             }
             return null;
         }
+        public Order CurrentOrder()
+        {
+            if (position < OrderList.Count())
+            {
+                Order o = OrderList[position];
+                return o;
+            }
+            return null;
+        }
         public Order GetOrder(int orderID)
         {
             for (int i = 0; i < OrderList.Count(); i++) 
@@ -68,6 +77,18 @@ namespace SE_Assignment
                 }
             }
             return null;
+        }
+        public List<Order> GetAllOrdersWhereState(string state)
+        {
+            List<Order> oL = new List<Order>();
+            for (int i = 0; i < OrderList.Count(); i++)
+            {
+                if (OrderList[i].OrderStatus == state)
+                {
+                    oL.Add(OrderList[i]);
+                }
+            }
+            return oL;
         }
     }
 }
