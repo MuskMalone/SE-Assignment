@@ -74,24 +74,11 @@ namespace SE_Assignment
             }
         }
 
-        /*
-        public void viewDispatchedOrders()
-        {
-            Console.WriteLine("\n");
-            Console.WriteLine("========= ORDERS DISPATCHED ========\n");
-            List<Order> oList = orderCollection.GetAllOrdersWhereState("dispatched");
-            for (int i = 0; i < oList.Count(); i++)
-            {
-                Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
-            }
-        }
-        */
-        
         public void GetAllCompletedOrders()
         {
             Console.WriteLine("\n");
             Console.WriteLine("========= ORDERS TO BE DISPATCHED ========\n");
-            List<Order> oList = orderCollection.GetAllOrdersWhereState("new");
+            List<Order> oList = orderCollection.GetAllOrdersWhereState("preparing");
             for (int i = 0; i < oList.Count(); i++)
             {
                 Console.WriteLine(oList[i].OrderID + ": " + oList[i].getCurrentState().getStateName());

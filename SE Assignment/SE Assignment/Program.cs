@@ -262,9 +262,17 @@ namespace SE_Assignment
                 // [3] Select order to dispatch
                 else if (option == "3")
                 {
+                    Console.WriteLine("Enter Order ID: ");
+                    int orderid = Int32.Parse(Console.ReadLine());
+                    dList[0].DispatchOrder(orderid);
+                    Console.WriteLine("Order has been dispatched. yay");
+                }
+
+                // [4] Return to Employee Screen
+                else if (option == "4")
+                {
                     employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
                 }
-                
             }
         }
 
