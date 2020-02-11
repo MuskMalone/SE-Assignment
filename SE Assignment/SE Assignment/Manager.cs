@@ -31,16 +31,6 @@ namespace SE_Assignment
             dateJoined = _dateJoined;
             companyStartDate = startDate;
         }
-
-
-        public void ViewAllMenus(MenuCollection mc)
-        {
-            Console.WriteLine(mc.GetCurrent());
-            while (mc.HasNextFood())
-            {
-                Console.WriteLine(mc.NextFood().ToString());
-            }
-        }
         
         public string getManagerDetails()
         {
