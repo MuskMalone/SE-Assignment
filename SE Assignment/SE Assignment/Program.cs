@@ -9,7 +9,7 @@ namespace SE_Assignment
     class Program
     {
         // OBJECTS CREATED HERE
-        static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList, List<Food> fList)
+        static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
         {
             OrderCollection oc = new OrderCollection();
             
@@ -183,7 +183,7 @@ namespace SE_Assignment
         }
 
         // CUSTOMER SCREEN
-        static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList)
+        static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, MenuCollection setM, MenuCollection alcM)
         {
             while (true)
             {
@@ -264,11 +264,38 @@ namespace SE_Assignment
 
                     }
                 }
-                if (option == "2")
+                else if (option == "2")
                 {
-                    r.viewAllReceipt(rList);
+                    //r.viewAllReceipt(rList);
+                    while (true) {
+                        Console.WriteLine("\n ======= What would you like to buy? =======");
+                        Console.WriteLine("[1] Menu");
+                        Console.WriteLine("[2] À la carte");
+                        Console.WriteLine("[3] Back");
+                        Console.Write("Select an option: ");
+                        string orderOption = Console.ReadLine();
+
+                        if (orderOption == "1")
+                        {
+                            setM.ListAllMenus();
+                            Console.Write("Add to Cart: ");
+                            string foodChoice = Console.ReadLine();
+                            // Call customer function
+                        }
+                        else if (orderOption == "2")
+                        {
+                            alcM.GetCurrent().ToString();
+                            Console.Write("Add to Cart: ");
+                            string foodChoice = Console.ReadLine();
+                            // Call customer function
+                        }
+                        else if (orderOption == "3")
+                        {
+                            break;
+                        }
+                    }
                 }
-                if (option == "0")
+                else if (option == "0")
                 {
                    Main();
                 }
@@ -277,6 +304,7 @@ namespace SE_Assignment
         
         static void Main()
         {
+            
             List<Manager> mList = new List<Manager>();
             Manager m = new Manager();
 
@@ -295,7 +323,44 @@ namespace SE_Assignment
             List<Food> fList = new List<Food>();
             Food f = new Food();
 
-            initalizer(mList, dList, cList, customerList, rList, fList);
+            MenuCollection setMenu = new MenuCollection();
+            MenuCollection alacarteMenu = new MenuCollection();
+
+            FoodIterator fi_wombo = setMenu.CreateFoodIterator(1, "Wombo Combo", 5.5);
+            FoodIterator fi_cnd = setMenu.CreateFoodIterator(2, "Chips n Dips", 7);
+            FoodIterator fi_truff = setMenu.CreateFoodIterator(3, "Truffle Trouble", 4.5);
+            FoodIterator alacarte = alacarteMenu.CreateFoodIterator(4, "A la Carte Items", 0);
+
+            Food Burger = new Food(1, "Completely Normal Hamburger", "Fast Food", 5, "Available");
+            Food Soda = new Food(2, "Too-Gassy-4-Me Soda", "Fast Food", 1.5, "Available");
+            Food Onion_Rings = new Food(3, "Onion Ringz", "Fast Food", 2, "Available");
+            fi_wombo.AddFood(Burger);
+            fi_wombo.AddFood(Soda);
+            fi_wombo.AddFood(Onion_Rings);
+            Food Dip = new Food(4, "Super Special Spicy Sauce", "Fast Food", 2, "Available");
+            Food Fries = new Food(5, "Frenzy Fries", "Fast Food", 3.5, "Available");
+            Food Nachos = new Food(6, "Nasty Nachos", "Fast Food", 2, "Available");
+            fi_cnd.AddFood(Dip);
+            fi_cnd.AddFood(Fries);
+            fi_cnd.AddFood(Nachos);
+            Food MnC = new Food(7, "Truffle Mac n Cheeeeese", "Fast Food", 6.5, "Available");
+            Food Pizza = new Food(8, "Truffa Pizza", "Fast Food", 9.9, "Available");
+            Food Truff = new Food(9, "Truffries", "Fast Food", 4.5, "Available");
+            fi_truff.AddFood(MnC);
+            fi_truff.AddFood(Pizza);
+            fi_truff.AddFood(Truff);
+
+            alacarte.AddFood(Burger);
+            alacarte.AddFood(Soda);
+            alacarte.AddFood(Fries);
+            alacarte.AddFood(Onion_Rings);
+            alacarte.AddFood(Nachos);
+            alacarte.AddFood(MnC);
+            alacarte.AddFood(Dip);
+            alacarte.AddFood(Truff);
+            alacarte.AddFood(Pizza);
+
+            initalizer(mList, dList, cList, customerList, rList);
 
             string accountType;
 
@@ -327,7 +392,7 @@ namespace SE_Assignment
             // GOTO CUSTOMER SCREEN
             else if (accountType == "2")
             {
-                customerScreen(customer, r, rList, f, fList);
+                customerScreen(customer, r, rList, f, fList, setMenu, alacarteMenu);
             }
             Console.ReadKey();
             

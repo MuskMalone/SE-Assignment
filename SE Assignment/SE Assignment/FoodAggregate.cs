@@ -8,6 +8,6 @@ namespace SE_Assignment
 {
     public interface FoodAggregate
     {
-        FoodIterator CreateFoodIterator(int id, string menuName);
+        FoodIterator CreateFoodIterator(int id, string menuName, double price);
     }
 }
