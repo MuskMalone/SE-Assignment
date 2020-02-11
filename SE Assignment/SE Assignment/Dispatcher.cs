@@ -22,7 +22,7 @@ namespace SE_Assignment
         public void dispatchOrder(Order order)
         {
             // Code
-            order.OrderStatus = "dispatched";
+            order.getCurrentState().dispatchOrder();
         }
 
         public Dispatcher() { }
@@ -76,6 +76,10 @@ namespace SE_Assignment
                 totalCommission = totalCommission + 1;
             }
             return totalCommission;
+        }
+        public void confirmDelivery(Order o)
+        {
+            o.getCurrentState().confirmOrder();
         }
     }
 }
