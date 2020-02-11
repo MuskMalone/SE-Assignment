@@ -10,8 +10,7 @@ namespace SE_Assignment
     {
         // OBJECTS CREATED HERE
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
-        {
-           
+        {           
             OrderCollection oc = new OrderCollection();
             
             Order o1 = new Order(1, "new");
