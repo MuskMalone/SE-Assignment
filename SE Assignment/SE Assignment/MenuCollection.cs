@@ -16,7 +16,7 @@ namespace SE_Assignment
             return menuList[position];
         }
 
-        public FoodIterator NextFood()
+        public FoodIterator NextMenu()
         {
             if (position < menuList.Count() - 1)
             {
@@ -27,7 +27,7 @@ namespace SE_Assignment
             return null;
         }
 
-        public bool HasNextFood()
+        public bool HasNextMenu()
         {
             if (position < menuList.Count() - 1)
                 return true;
@@ -35,9 +35,9 @@ namespace SE_Assignment
             return false;
         }
 
-        public FoodIterator CreateFoodIterator(int id, string menuName)
+        public FoodIterator CreateFoodIterator(int id, string menuName, double price)
         {
-            FoodIterator fi = new FoodCollection(id, menuName);
+            FoodIterator fi = new FoodCollection(id, menuName, price);
             menuList.Add(fi);
             Console.WriteLine("Created Menu Successfully!");
             return fi;
@@ -68,12 +68,14 @@ namespace SE_Assignment
             }
         }
 
-        public void ViewAllFood(FoodIterator fc)
+        public void ListAllMenus()
         {
-            Console.WriteLine(fc.GetCurrent());
-            while (fc.HasNextFood())
+            Console.WriteLine("================ Set Meals ===============\n");
+            Console.WriteLine(GetCurrent().ToString());
+            while (HasNextMenu())
             {
-                Console.WriteLine(fc.NextFood().ToString());
+                Console.WriteLine();
+                Console.WriteLine(NextMenu().ToString());
             }
         }
     }

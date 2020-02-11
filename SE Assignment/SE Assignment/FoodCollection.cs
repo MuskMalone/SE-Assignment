@@ -11,13 +11,19 @@ namespace SE_Assignment
         private int menuID;
         private string name;
         private int size = 0;
+        private double price;
 
-        public FoodCollection(int id, string menuName)
+        public FoodCollection(int id, string menuName, double _price)
         {
             menuID = id;
             name = menuName;
+            price = _price;
         }
 
+        public double GetPrice()
+        {
+            return price;
+        }
         public int GetID()
         {
             return menuID;
@@ -89,9 +95,24 @@ namespace SE_Assignment
 
         public override string ToString()
         {
-            return "Menu " + menuID + ": " + name + ", Size: " + size;
+            string displayText = "[" + menuID + "] " + name + ", Size: " + size + ", Price: $" + price;
+            displayText += "\n> " + GetCurrent().Title;
+            while (HasNextFood())
+            {
+                displayText += "\n> " + NextFood().Title;
+            }
+            
+            return displayText;
         }
 
+        public void ListAllFood()
+        {
+            Console.WriteLine(GetCurrent());
+            while (HasNextFood())
+            {
+                Console.WriteLine(NextFood().ToString());
+            }
+        }
         
         public double GetTotalAmount()
         {
@@ -99,8 +120,7 @@ namespace SE_Assignment
 
             for (int i = 0; i < size; i++)
             {
-                amount += foodList[i].Price;           
-               
+                amount += foodList[i].Price;
             }
 
             return amount;
