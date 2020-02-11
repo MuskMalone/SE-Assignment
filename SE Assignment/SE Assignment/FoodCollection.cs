@@ -104,15 +104,6 @@ namespace SE_Assignment
             
             return displayText;
         }
-
-        public void ListAllFood()
-        {
-            Console.WriteLine(GetCurrent());
-            while (HasNextFood())
-            {
-                Console.WriteLine(NextFood().ToString());
-            }
-        }
         
         public double GetTotalAmount()
         {
@@ -124,6 +115,33 @@ namespace SE_Assignment
             }
 
             return amount;
+        }
+
+        public Food GetFood(int id)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                if (GetCurrent().FoodID == id)
+                    return GetCurrent();
+                else
+                {
+                    while (HasNextFood())
+                    {
+                        if (NextFood().FoodID == id)
+                            return GetCurrent();
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void ListAllFood()
+        {
+            Console.WriteLine(GetCurrent());
+            while (HasNextFood())
+            {
+                Console.WriteLine(NextFood().ToString());
+            }
         }
     }
 }

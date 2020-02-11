@@ -25,5 +25,11 @@ namespace SE_Assignment
         void RemoveFood(int id);
 
         double GetTotalAmount();
+
+        void ListAllFood();
+
+        Food GetFood(int id);
+
+        double GetPrice();
     }
 }
