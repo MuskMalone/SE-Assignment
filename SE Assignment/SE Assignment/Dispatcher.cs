@@ -91,7 +91,7 @@ namespace SE_Assignment
         {
             Console.WriteLine("\n");
             Console.WriteLine("========= ORDERS TO BE DISPATCHED ========\n");
-            List<Order> oList = orderCollection.GetAllOrdersWhereState("preparing");
+            List<Order> oList = orderCollection.GetAllOrdersWhereState("new");
             for (int i = 0; i < oList.Count(); i++)
             {
                 Console.WriteLine(oList[i].OrderID + ": " + oList[i].getCurrentState().getStateName());
