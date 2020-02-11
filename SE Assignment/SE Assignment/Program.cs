@@ -13,22 +13,16 @@ namespace SE_Assignment
         {
            
             OrderCollection oc = new OrderCollection();
-
+            
             Order o1 = new Order(1, "new");
             Order o2 = new Order(2, "new");
             Order o3 = new Order(3, "new");
-            Order o4 = new Order(4, "preparing");
-            Order o5 = new Order(5, "delivered");
-            Order o6 = new Order(6, "ready");
-            Order o7 = new Order(7, "ready");
+            Order o4 = new Order(4, "new");
 
             oc.AddOrder(o1);
             oc.AddOrder(o2);
             oc.AddOrder(o3);
             oc.AddOrder(o4);
-            oc.AddOrder(o5);
-            oc.AddOrder(o6);
-            oc.AddOrder(o7);
 
             Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
             Manager m2 = new Manager(1,"cheng en", "S6666667X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
@@ -197,15 +191,23 @@ namespace SE_Assignment
 
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
-
+                /*
                 if (option == "1")
                 {
                     d.viewAllDispatchers(dList);
                 }
-                
+                */
+                if (option == "1")
+                {
+                    dList[0].getAllReadyOrders();
+                }
+
                 else if (option == "2")
                 {
-                    dList[0].getAllConfirmedOrders();
+                    Console.WriteLine("Enter Order ID: ");
+                    int orderid = Int32.Parse(Console.ReadLine());
+                    dList[0].DispatchOrder(orderid);
+                    Console.WriteLine("Order " + orderid + " has been dispatched.");
                 }
 
                 else if (option == "3")
@@ -420,11 +422,9 @@ namespace SE_Assignment
             Console.WriteLine("======= SELECT AN ACCOUNT =======");
             Console.WriteLine("[1] Employee");
             Console.WriteLine("[2] Customer");
-            Console.WriteLine("[0] Get hacked");
-
 
             Console.WriteLine("\n ======= EXIT? =======");
-           
+            Console.WriteLine("[0] Get hacked");
 
             Console.Write("\n Select an Account type: ");
 

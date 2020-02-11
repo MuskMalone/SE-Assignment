@@ -56,36 +56,30 @@ namespace SE_Assignment
                 Console.WriteLine(d.getDispatcherDetails());
             }
         }
-
-        public string getCompletedOrders(Order o)
-        {
-            return ("======== Orders ready to be dispatched ======== \n" +
-                    "Order No." + o.OrderID + "\n" +
-                    "Status:" + o.OrderStatus);
-        }
-
+        
         public void viewCompletedOrders(Order o)
         {
             o.getCurrentState();
             Console.WriteLine(o.getCurrentState());
         }
 
-        public void getAllConfirmedOrders()
+        public void getAllReadyOrders()
         {
             Console.WriteLine("\n");
-            Console.WriteLine("========= ORDERS CONFIRMED ========\n");
+            Console.WriteLine("========= ORDERS TO BE DISPATCHED ========\n");
             List<Order> oList = orderCollection.GetAllOrdersWhereState("ready");
             for (int i = 0; i < oList.Count(); i++)
             {
                 Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
             }
         }
+
         public void DispatchOrder(int orderid)
         {
-            orderCollection.GetOrder(orderid).getCurrentState().prepareOrder();
+            orderCollection.GetOrder(orderid).getCurrentState().completeOrder();
         }
-        
-        public void getAllDispatchedOrders()
+
+        public void viewDispatchedOrders()
         {
             Console.WriteLine("\n");
             Console.WriteLine("========= ORDERS DISPATCHED ========\n");
