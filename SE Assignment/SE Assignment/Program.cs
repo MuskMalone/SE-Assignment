@@ -218,9 +218,9 @@ namespace SE_Assignment
                         if (foodoption == "2")
                         {
                             Console.WriteLine("\n ======= A la carte options =======");
-                            while (alacartefood.HasNextFood() == true)
+                            while (alcM.HasNextMenu() == true)
                             {                           
-                                Console.WriteLine(alacartefood.NextFood());
+                                Console.WriteLine(alcM.NextMenu());
                             }
                         }
 
@@ -240,7 +240,7 @@ namespace SE_Assignment
                            
                         if (deliveryoption == "1")
                         {
-                            double paymentamount = alacartefood.GetTotalAmount();
+                            double paymentamount = alcM.GetCurrent().GetTotalAmount();
                             //no express fee, delivery 
                             Console.WriteLine("total to pay is " + paymentamount.ToString());
                             publicamount = paymentamount;
@@ -248,7 +248,7 @@ namespace SE_Assignment
 
                         else
                         {
-                            double paymentamount = alacartefood.GetTotalAmount();   
+                            double paymentamount = alcM.GetCurrent().GetTotalAmount();   
                             //express fee is 3 dollars
                             paymentamount = paymentamount + 3.00;
                             Console.WriteLine("total to pay is " + paymentamount.ToString());
