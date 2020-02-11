@@ -9,6 +9,7 @@ namespace SE_Assignment
     class DispatchedState : OrderState
     {
         private string name = "dispatched";
+
         private Order myOrder;
 
         public DispatchedState(Order order)

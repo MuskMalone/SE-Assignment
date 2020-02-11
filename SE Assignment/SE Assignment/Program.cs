@@ -13,24 +13,22 @@ namespace SE_Assignment
         {
            
             OrderCollection oc = new OrderCollection();
-           
-
 
             Order o1 = new Order(1, "new");
             Order o2 = new Order(2, "new");
             Order o3 = new Order(3, "new");
             Order o4 = new Order(4, "preparing");
             Order o5 = new Order(5, "delivered");
+            Order o6 = new Order(6, "completed");
+            Order o7 = new Order(7, "completed");
 
             oc.AddOrder(o1);
             oc.AddOrder(o2);
             oc.AddOrder(o3);
             oc.AddOrder(o4);
             oc.AddOrder(o5);
-
-
-
-
+            oc.AddOrder(o6);
+            oc.AddOrder(o7);
 
             Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
             Manager m2 = new Manager(1,"cheng en", "S6666667X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
@@ -166,7 +164,7 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= DISPATCHER SCREEN =======");
                 Console.WriteLine("[1] View all dispatcher details");
-                Console.WriteLine("[2] Select a dispatcher");
+                Console.WriteLine("[2] View orders to dispatch");
                 Console.WriteLine("[3] Return to Employee Screen");
 
                 Console.Write("Select an option: ");
@@ -176,6 +174,12 @@ namespace SE_Assignment
                 {
                     d.viewAllDispatchers(dList);
                 }
+                
+                else if (option == "2")
+                {
+                    d.viewCompletedOrders();
+                }
+
                 else if (option == "3")
                 {
                     employeeScreen(m, mList, c, cList, d, dList);

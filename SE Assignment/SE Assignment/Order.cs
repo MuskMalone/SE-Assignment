@@ -9,8 +9,7 @@ namespace SE_Assignment
     public class Order
     {
         public string OrderStatus { get; set; }
-        public readonly int OrderID;
-      
+        public readonly int OrderID;      
         
         private OrderState newState;
         private OrderState preparingState;
@@ -50,11 +49,13 @@ namespace SE_Assignment
         {
             return currentState;
         }
+
         public OrderState getNewState() { return newState; }
         public OrderState getPreparingState() { return preparingState; }
         public OrderState getReadyState() { return readyState; }
         public OrderState getDispatchedState() { return dispatchedState; }
         public OrderState getDeliveredState() { return deliveredState; }
+        
         public void registerCustomer()
         {
             Console.WriteLine("");

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SE_Assignment
 {
     public class Dispatcher : Employee
     {
         private Order order;
         private OrderCollection orderCollection;
-        
+
         private double totalCommision;
 
         public double TotalCommission
@@ -19,15 +20,11 @@ namespace SE_Assignment
             set { totalCommision = value; }
         }
 
-        public void dispatchOrder(Order order)
-        {
-            // Code
-            order.OrderStatus = "dispatched";
-        }
-
         public Dispatcher() { }
 
-        public Dispatcher(string _name, int _employeeId, string _nric, char _gender, DateTime _datejoined, string _status, OrderCollection oc)
+        public Dispatcher(string _name, int _employeeId, string _nric, 
+                          char _gender, DateTime _datejoined, string _status, 
+                          OrderCollection oc)
         {
             name = _name;
             employeeID = _employeeId;
@@ -58,6 +55,26 @@ namespace SE_Assignment
             }
         }
 
+        public string getCompletedOrders(Order o)
+        {
+            return ("======== Orders ready to be dispatched ======== \n" +
+                    "Order No." + o.OrderID + "\n" +
+                    "Status:" + o.OrderStatus);
+        }
+
+        public void viewCompletedOrders(Order o)
+        {
+            o.getCurrentState();
+            Console.WriteLine(o.getCurrentState());
+        }
+
+        public void dispatchOrder()
+        {
+
+        }
+
+        // TO BE IMPLEMENTED
+        /*
         public double calculateCommission(Order o, double totalCommission)
         {
             // Reset commission if new month
@@ -77,5 +94,6 @@ namespace SE_Assignment
             }
             return totalCommission;
         }
+        */
     }
 }
