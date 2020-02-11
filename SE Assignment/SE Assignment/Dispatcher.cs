@@ -11,9 +11,7 @@ namespace SE_Assignment
     {
         private Order order;
         private OrderCollection orderCollection;
-
-        public OrderCollection getOrderCollection() { return orderCollection; }
-
+        
         private double totalCommision;
 
         public double TotalCommission
@@ -63,6 +61,8 @@ namespace SE_Assignment
             Console.WriteLine(o.getCurrentState());
         }
 
+        public OrderCollection getOrderCollection() { return orderCollection; }
+
         public void getAllReadyOrders()
         {
             Console.WriteLine("\n");
@@ -73,12 +73,7 @@ namespace SE_Assignment
                 Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
             }
         }
-
-        public void DispatchOrder(int orderid)
-        {
-            orderCollection.GetOrder(orderid).getCurrentState().completeOrder();
-        }
-
+        
         public void viewDispatchedOrders()
         {
             Console.WriteLine("\n");
@@ -88,6 +83,11 @@ namespace SE_Assignment
             {
                 Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
             }
+        }
+
+        public void DispatchOrder(int orderid)
+        {
+            orderCollection.GetOrder(orderid).getCurrentState().completeOrder();
         }
 
         // TO BE IMPLEMENTED
