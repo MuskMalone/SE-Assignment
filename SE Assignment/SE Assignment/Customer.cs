@@ -16,6 +16,9 @@ namespace SE_Assignment
         private string email;
         private string address;
 
+        public List<Food> custfoodList = new List<Food>();
+        public List<FoodIterator> custmenuList = new List<FoodIterator>();
+
         public string Name
         {
             get { return name; }
@@ -52,6 +55,33 @@ namespace SE_Assignment
             PhoneNumber = phoneNumber;
             Email = email;
             Address = address;
+        }
+
+        public double GetcustfoodListTotalAmount()
+        {
+            double amount = 0;
+
+            foreach (Food food in custfoodList)
+            {
+                if (food != null)
+                    amount += food.Price;
+            }
+
+            return amount;
+        }
+
+
+        public double GetcustmenuListListTotalAmount()
+        {
+            double amount = 0;
+
+            foreach (FoodIterator set in custmenuList)
+            {
+                if (set != null)
+                    amount += set.GetPrice();
+            }
+
+            return amount;
         }
 
         public void placeOrder()

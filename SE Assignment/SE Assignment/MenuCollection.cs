@@ -11,6 +11,10 @@ namespace SE_Assignment
         List<FoodIterator> menuList = new List<FoodIterator>();
         int position = 0;
 
+        public int GetCount()
+        {
+            return menuList.Count();
+        }
         public FoodIterator GetCurrent()
         {
             return menuList[position];
@@ -18,7 +22,7 @@ namespace SE_Assignment
 
         public FoodIterator NextMenu()
         {
-            if (position < menuList.Count() - 1)
+            if (position < menuList.Count()-1)
             {
                 position++;
                 return menuList[position];
@@ -29,7 +33,7 @@ namespace SE_Assignment
 
         public bool HasNextMenu()
         {
-            if (position < menuList.Count() - 1)
+            if (position < menuList.Count()-1)
                 return true;
             position = 0;
             return false;
@@ -77,6 +81,24 @@ namespace SE_Assignment
                 Console.WriteLine();
                 Console.WriteLine(NextMenu().ToString());
             }
+        }
+
+        public FoodIterator GetMenu(int id)
+        {
+            for (int i = 0; i < menuList.Count(); i++)
+            {
+                if (GetCurrent().GetID() == id)
+                    return GetCurrent();
+                else
+                {
+                    while (HasNextMenu())
+                    {
+                        if (NextMenu().GetID() == id)
+                            return GetCurrent();
+                    }
+                }
+            }
+            return null;
         }
     }
 }

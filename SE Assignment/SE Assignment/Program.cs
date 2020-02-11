@@ -9,6 +9,9 @@ namespace SE_Assignment
     class Program
     {
         // OBJECTS CREATED HERE
+        static MenuCollection setMenu = new MenuCollection();
+        static MenuCollection alacarteMenu = new MenuCollection();
+
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
         {
            
@@ -53,7 +56,7 @@ namespace SE_Assignment
         }
 
         // EMPLOYEE SCREEN
-        static void employeeScreen(Manager m, List<Manager> mList, Chef c, List<Chef> cList, Dispatcher d, List<Dispatcher> dList)
+        static void employeeScreen(Manager m, List<Manager> mList, Chef c, List<Chef> cList, Dispatcher d, List<Dispatcher> dList, MenuCollection setMenu, MenuCollection alcM)
         {
             while (true)
             {
@@ -71,19 +74,19 @@ namespace SE_Assignment
                 // TO MANAGER SCREEN
                 if (option == "1")
                 {
-                    managerScreen(m, mList);
+                    managerScreen(m, mList, setMenu, alcM);
                 }
 
                 // TO CHEF SCREEN
                 else if (option == "2")
                 {
-                    chefScreen(c, cList);
+                    chefScreen(c, cList, setMenu, alcM);
                 }
 
                 // TO DISPATCHERS SCREEN
                 else if (option == "3")
                 {
-                    dispatcherScreen(d, dList);
+                    dispatcherScreen(d, dList, setMenu, alcM);
                 }
 
                 // HOMESCREEN
@@ -95,7 +98,7 @@ namespace SE_Assignment
         }
 
         // MANAGER SCREEN
-        static void managerScreen(Manager m, List<Manager> mList)
+        static void managerScreen(Manager m, List<Manager> mList, MenuCollection setMenu, MenuCollection alcM)
         {
             List<Chef> cList = new List<Chef>();
             Chef c = new Chef();
@@ -106,9 +109,10 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= MANAGER SCREEN =======");
                 Console.WriteLine("[1] View all manager details");
-                Console.WriteLine("[2] Return to Employee Screen");
+                Console.WriteLine("[2] Manage Food & Menus");
+                Console.WriteLine("[3] Return to Employee Screen");
 
-                Console.Write("Select an option:");
+                Console.Write("Select an option: ");
                 string option = Console.ReadLine();
 
                 if(option == "1")
@@ -117,13 +121,64 @@ namespace SE_Assignment
                 }
                 else if (option == "2")
                 {
-                    employeeScreen(m, mList, c, cList, d, dList);
+                    Console.WriteLine("\n ======= MANAGE FOOD & MENUS =======");
+                    Console.WriteLine("[1] Add Menu");
+                    Console.WriteLine("[2] Edit Menu");
+                    Console.WriteLine("[3] Delete Menu");
+                    Console.WriteLine("[4] Add Food");
+                    Console.WriteLine("[5] Edit Food");
+                    Console.WriteLine("[6] Delete Food");
+                    Console.WriteLine("[0] Return to Employee Screen");
+
+                    Console.Write("Select an option: ");
+                    option = Console.ReadLine();
+
+                    if (option == "1")
+                    {
+                        Console.WriteLine("Enter name for Menu: ");
+                        string mName = Console.ReadLine();
+                        Console.WriteLine("Enter price for "+mName);
+                        string mPrice = Console.ReadLine();
+                        FoodIterator newMenu = setMenu.CreateFoodIterator(setMenu.GetCount() + 1, mName, Convert.ToDouble(mPrice));
+                        while (true)
+                        {
+                            Console.WriteLine("Select Food for Menu: ");
+                            alcM.GetCurrent().ListAllFood();
+                            string mFoodID = Console.ReadLine();
+                            for (int i = 0; i < alacarteMenu.GetCount(); i++)
+                            {
+                                if (alacarteMenu.GetCurrent().GetCurrent().FoodID == Convert.ToInt32(mFoodID))
+                                    newMenu.AddFood(alacarteMenu.GetCurrent().GetCurrent());
+                                else
+                                {
+                                    while (alacarteMenu.GetCurrent().HasNextFood())
+                                    {
+                                        if (alacarteMenu.GetCurrent().NextFood().FoodID == Convert.ToInt32(mFoodID))
+                                            newMenu.AddFood(alacarteMenu.GetCurrent().GetCurrent());
+                                    }
+                                }
+                            }
+                            Console.WriteLine("Add More?");
+                            Console.WriteLine("[1] Yes");
+                            Console.WriteLine("[2] No");
+                            option = Console.ReadLine();
+                            if (option == "1")
+                                continue;
+                            else
+                                break;
+                        }
+                    }
+
+                }
+                else if (option == "3")
+                {
+                    employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
                 }
             }
         }
 
         // CHEF SCREEN
-        static void chefScreen(Chef c, List<Chef> cList)
+        static void chefScreen(Chef c, List<Chef> cList, MenuCollection setMenu, MenuCollection alcM)
         {
             List<Manager> mList = new List<Manager>();
             Manager m = new Manager();
@@ -147,14 +202,14 @@ namespace SE_Assignment
 
                 else if (option == "2")
                 {
-                    employeeScreen(m, mList, c, cList, d, dList);
+                    employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
                 }
 
             }
         }
 
         // DISPATCHER SCREEN
-        static void dispatcherScreen(Dispatcher d, List<Dispatcher> dList)
+        static void dispatcherScreen(Dispatcher d, List<Dispatcher> dList, MenuCollection setMenu, MenuCollection alcM)
         {
             List<Manager> mList = new List<Manager>();
             Manager m = new Manager();
@@ -178,7 +233,7 @@ namespace SE_Assignment
                 }
                 else if (option == "3")
                 {
-                    employeeScreen(m, mList, c, cList, d, dList);
+                    employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
                 }
             }
         }
@@ -187,11 +242,17 @@ namespace SE_Assignment
         //static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, FoodIterator alacartefood)
         static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, MenuCollection setM, MenuCollection alcM)
         {
+            void pay(PaymentStrategy paymentMethod, double amount)
+            {
+
+                paymentMethod.pay(amount);
+            }
+
             while (true)
             {
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
-                Console.WriteLine("[2] Make New Order");
-                Console.WriteLine("[1] View All Receipts");
+                Console.WriteLine("[1] Make New Order");
+                Console.WriteLine("[2] View All Receipts");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -205,116 +266,126 @@ namespace SE_Assignment
                     Console.Write("Select an option: ");
                     string resterauntoption = Console.ReadLine();
 
-                     
+
                     if (resterauntoption == "1")
                     {
-                        Console.WriteLine("\n ======= What would you like to buy? =======");
-                        Console.WriteLine("[1] Set");
-                        Console.WriteLine("[2] A la Carte");                
-                        Console.Write("select option: ");
-                        string foodoption = Console.ReadLine();
 
-
-                        if (foodoption == "2")
+                        while (true)
                         {
-                            Console.WriteLine("\n ======= A la carte options =======");
-                            while (alcM.HasNextMenu() == true)
-                            {                           
-                                Console.WriteLine(alcM.NextMenu());
+                            Console.WriteLine("\n ======= What would you like to buy? =======");
+                            Console.WriteLine("[1] Menu");
+                            Console.WriteLine("[2] À la carte");
+                            Console.WriteLine("[3] Proceed to pay");
+                            Console.WriteLine("[4] Back");
+                            Console.Write("Select an option: ");
+                            string orderOption = Console.ReadLine();
+
+                            if (orderOption == "1")
+                            {
+                                setM.ListAllMenus();
+                                Console.Write("Add to Cart: ");
+                                string foodChoice = Console.ReadLine();
+                                c.custmenuList.Add(setMenu.GetMenu(Convert.ToInt32(foodChoice)));
+                            }
+                            else if (orderOption == "2")
+                            {
+                                Console.WriteLine(alcM.GetCurrent().ToString());
+                                Console.Write("Add to Cart: ");
+                                string foodChoice = Console.ReadLine();
+                                c.custfoodList.Add(alacarteMenu.GetCurrent().GetFood(Convert.ToInt32(foodChoice)));
+                            }
+
+                            else if (orderOption == "3")
+                            {
+                                Console.WriteLine("\n ======= Delivery option =======");
+                                Console.WriteLine("[1] Standard delivery");
+                                Console.WriteLine("[2] Express delivery");
+                                Console.Write("Select an option: ");
+                                string deliveryoption = Console.ReadLine();
+
+                                if (deliveryoption == "1")
+                                {
+
+                                    double alcmpaymentamount = c.GetcustfoodListTotalAmount();
+                                    double setmpaymentamount = c.GetcustmenuListListTotalAmount();
+                                    //express fee: 0.00
+                                    publicamount = alcmpaymentamount + setmpaymentamount;
+                                    Console.WriteLine("total to pay is " + publicamount.ToString());
+                                    //double alcmpaymentamount = alcM.GetCurrent().GetTotalAmount();
+                                    // Console.WriteLine("[alcm amount is " + alcmpaymentamount);
+
+
+                                    //double setmpaymentamount = setM.GetCurrent().GetPrice();
+                                    // Console.WriteLine("setm amount is " + setmpaymentamount);
+                                    //no express fee, delivery
+                                    //publicamount = alcmpaymentamount + setmpaymentamount;
+                                    //Console.WriteLine("total to pay is " + publicamount.ToString());
+
+                                }
+
+                                else if (deliveryoption == "2")
+                                {
+                                    double alcmpaymentamount = c.GetcustfoodListTotalAmount();
+                                    double setmpaymentamount = c.GetcustmenuListListTotalAmount();
+                                    //express fee: 3.00
+                                    publicamount = alcmpaymentamount + setmpaymentamount + 3.00;
+                                    Console.WriteLine("total to pay is " + publicamount.ToString());
+                                }
+
+
+                                Console.WriteLine("\n ======= Payment option =======");
+                                Console.WriteLine("[1] Credit Card");
+                                Console.WriteLine("[2] Paypal");
+                                Console.Write("Select an option: ");
+                                string paymentoption = Console.ReadLine();
+
+                                if (paymentoption == "1")
+                                {
+                                    Console.WriteLine("Credit Card selected");
+                                    Console.Write("Credit Card Name: ");
+                                    string name = Console.ReadLine();
+                                    //Console.WriteLine("Credit Card Number: ");
+                                    //string creditcardnumber = Console.ReadLine();
+                                    Console.Write("Cvc: ");
+                                    string cvc = Console.ReadLine();
+                                    Console.Write("Date of expiry: ");
+                                    string DOE = Console.ReadLine();
+                                    pay(new CreditCard(name, "1234567890123456", cvc, DOE), publicamount);
+                                    break;
+
+                                }
+
+                                if (paymentoption == "2")
+                                {
+                                    Console.WriteLine("Paypal selected");
+                                    Console.Write("Recpient name: ");
+                                    string name = Console.ReadLine();
+                                    Console.Write("Currency: ");
+                                    string curr = Console.ReadLine();
+                                    pay(new Paypal(name, curr), publicamount);
+                                    break;
+                                }
+                            }
+
+                            else if (orderOption == "4")
+                            {
+                                break;
                             }
                         }
-
-                        if (foodoption == "1")
-                        {
-                            Console.WriteLine("\n ======= Set options =======");
-                        }
-
-
-                        Console.WriteLine("\n ======= Delivery option =======");
-                        Console.WriteLine("[1] Standard delivery");
-                        Console.WriteLine("[2] Express delivery");
-                        Console.Write("Select an option: ");
-                        string deliveryoption = Console.ReadLine();
-
-                                                   
-                           
-                        if (deliveryoption == "1")
-                        {
-                            double paymentamount = alcM.GetCurrent().GetTotalAmount();
-                            //no express fee, delivery 
-                            Console.WriteLine("total to pay is " + paymentamount.ToString());
-                            publicamount = paymentamount;
-                        }
-
-                        else
-                        {
-                            double paymentamount = alcM.GetCurrent().GetTotalAmount();   
-                            //express fee is 3 dollars
-                            paymentamount = paymentamount + 3.00;
-                            Console.WriteLine("total to pay is " + paymentamount.ToString());
-                            publicamount = paymentamount;
-                        } 
-                                                    
-
-                        Console.WriteLine("\n ======= Payment option =======");
-                        Console.WriteLine("[1] Credit Card");
-                        Console.WriteLine("[2] Paypal");
-                        Console.Write("Select an option: ");
-                        string paymentoption = Console.ReadLine();
-
-                        if (paymentoption == "1")
-                        {
-                            Console.WriteLine("Credit Card selected");
-                        }
-
-                        if (paymentoption == "2")
-                        {
-                            Console.WriteLine("Paypal selected");
-                        }
-
-
-
 
                     }
                 }
                 else if (option == "2")
                 {
-                    //r.viewAllReceipt(rList);
-                    while (true) {
-                        Console.WriteLine("\n ======= What would you like to buy? =======");
-                        Console.WriteLine("[1] Menu");
-                        Console.WriteLine("[2] À la carte");
-                        Console.WriteLine("[3] Back");
-                        Console.Write("Select an option: ");
-                        string orderOption = Console.ReadLine();
 
-                        if (orderOption == "1")
-                        {
-                            setM.ListAllMenus();
-                            Console.Write("Add to Cart: ");
-                            string foodChoice = Console.ReadLine();
-                            // Call customer function
-                        }
-                        else if (orderOption == "2")
-                        {
-                            Console.WriteLine(alcM.GetCurrent().ToString());
-                            Console.Write("Add to Cart: ");
-                            string foodChoice = Console.ReadLine();
-                            // Call customer function
-                        }
-                        else if (orderOption == "3")
-                        {
-                            break;
-                        }
-                    }
                 }
                 else if (option == "0")
                 {
-                   Main();
+                    Main();
                 }
             }
         }
-        
+
         static void Main()
         {
             List<Manager> mList = new List<Manager>();
@@ -335,13 +406,11 @@ namespace SE_Assignment
             List<Food> fList = new List<Food>();
             Food f = new Food();
 
-            MenuCollection setMenu = new MenuCollection();
-            MenuCollection alacarteMenu = new MenuCollection();
 
             FoodIterator fi_wombo = setMenu.CreateFoodIterator(1, "Wombo Combo", 5.5);
             FoodIterator fi_cnd = setMenu.CreateFoodIterator(2, "Chips n Dips", 7);
             FoodIterator fi_truff = setMenu.CreateFoodIterator(3, "Truffle Trouble", 4.5);
-            FoodIterator alacarte = alacarteMenu.CreateFoodIterator(4, "A la Carte Items", 0);
+            FoodIterator alacarte = alacarteMenu.CreateFoodIterator(0, "A la Carte Items", 0);
 
             Food Burger = new Food(1, "Completely Normal Hamburger", "Fast Food", 5, "Available");
             Food Soda = new Food(2, "Too-Gassy-4-Me Soda", "Fast Food", 1.5, "Available");
@@ -398,7 +467,7 @@ namespace SE_Assignment
             // GOTO EMPLOYEE SCREEN
             if (accountType == "1")
             {
-                employeeScreen(m, mList, c, cList, d, dList);
+                employeeScreen(m, mList, c, cList, d, dList, setMenu, alacarteMenu);
             }
             
             // GOTO CUSTOMER SCREEN
