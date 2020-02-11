@@ -37,7 +37,9 @@ namespace SE_Assignment
 
             Chef c1 = new Chef("Cheng Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
             Chef c2 = new Chef("Hian Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
-            
+            cList.Add(c1);
+            cList.Add(c2);
+
             Dispatcher d1 = new Dispatcher("Nikko", 2, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
             dList.Add(d1);
 
@@ -133,17 +135,43 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= CHEF SCREEN =======");
                 Console.WriteLine("[1] Krabby patty secret formula");
-                Console.WriteLine("[2] Return to Employee Screen");
+                Console.WriteLine("[2] prepare order u want");
+                Console.WriteLine("[3] get preparing orders fucklsersekrlsk");
+                Console.WriteLine("[4] finish HIM");
+                Console.WriteLine("[5] Return to Employee Screen");
 
                 Console.Write("Select an option:");
                 string option = Console.ReadLine();
 
                 if (option == "1")
                 {
+                    cList[0].GetAllNewOrders();
                     Console.WriteLine("\n bitch u thot");
                 }
 
-                else if (option == "2")
+                if (option == "2")
+                {
+                    Console.WriteLine("Enter Order ID: ");
+                    int orderid = Int32.Parse(Console.ReadLine());
+                    cList[0].PrepareOrder(orderid);
+                    Console.WriteLine("\n sksksksk");
+                }
+
+                if (option == "3")
+                {
+                    cList[0].GetAllPreparingOrders();
+                    Console.WriteLine("\n current preparing orders");
+                }
+
+                if (option == "4")
+                {
+                    Console.WriteLine("Enter Order ID: ");
+                    int orderid = Int32.Parse(Console.ReadLine());
+                    cList[0].CompleteOrder(orderid);
+                    Console.WriteLine("there is no war in ba sing se");
+                }
+
+                else if (option == "5")
                 {
                     employeeScreen(m, mList, c, cList, d, dList);
                 }
