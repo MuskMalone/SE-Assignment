@@ -11,8 +11,11 @@ namespace SE_Assignment
         // OBJECTS CREATED HERE
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList, List<Food> fList)
         {
+           
             OrderCollection oc = new OrderCollection();
-            
+           
+
+
             Order o1 = new Order(1, "new");
             Order o2 = new Order(2, "new");
             Order o3 = new Order(3, "new");
@@ -25,10 +28,8 @@ namespace SE_Assignment
             oc.AddOrder(o4);
             oc.AddOrder(o5);
 
-            //Food burger = new Food(1, "Beef Burger", "Lunch set", 7.50, "available");
-            //Food steak = new Food(2, "steak", "dinner set", 13.50, "available");
-            //fList.Add(steak);
-            //fList.Add(burger);
+
+
 
 
             Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
@@ -183,7 +184,7 @@ namespace SE_Assignment
         }
 
         // CUSTOMER SCREEN
-        static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList)
+        static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, FoodIterator alacartefood)
         {
             while (true)
             {
@@ -206,42 +207,53 @@ namespace SE_Assignment
                      
                     if (resterauntoption == "1")
                     {
-                        Console.WriteLine("\n ======= Food Items =======");
-                        f.viewAllFood(fList);
-                        Console.Write("select food item: ");
+                        Console.WriteLine("\n ======= What would you like to buy? =======");
+                        Console.WriteLine("[1] Set");
+                        Console.WriteLine("[2] A la Carte");                
+                        Console.Write("select option: ");
                         string foodoption = Console.ReadLine();
+
+
+                        if (foodoption == "2")
+                        {
+                            Console.WriteLine("\n ======= A la carte options =======");
+                            while (alacartefood.HasNextFood() == true)
+                            {                           
+                                Console.WriteLine(alacartefood.NextFood());
+                            }
+                        }
+
+                        if (foodoption == "1")
+                        {
+                            Console.WriteLine("\n ======= Set options =======");
+                        }
+
+
                         Console.WriteLine("\n ======= Delivery option =======");
                         Console.WriteLine("[1] Standard delivery");
                         Console.WriteLine("[2] Express delivery");
                         Console.Write("Select an option: ");
                         string deliveryoption = Console.ReadLine();
 
-                        foreach (Food finder in fList)
+                                                   
+                           
+                        if (deliveryoption == "1")
                         {
-
-                           if (finder.FoodID.ToString() == foodoption)
-                            {
-                               
-
-                                if (deliveryoption == "1")
-                                {
-                                    double paymentamount = finder.Price;
-                                    //no express fee, delivery 
-                                    Console.WriteLine("total to pay is " + paymentamount.ToString());
-                                    publicamount = paymentamount;
-                                }
-
-                               else
-                                {
-                                    double paymentamount = finder.Price;
-                                    //express fee is 3 dollars
-                                    paymentamount = paymentamount + 3.00;
-                                    Console.WriteLine("total to pay is " + paymentamount.ToString());
-                                    publicamount = paymentamount;
-                                } 
-                            }
-
+                            double paymentamount = alacartefood.GetTotalAmount();
+                            //no express fee, delivery 
+                            Console.WriteLine("total to pay is " + paymentamount.ToString());
+                            publicamount = paymentamount;
                         }
+
+                        else
+                        {
+                            double paymentamount = alacartefood.GetTotalAmount();   
+                            //express fee is 3 dollars
+                            paymentamount = paymentamount + 3.00;
+                            Console.WriteLine("total to pay is " + paymentamount.ToString());
+                            publicamount = paymentamount;
+                        } 
+                                                    
 
                         Console.WriteLine("\n ======= Payment option =======");
                         Console.WriteLine("[1] Credit Card");
@@ -277,6 +289,22 @@ namespace SE_Assignment
         
         static void Main()
         {
+
+            MenuCollection setMenu = new MenuCollection();
+            MenuCollection alacarteMenu = new MenuCollection();
+
+            Food burger = new Food(1, "Beef Burger", "ala carte", 7.50, "available");
+            Food steak = new Food(2, "steak", "ala carte", 13.50, "available");
+            FoodIterator alacartefood = alacarteMenu.CreateFoodIterator(1, "a la carte");
+
+            alacartefood.AddFood(burger);
+            alacartefood.AddFood(steak);
+
+
+            FoodIterator bfastset = setMenu.CreateFoodIterator(1, "bfastset");
+
+
+
             List<Manager> mList = new List<Manager>();
             Manager m = new Manager();
 
@@ -327,7 +355,8 @@ namespace SE_Assignment
             // GOTO CUSTOMER SCREEN
             else if (accountType == "2")
             {
-                customerScreen(customer, r, rList, f, fList);
+ 
+                customerScreen(customer, r, rList, f, fList, alacartefood);
             }
             Console.ReadKey();
             

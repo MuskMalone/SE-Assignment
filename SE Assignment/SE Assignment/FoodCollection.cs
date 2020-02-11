@@ -99,8 +99,7 @@ namespace SE_Assignment
 
             for (int i = 0; i < size; i++)
             {
-                amount += foodList[i].Price;
-                size += 1;
+                amount += foodList[i].Price;           
                
             }
 
