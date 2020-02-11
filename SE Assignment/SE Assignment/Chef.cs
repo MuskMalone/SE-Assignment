@@ -24,9 +24,33 @@ namespace SE_Assignment
 
         public OrderCollection getOrderCollection() { return ordercollection; }
         
-        public void PrepareOrder()
+        public void GetAllNewOrders()
         {
-
+            Console.WriteLine("\n");
+            Console.WriteLine("========= new owdews UwU ========\n");
+            List<Order> oL = ordercollection.GetAllOrdersWhereState("new");
+            for (int i = 0; i < oL.Count(); i++)
+            {
+                Console.WriteLine(oL[i].OrderID + "      " + oL[i].getCurrentState().getStateName());
+            }
+        }
+        public void GetAllPreparingOrders()
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("========= pwepawing owdews OwO ========\n");
+            List<Order> oL = ordercollection.GetAllOrdersWhereState("preparing");
+            for (int i = 0; i < oL.Count(); i++)
+            {
+                Console.WriteLine(oL[i].OrderID + "      " + oL[i].getCurrentState().getStateName());
+            }
+        }
+        public void PrepareOrder(int orderid)
+        {
+            ordercollection.GetOrder(orderid).getCurrentState().prepareOrder();
+        }
+        public void CompleteOrder(int orderid)
+        {
+            ordercollection.GetOrder(orderid).getCurrentState().completeOrder();
         }
     }
 }

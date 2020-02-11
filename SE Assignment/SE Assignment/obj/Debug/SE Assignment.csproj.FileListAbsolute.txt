@@ -10,3 +10,9 @@ C:/Users/cheng/Documents/GitHub/SE-Assignment/SE Assignment/SE Assignment/obj/De
 /Users/danielravindran/Documents/School/SE/Assignment/SE Assignment/SE Assignment/bin/Debug/SE Assignment.exe.config
 /Users/danielravindran/Documents/School/SE/Assignment/SE Assignment/SE Assignment/bin/Debug/SE Assignment.exe
 /Users/danielravindran/Documents/School/SE/Assignment/SE Assignment/SE Assignment/bin/Debug/SE Assignment.pdb
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\bin\Debug\SE Assignment.exe.config
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\bin\Debug\SE Assignment.exe
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\bin\Debug\SE Assignment.pdb
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\obj\Debug\SE Assignment.csprojAssemblyReference.cache
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\obj\Debug\SE Assignment.exe
+C:\Users\terra\Documents\GitHub\SE-Assignment\SE Assignment\SE Assignment\obj\Debug\SE Assignment.pdb
