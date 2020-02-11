@@ -19,8 +19,8 @@ namespace SE_Assignment
             Order o3 = new Order(3, "new");
             Order o4 = new Order(4, "preparing");
             Order o5 = new Order(5, "delivered");
-            Order o6 = new Order(6, "completed");
-            Order o7 = new Order(7, "completed");
+            Order o6 = new Order(6, "ready");
+            Order o7 = new Order(7, "ready");
 
             oc.AddOrder(o1);
             oc.AddOrder(o2);
@@ -205,7 +205,7 @@ namespace SE_Assignment
                 
                 else if (option == "2")
                 {
-                    d.viewCompletedOrders();
+                    dList[0].getAllConfirmedOrders();
                 }
 
                 else if (option == "3")
@@ -217,13 +217,15 @@ namespace SE_Assignment
 
         // CUSTOMER SCREEN
         //static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, FoodIterator alacartefood)
-        static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, MenuCollection setM, MenuCollection alcM)
+        static void customerScreen(Customer c, List<Customer> cList, Receipt r, List<Receipt> rList, Food f, List<Food> fList, MenuCollection setM, MenuCollection alcM)
         {
             while (true)
             {
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
-                Console.WriteLine("[2] Make New Order");
-                Console.WriteLine("[1] View All Receipts");
+                Console.WriteLine("[1] Make New Order");
+                Console.WriteLine("[2] ?");
+                Console.WriteLine("[3] View Order Statuses");
+                Console.WriteLine("[5] View All Receipts");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -303,15 +305,11 @@ namespace SE_Assignment
                         {
                             Console.WriteLine("Paypal selected");
                         }
-
-
-
-
                     }
                 }
+
                 else if (option == "2")
                 {
-                    //r.viewAllReceipt(rList);
                     while (true) {
                         Console.WriteLine("\n ======= What would you like to buy? =======");
                         Console.WriteLine("[1] Menu");
@@ -340,6 +338,17 @@ namespace SE_Assignment
                         }
                     }
                 }
+
+                else if (option == "3")
+                {
+                    c.viewAllOrderStatuses();
+                }
+
+                else if (option == "5")
+                {
+                    r.viewAllReceipt(rList);
+                }
+
                 else if (option == "0")
                 {
                    Main();
@@ -436,7 +445,7 @@ namespace SE_Assignment
             // GOTO CUSTOMER SCREEN
             else if (accountType == "2")
             {
-            	customerScreen(customer, r, rList, f, fList, setMenu, alacarteMenu);
+            	customerScreen(customer, customerList, r, rList, f, fList, setMenu, alacarteMenu);
             }
             Console.ReadKey();
             

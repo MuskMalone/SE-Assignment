@@ -12,6 +12,8 @@ namespace SE_Assignment
         private Order order;
         private OrderCollection orderCollection;
 
+        public OrderCollection getOrderCollection() { return orderCollection; }
+
         private double totalCommision;
 
         public double TotalCommission
@@ -68,9 +70,30 @@ namespace SE_Assignment
             Console.WriteLine(o.getCurrentState());
         }
 
-        public void dispatchOrder()
+        public void getAllConfirmedOrders()
         {
-            Console.Write("BITCHFUCK YOU");
+            Console.WriteLine("\n");
+            Console.WriteLine("========= ORDERS CONFIRMED ========\n");
+            List<Order> oList = orderCollection.GetAllOrdersWhereState("ready");
+            for (int i = 0; i < oList.Count(); i++)
+            {
+                Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
+            }
+        }
+        public void DispatchOrder(int orderid)
+        {
+            orderCollection.GetOrder(orderid).getCurrentState().prepareOrder();
+        }
+        
+        public void getAllDispatchedOrders()
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("========= ORDERS DISPATCHED ========\n");
+            List<Order> oList = orderCollection.GetAllOrdersWhereState("dispatched");
+            for (int i = 0; i < oList.Count(); i++)
+            {
+                Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
+            }
         }
 
         // TO BE IMPLEMENTED
