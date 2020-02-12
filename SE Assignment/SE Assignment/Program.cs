@@ -16,6 +16,8 @@ namespace SE_Assignment
         static int MenuCount = 1;
         static int FoodCount = 1;
         static int ReceiptCount = 1;
+        static List<Receipt> receiptList = new List<Receipt>();
+
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
         {
 
@@ -291,6 +293,7 @@ namespace SE_Assignment
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
                 Console.WriteLine("[1] Make New Order");
                 Console.WriteLine("[2] View All Receipts");
+                Console.WriteLine("[3] View Current & Past Orders");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -429,7 +432,45 @@ namespace SE_Assignment
                 {
 
                 }
-                
+
+                else if (option == "3")
+                {
+                    Console.WriteLine("=============== CURRENT ORDERS ====================");
+                    if (oc.GetAllOrdersWhereState("dispatched").Count() != 0 || oc.GetAllOrdersWhereState("ready").Count() != 0 || oc.GetAllOrdersWhereState("preparing").Count() != 0
+                        || oc.GetAllOrdersWhereState("new").Count() != 0)
+                    {
+                        foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                        }
+                        foreach (Order order in oc.GetAllOrdersWhereState("ready"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                        }
+                        foreach (Order order in oc.GetAllOrdersWhereState("preparing"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                        }
+                        foreach (Order order in oc.GetAllOrdersWhereState("new"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                        }
+                    }
+                    else
+                        Console.WriteLine("You have no current orders!");
+
+                    Console.WriteLine("=============== PAST ORDERS ====================");
+                    if (oc.GetAllOrdersWhereState("delivered").Count() != 0)
+                    {
+                        foreach (Order order in oc.GetAllOrdersWhereState("delivered"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID);
+                        }
+                    }
+                    else
+                        Console.WriteLine("You have no past orders!");
+                }
+
                 else if (option == "0")
                 {
                     Main();

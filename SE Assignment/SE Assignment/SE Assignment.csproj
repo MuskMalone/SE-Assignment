@@ -54,6 +54,7 @@
     <Compile Include="FoodIterator.cs" />
     <Compile Include="MenuCollection.cs" />
     <Compile Include="NewState.cs" />
+    <Compile Include="Observer.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderCollection.cs" />
     <Compile Include="OrderState.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="PaymentStrategy.cs" />
     <Compile Include="Paypal.cs" />
     <Compile Include="CreditCard.cs" />
+    <Compile Include="Subject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
