@@ -7,46 +7,21 @@ using System.Threading.Tasks;
 namespace SE_Assignment
 {
     public class FoodCollection : FoodIterator
-    {
-        private int menuID;
-        private string name;
-        private int size = 0;
-        private double price;
-
-        public FoodCollection(int id, string menuName, double _price)
-        {
-            menuID = id;
-            name = menuName;
-            price = _price;
-        }
-
-        public double GetPrice()
-        {
-            return price;
-        }
-        public int GetID()
-        {
-            return menuID;
-        }
-        public string GetName()
-        {
-            return name;
-        }
-
-        public List<Food> foodList = new List<Food>();
+    {        
+        public List<MenuItem> itemList = new List<MenuItem>();
         int position = 0;
 
-        public Food GetCurrent()
+        public MenuItem GetCurrent()
         {
-            return foodList[position];
+            return itemList[position];
         }
 
-        public Food NextFood()
+        public MenuItem NextFood()
         {
-            if (position < size-1)
+            if (position < itemList.Count()-1)
             {
                 position++;
-                return foodList[position];
+                return itemList[position];
             }
             position = 0;
             return null;
@@ -54,94 +29,41 @@ namespace SE_Assignment
 
         public bool HasNextFood()
         {
-            if (position < size-1)
+            if (position < itemList.Count()-1)
                 return true;
             position = 0;
             return false;
         }
 
-        public void AddFood(Food f)
+        public void AddFood(MenuItem m)
         {
-            foodList.Add(f);
-            size += 1;
-            Console.WriteLine(f.Title+" Added Successfully!");
-        }
-
-        public void EditFood(int id, Food f)
-        {
-            for (int i = 0; i < size-1; i++)
-            {
-                if (foodList[i].FoodID == id)
-                {
-                    foodList[i] = f;
-                    Console.WriteLine("Successfully Edited Food Item!");
-                }
-            }
+            itemList.Add(m);
+            Console.WriteLine(m.Name +" Added Successfully!");
         }
 
         public void RemoveFood(int id)
         {
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < itemList.Count(); i++)
             {
-                if (foodList[i].FoodID == id)
+                if (itemList[i].ItemID == id)
                 {
-                    string removedFood = foodList[i].Title;
-                    foodList.RemoveAt(i);
-                    size -= 1;
+                    string removedFood = itemList[i].Name;
+                    itemList.RemoveAt(i);
                     Console.WriteLine("Successfully Deleted " + removedFood + "!");
                 }
             }
         }
 
-        public override string ToString()
+        public MenuItem GetMenuItem(int id)
         {
-            string displayText = "[" + menuID + "] " + name + ", Size: " + size + ", Price: $" + price;
-            displayText += "\n> " + GetCurrent().Title;
-            while (HasNextFood())
+            for (int i = 0; i < itemList.Count(); i++)
             {
-                displayText += "\n> " + NextFood().Title;
-            }
-            
-            return displayText;
-        }
-        
-        public double GetTotalAmount()
-        {
-            double amount = 0;
-
-            for (int i = 0; i < size; i++)
-            {
-                amount += foodList[i].Price;
-            }
-
-            return amount;
-        }
-
-        public Food GetFood(int id)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                if (GetCurrent().FoodID == id)
-                    return GetCurrent();
-                else
+                if (itemList[i].ItemID == id)
                 {
-                    while (HasNextFood())
-                    {
-                        if (NextFood().FoodID == id)
-                            return GetCurrent();
-                    }
+                    return itemList[i];
                 }
             }
             return null;
-        }
-
-        public void ListAllFood()
-        {
-            Console.WriteLine(GetCurrent());
-            while (HasNextFood())
-            {
-                Console.WriteLine(NextFood().ToString());
-            }
         }
     }
 }
