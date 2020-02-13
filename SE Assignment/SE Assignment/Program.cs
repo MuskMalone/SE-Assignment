@@ -254,7 +254,7 @@ namespace SE_Assignment
                         d.dispatchOrder(oc.GetOrder(Convert.ToInt32(input)));
                     }
                     else
-                        Console.WriteLine("You have no orders!");
+                        Console.WriteLine("\n You have no orders to dispatch! \n");
                 }
                 else if (option == "3")
                 {
@@ -266,7 +266,7 @@ namespace SE_Assignment
                         }
                         Console.WriteLine("Confirm a delivery: ");
                         string input = Console.ReadLine();
-                        d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
+                        d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));                        
                     }
                     else
                         Console.WriteLine("You have no orders!");
@@ -430,45 +430,66 @@ namespace SE_Assignment
                 }
                 else if (option == "2")
                 {
-
+                    // show receipt details
+                    r.viewAllReceipt(rList);
                 }
 
                 else if (option == "3")
                 {
-                    Console.WriteLine("=============== CURRENT ORDERS ====================");
-                    if (oc.GetAllOrdersWhereState("dispatched").Count() != 0 || oc.GetAllOrdersWhereState("ready").Count() != 0 || oc.GetAllOrdersWhereState("preparing").Count() != 0
-                        || oc.GetAllOrdersWhereState("new").Count() != 0)
+                    while (true)
                     {
-                        foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
-                        {
-                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
-                        }
-                        foreach (Order order in oc.GetAllOrdersWhereState("ready"))
-                        {
-                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
-                        }
-                        foreach (Order order in oc.GetAllOrdersWhereState("preparing"))
-                        {
-                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
-                        }
-                        foreach (Order order in oc.GetAllOrdersWhereState("new"))
-                        {
-                            Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
-                        }
-                    }
-                    else
-                        Console.WriteLine("You have no current orders!");
+                        Console.WriteLine("\n ======= VIEW ORDERS =======");
+                        Console.WriteLine("[1] View Current Orders");
+                        Console.WriteLine("[2] View Past Orders");
+                        Console.WriteLine("[3] Return to customer screen");
+                        Console.Write("\nSelect an option: ");
+                        string orderOption = Console.ReadLine();
 
-                    Console.WriteLine("=============== PAST ORDERS ====================");
-                    if (oc.GetAllOrdersWhereState("delivered").Count() != 0)
-                    {
-                        foreach (Order order in oc.GetAllOrdersWhereState("delivered"))
+                        if (orderOption == "1")
                         {
-                            Console.WriteLine("Order " + order.OrderID);
+                            Console.WriteLine("\n=============== CURRENT ORDERS ====================");
+                            if (oc.GetAllOrdersWhereState("dispatched").Count() != 0 || oc.GetAllOrdersWhereState("ready").Count() != 0 || oc.GetAllOrdersWhereState("preparing").Count() != 0
+                            || oc.GetAllOrdersWhereState("new").Count() != 0)
+                            {
+                                foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("ready"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("preparing"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("new"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                            }
+                            else
+                                Console.WriteLine("You have no current orders!");
+
+                        }
+                        else if (orderOption == "2")
+                        {
+                            Console.WriteLine("\n=============== PAST ORDERS ====================");
+                            if (oc.GetAllOrdersWhereState("delivered").Count() != 0)
+                            {
+                                foreach (Order order in oc.GetAllOrdersWhereState("delivered"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                            }
+                            else
+                                Console.WriteLine("You have no past orders!");
+                        }
+                        else if (orderOption == "3")
+                        {
+                            break;
                         }
                     }
-                    else
-                        Console.WriteLine("You have no past orders!");
                 }
 
                 else if (option == "0")
@@ -540,11 +561,9 @@ namespace SE_Assignment
             Console.WriteLine("======= SELECT AN ACCOUNT =======");
             Console.WriteLine("[1] Employee");
             Console.WriteLine("[2] Customer");
-            Console.WriteLine("[0] Get hacked");
-
-
+            
             Console.WriteLine("\n ======= EXIT? =======");
-           
+            Console.WriteLine("[0] Exit Application");
 
             Console.Write("\n Select an Account type: ");
 
