@@ -237,7 +237,6 @@ namespace SE_Assignment
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
 
-                // [1] View all dispatcher detail
                 if (option == "1")
                 {
                     d.viewAllDispatchers(dList);
@@ -270,8 +269,7 @@ namespace SE_Assignment
                         d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
                         d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
 
-                        //Console.WriteLine("\nTotal commission earned this month is now $" 
-                                          + d.TotalCommission);
+                        Console.WriteLine("\nTotal commission earned this month is now $" + d.TotalCommission);
                     }
                     else
                         Console.WriteLine("You have no orders!");

@@ -54,10 +54,6 @@ namespace SE_Assignment
                 Console.WriteLine(d.getDispatcherDetails());
             }
         }
-        
-        // TO BE IMPLEMENTED
-        /*
-        public double calculateCommission(Order o, double totalCommission)
 
         // Assuming dispatchers earn $5 per commission or something
         public double addCommission(Order o, double TotalCommission)
@@ -92,6 +88,5 @@ namespace SE_Assignment
         {
             o.getCurrentState().confirmOrder();
         }
-        */
     }
 }
