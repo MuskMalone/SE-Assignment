@@ -565,11 +565,9 @@ namespace SE_Assignment
             Console.WriteLine("======= SELECT AN ACCOUNT =======");
             Console.WriteLine("[1] Employee");
             Console.WriteLine("[2] Customer");
-            Console.WriteLine("[0] Get hacked");
-
-
+            
             Console.WriteLine("\n ======= EXIT? =======");
-           
+            Console.WriteLine("[0] Exit Application");
 
             Console.Write("\n Select an Account type: ");
 
