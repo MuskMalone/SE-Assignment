@@ -269,7 +269,7 @@ namespace SE_Assignment
                         d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
                         d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
 
-                        Console.WriteLine("\nTotal commission earned this month is now $: " 
+                        //Console.WriteLine("\nTotal commission earned this month is now $" 
                                           + d.TotalCommission);
                     }
                     else
