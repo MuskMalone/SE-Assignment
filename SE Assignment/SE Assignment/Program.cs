@@ -270,7 +270,7 @@ namespace SE_Assignment
                         d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
                         d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
 
-                        Console.WriteLine("\nTotal commission earned this month is now $: " 
+                        //Console.WriteLine("\nTotal commission earned this month is now $" 
                                           + d.TotalCommission);
                     }
                     else
@@ -566,9 +566,8 @@ namespace SE_Assignment
             Console.WriteLine("======= SELECT AN ACCOUNT =======");
             Console.WriteLine("[1] Employee");
             Console.WriteLine("[2] Customer");
-
             Console.WriteLine("\n ======= EXIT? =======");
-            Console.WriteLine("[0] Get hacked");
+            Console.WriteLine("[0] Exit Application");
 
             Console.Write("\n Select an Account type: ");
 

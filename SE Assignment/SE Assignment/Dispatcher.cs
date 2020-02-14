@@ -18,13 +18,7 @@ namespace SE_Assignment
         {
             get { return totalCommission; }
             set { totalCommission = value; }
-        }        
-
-        public void dispatchOrder(Order order)
-        {
-            // Code
-            order.getCurrentState().dispatchOrder();
-        }
+        }       
 
         public Dispatcher() { }
 
@@ -87,6 +81,11 @@ namespace SE_Assignment
             }
 
             return TotalCommission;
+        }
+
+        public void dispatchOrder(Order o)
+        {
+            o.getCurrentState().dispatchOrder();
         }
 
         public void confirmDelivery(Order o)
