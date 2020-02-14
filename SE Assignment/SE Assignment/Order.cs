@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class Order
+    public class Order : Subject
     {
         public string OrderStatus { get; set; }
         public readonly int OrderID;      
@@ -74,5 +74,17 @@ namespace SE_Assignment
             // Code
         }
 
+        public void registeCustomer(Customer c)
+        {
+            c.update();
+        }
+        public void removeCustomer(Customer c)
+        {
+            c.update();
+        }
+        public void notifyCustomer(Customer c)
+        {
+            c.update();
+        }
     }
 }

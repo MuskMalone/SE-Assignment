@@ -11,20 +11,15 @@ namespace SE_Assignment
         // OBJECTS CREATED HERE
         static MenuCollection setMenu = new MenuCollection();
         static MenuCollection alacarteMenu = new MenuCollection();
+        static OrderCollection oc = new OrderCollection();
+        static int OrderCount = 1;
+        static int MenuCount = 1;
+        static int FoodCount = 1;
+        static int ReceiptCount = 1;
+        static List<Receipt> receiptList = new List<Receipt>();
 
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
-        {           
-            OrderCollection oc = new OrderCollection();
-            
-            Order o1 = new Order(1, "new");
-            Order o2 = new Order(2, "new");
-            Order o3 = new Order(3, "new");
-            Order o4 = new Order(4, "new");
-
-            oc.AddOrder(o1);
-            oc.AddOrder(o2);
-            oc.AddOrder(o3);
-            oc.AddOrder(o4);
+        {
 
             Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
             Manager m2 = new Manager(1,"cheng en", "S6666667X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
@@ -32,20 +27,16 @@ namespace SE_Assignment
             mList.Add(m2);
 
             Chef c1 = new Chef("Cheng Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
-            Chef c2 = new Chef("Hian Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
+            Chef c2 = new Chef("Hian Hian", 1, "S7777777X", 'F', DateTime.UtcNow, "On Duty", oc);
             cList.Add(c1);
             cList.Add(c2);
 
             Dispatcher d1 = new Dispatcher("Nikko", 2, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
             dList.Add(d1);
 
-            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@daddy.com", "535 Clementi Rd, Singapore 599489");
+            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489");
             customerList.Add(customer1);
-
-            Receipt receipt1 = new Receipt(100, DateTime.UtcNow, DateTime.UtcNow, "Breakfast meal", "Visa", 12.50);
-            Receipt receipt2 = new Receipt(101, DateTime.UtcNow, DateTime.UtcNow, "Lunch meal", "Visa", 15);
-            rList.Add(receipt1);
-            rList.Add(receipt2);
+            
         }
 
         // EMPLOYEE SCREEN
@@ -182,10 +173,10 @@ namespace SE_Assignment
             while (true)
             {
                 Console.WriteLine("\n ======= CHEF SCREEN =======");
-                Console.WriteLine("[1] Krabby patty secret formula");
-                Console.WriteLine("[2] prepare order u want");
-                Console.WriteLine("[3] get preparing orders fucklsersekrlsk");
-                Console.WriteLine("[4] finish HIM");
+                Console.WriteLine("[1] View New Orders");
+                Console.WriteLine("[2] Prepare an order");
+                Console.WriteLine("[3] Get preparing orders");
+                Console.WriteLine("[4] Finish an order");
                 Console.WriteLine("[5] Return to Employee Screen");
 
                 Console.Write("Select an option:");
@@ -194,7 +185,7 @@ namespace SE_Assignment
                 if (option == "1")
                 {
                     cList[0].GetAllNewOrders();
-                    Console.WriteLine("\n bitch u thot");
+                    Console.WriteLine("\n");
                 }
 
                 if (option == "2")
@@ -202,13 +193,13 @@ namespace SE_Assignment
                     Console.WriteLine("Enter Order ID: ");
                     int orderid = Int32.Parse(Console.ReadLine());
                     cList[0].PrepareOrder(orderid);
-                    Console.WriteLine("\n sksksksk");
+                    Console.WriteLine("\n");
                 }
 
                 if (option == "3")
                 {
                     cList[0].GetAllPreparingOrders();
-                    Console.WriteLine("\n current preparing orders");
+                    Console.WriteLine("\n Current preparing orders");
                 }
 
                 if (option == "4")
@@ -216,7 +207,6 @@ namespace SE_Assignment
                     Console.WriteLine("Enter Order ID: ");
                     int orderid = Int32.Parse(Console.ReadLine());
                     cList[0].CompleteOrder(orderid);
-                    Console.WriteLine("there is no war in ba sing se");
                 }
 
                 else if (option == "5")
@@ -240,8 +230,8 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= DISPATCHER SCREEN =======");
                 Console.WriteLine("[1] View all dispatcher details");
-                Console.WriteLine("[2] View orders to dispatch");
-                Console.WriteLine("[3] Select order to dispatch");
+                Console.WriteLine("[2] Dispatch an order");
+                Console.WriteLine("[3] Confirm a delivery");
                 Console.WriteLine("[4] Return to Employee Screen");
 
                 Console.Write("Select an option: ");
@@ -252,23 +242,40 @@ namespace SE_Assignment
                 {
                     d.viewAllDispatchers(dList);
                 }
-
-                // [2] View orders to dispatch
                 else if (option == "2")
                 {
-                    dList[0].GetAllCompletedOrders();
+                    if (oc.GetAllOrdersWhereState("ready").Count() != 0)
+                    {
+                        foreach (Order order in oc.GetAllOrdersWhereState("ready"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID);
+                        }
+                        Console.WriteLine("Dispatch an order: ");
+                        string input = Console.ReadLine();
+                        d.dispatchOrder(oc.GetOrder(Convert.ToInt32(input)));
+                    }
+                    else
+                        Console.WriteLine("You have no orders!");
                 }
-
-                // [3] Select order to dispatch
                 else if (option == "3")
                 {
-                    Console.WriteLine("Enter Order ID: ");
-                    int orderid = Int32.Parse(Console.ReadLine());
-                    dList[0].DispatchOrder(orderid);
-                    Console.WriteLine("Order has been dispatched. yay");
-                }
+                    if (oc.GetAllOrdersWhereState("dispatched").Count() != 0)
+                    {
+                        foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID);
+                        }
+                        Console.WriteLine("Confirm a delivery: ");
+                        string input = Console.ReadLine();
+                        d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
+                        d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
 
-                // [4] Return to Employee Screen
+                        Console.WriteLine("\nTotal commission earned this month is now $: " 
+                                          + d.TotalCommission);
+                    }
+                    else
+                        Console.WriteLine("You have no orders!");
+                }
                 else if (option == "4")
                 {
                     employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
@@ -290,9 +297,8 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
                 Console.WriteLine("[1] Make New Order");
-                Console.WriteLine("[2] ?");
-                Console.WriteLine("[3] View Order Statuses");
-                Console.WriteLine("[5] View All Receipts");
+                Console.WriteLine("[2] View All Receipts");
+                Console.WriteLine("[3] View Current & Past Orders");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -378,7 +384,7 @@ namespace SE_Assignment
                                 Console.WriteLine("[2] Paypal");
                                 Console.Write("Select an option: ");
                                 string paymentoption = Console.ReadLine();
-
+                                
                                 if (paymentoption == "1")
                                 {
                                     Console.WriteLine("Credit Card selected");
@@ -391,6 +397,12 @@ namespace SE_Assignment
                                     Console.Write("Date of expiry: ");
                                     string DOE = Console.ReadLine();
                                     pay(new CreditCard(name, "1234567890123456", cvc, DOE), publicamount);
+                                    Order newOrder = new Order(OrderCount, "New");
+                                    OrderCount++;
+                                    oc.AddOrder(newOrder);
+                                    Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custmenuList, c.custfoodList, "Credit Card", publicamount);
+                                    rList.Add(newReceipt);
+                                    newReceipt.viewAllReceipt(rList);
                                     break;
 
                                 }
@@ -403,6 +415,12 @@ namespace SE_Assignment
                                     Console.Write("Currency: ");
                                     string curr = Console.ReadLine();
                                     pay(new Paypal(name, curr), publicamount);
+                                    Order newOrder = new Order(OrderCount, "New");
+                                    OrderCount++;
+                                    oc.AddOrder(newOrder);
+                                    Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custmenuList, c.custfoodList, "Paypal", publicamount);
+                                    rList.Add(newReceipt);
+                                    newReceipt.viewAllReceipt(rList);
                                     break;
                                 }
                             }
@@ -417,16 +435,66 @@ namespace SE_Assignment
 
                 else if (option == "2")
                 {
+                    // Get receipt
                 }
 
                 else if (option == "3")
                 {
-                    c.viewAllOrderStatuses();
-                }
+                    while (true)
+                    {
+                        Console.WriteLine("\n ======= VIEW ORDERS =======");
+                        Console.WriteLine("[1] View Current Orders");
+                        Console.WriteLine("[2] View Past Orders");
+                        Console.WriteLine("[3] Return to customer screen");
+                        Console.Write("\nSelect an option: ");
+                        string orderOption = Console.ReadLine();
 
-                else if (option == "5")
-                {
-                    r.viewAllReceipt(rList);
+                        if (orderOption == "1")
+                        {
+                            Console.WriteLine("\n=============== CURRENT ORDERS ====================");
+                            if (oc.GetAllOrdersWhereState("dispatched").Count() != 0 || oc.GetAllOrdersWhereState("ready").Count() != 0 || oc.GetAllOrdersWhereState("preparing").Count() != 0
+                            || oc.GetAllOrdersWhereState("new").Count() != 0)
+                            {
+                                foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("ready"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("preparing"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("new"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                            }
+                            else
+                                Console.WriteLine("You have no current orders!");
+
+                        }
+                        else if (orderOption == "2")
+                        {
+                            Console.WriteLine("\n=============== PAST ORDERS ====================");
+                            if (oc.GetAllOrdersWhereState("delivered").Count() != 0)
+                            {
+                                foreach (Order order in oc.GetAllOrdersWhereState("delivered"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                            }
+                            else
+                                Console.WriteLine("You have no past orders!");
+                        }
+
+                        else if (orderOption == "3")
+                        {
+                            break;
+                        }
+                    }
                 }
 
                 else if (option == "0")

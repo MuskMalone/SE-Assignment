@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Customer
+    public class Customer : Observer
     {
         private OrderCollection orderCollection;
         private List<Order> OrderList = new List<Order>();
@@ -87,6 +87,11 @@ namespace SE_Assignment
             return amount;
         }
 
+        public void updateOrderStatus()
+        {
+
+        }
+
         public void placeOrder()
         {
 
@@ -98,10 +103,9 @@ namespace SE_Assignment
             // Code
         }
 
-
-        public void updateOrderStatus()
+        public void update()
         {
-
+            Console.WriteLine("Your order has advanced to the next phase");
         }
 
         public void cancelOrder()

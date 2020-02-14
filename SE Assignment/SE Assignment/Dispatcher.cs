@@ -11,13 +11,19 @@ namespace SE_Assignment
     {
         private Order order;
         private OrderCollection orderCollection;
-        
-        private double totalCommision;
 
+        private double totalCommission;
+        
         public double TotalCommission
         {
-            get { return totalCommision; }
-            set { totalCommision = value; }
+            get { return totalCommission; }
+            set { totalCommission = value; }
+        }        
+
+        public void dispatchOrder(Order order)
+        {
+            // Code
+            order.getCurrentState().dispatchOrder();
         }
 
         public Dispatcher() { }
@@ -55,61 +61,37 @@ namespace SE_Assignment
             }
         }
         
-        public void viewCompletedOrders(Order o)
-        {
-            o.getCurrentState();
-            Console.WriteLine(o.getCurrentState());
-        }
-
-        public OrderCollection getOrderCollection() { return orderCollection; }
-
-        public void getAllReadyOrders()
-        {
-            Console.WriteLine("\n");
-            Console.WriteLine("========= ORDERS TO BE DISPATCHED ========\n");
-            List<Order> oList = orderCollection.GetAllOrdersWhereState("ready");
-            for (int i = 0; i < oList.Count(); i++)
-            {
-                Console.WriteLine(oList[i].OrderID + " " + oList[i].getCurrentState().getStateName());
-            }
-        }
-
-        public void GetAllCompletedOrders()
-        {
-            Console.WriteLine("\n");
-            Console.WriteLine("========= ORDERS TO BE DISPATCHED ========\n");
-            List<Order> oList = orderCollection.GetAllOrdersWhereState("preparing");
-            for (int i = 0; i < oList.Count(); i++)
-            {
-                Console.WriteLine(oList[i].OrderID + ": " + oList[i].getCurrentState().getStateName());
-            }
-        }
-
-        public void DispatchOrder(int orderid)
-        {
-            orderCollection.GetOrder(orderid).getCurrentState().dispatchOrder();
-        }
-
         // TO BE IMPLEMENTED
         /*
         public double calculateCommission(Order o, double totalCommission)
+
+        // Assuming dispatchers earn $5 per commission or something
+        public double addCommission(Order o, double TotalCommission)
         {
-            // Reset commission if new month
-            if (DateTime.Now.Day == 1 && order.OrderStatus != "delivered")
+            // Reset commission if new month            
+            if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
             {
                 totalCommission = 0;
             }
+
             // Assign commission if delivery successful on new month
-            else if (DateTime.Now.Day == 1 && order.OrderStatus == "delivered")
+            else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                totalCommission = totalCommission + 1;
+                totalCommission = totalCommission + 5;
             }
-            // Assign commission if delivery successful regardless 
-            else if (DateTime.Now.Day != 1 && order.OrderStatus == "delivered")
+
+            // Assign commission if delivery successful regardless
+            else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                totalCommission = totalCommission + 1;
+                totalCommission = totalCommission + 5;
             }
-            return totalCommission;
+
+            return TotalCommission;
+        }
+
+        public void confirmDelivery(Order o)
+        {
+            o.getCurrentState().confirmOrder();
         }
         */
     }
