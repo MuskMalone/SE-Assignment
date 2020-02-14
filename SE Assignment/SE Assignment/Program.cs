@@ -295,8 +295,7 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
                 Console.WriteLine("[1] Make New Order");
-                Console.WriteLine("[2] View All Receipts");
-                Console.WriteLine("[3] View Current & Past Orders");
+                Console.WriteLine("[2] View Current & Past Orders");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -432,11 +431,6 @@ namespace SE_Assignment
                 }
 
                 else if (option == "2")
-                {
-                    // Get receipt
-                }
-
-                else if (option == "3")
                 {
                     while (true)
                     {
