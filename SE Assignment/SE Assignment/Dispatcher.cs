@@ -42,7 +42,7 @@ namespace SE_Assignment
                     "Gender : " + gender + "\n" +
                     "Status : " + status + "\n" +
                     "Date Joined : " + dateJoined + "\n" +
-                    "Total comission : " + TotalCommission);
+                    "Total commission : " + TotalCommission);
         }
         
         public void viewAllDispatchers(List<Dispatcher> dList)
@@ -75,7 +75,7 @@ namespace SE_Assignment
                 totalCommission = totalCommission + 5;
             }
 
-            return TotalCommission;
+            return totalCommission;
         }
 
         public void dispatchOrder(Order o)
