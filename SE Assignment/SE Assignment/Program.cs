@@ -241,7 +241,6 @@ namespace SE_Assignment
                 {
                     d.viewAllDispatchers(dList);
                 }
-
                 else if (option == "2")
                 {
                     if (oc.GetAllOrdersWhereState("ready").Count() != 0)
@@ -255,9 +254,8 @@ namespace SE_Assignment
                         d.dispatchOrder(oc.GetOrder(Convert.ToInt32(input)));
                     }
                     else
-                        Console.WriteLine("\n You have no orders to dispatch!");
+                        Console.WriteLine("You have no orders!");
                 }
-
                 else if (option == "3")
                 {
                     if (oc.GetAllOrdersWhereState("dispatched").Count() != 0)
@@ -269,17 +267,14 @@ namespace SE_Assignment
                         Console.WriteLine("Confirm a delivery: ");
                         string input = Console.ReadLine();
                         d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
-
-                        //Add commission after order is delivered
                         d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
-                        
-                        //Console.WriteLine(d.TotalCommission);                        
-                    }
 
+                        Console.WriteLine("\nTotal commission earned this month is now $: " 
+                                          + d.TotalCommission);
+                    }
                     else
                         Console.WriteLine("You have no orders!");
                 }
-
                 else if (option == "4")
                 {
                     employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
@@ -439,8 +434,7 @@ namespace SE_Assignment
                 }
                 else if (option == "2")
                 {
-                    // show receipt details
-                    //r.viewAllReceipt(rList);
+                    // Get receipt
                 }
 
                 else if (option == "3")
@@ -571,9 +565,11 @@ namespace SE_Assignment
             Console.WriteLine("======= SELECT AN ACCOUNT =======");
             Console.WriteLine("[1] Employee");
             Console.WriteLine("[2] Customer");
-            
+            Console.WriteLine("[0] Get hacked");
+
+
             Console.WriteLine("\n ======= EXIT? =======");
-            Console.WriteLine("[0] Exit Application");
+           
 
             Console.Write("\n Select an Account type: ");
 

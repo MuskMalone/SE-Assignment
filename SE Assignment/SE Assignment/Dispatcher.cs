@@ -12,8 +12,6 @@ namespace SE_Assignment
         private OrderCollection orderCollection;
 
         private double totalCommission;
-
-        //public double TotalCommission { get; set; }
         
         public double TotalCommission
         {
@@ -59,11 +57,10 @@ namespace SE_Assignment
                 Console.WriteLine(d.getDispatcherDetails());
             }
         }
-
-        /*
+        
         // Assuming dispatchers earn $5 per commission or something
-        public double addCommission(Order o, double totalCommission)
-        { 
+        public double addCommission(Order o, double TotalCommission)
+        {
             // Reset commission if new month            
             if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
             {
@@ -82,32 +79,7 @@ namespace SE_Assignment
                 totalCommission = totalCommission + 5;
             }
 
-            return totalCommission;
-        }
-        */
-
-        // Assuming dispatchers earn $5 per commission or something
-        public double addCommission(Order o, double TotalCommission)
-        {
-            // Reset commission if new month            
-            if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
-            {
-                totalCommission = 100;
-            }
-
-            // Assign commission if delivery successful on new month
-            else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
-            {
-                totalCommission = totalCommission + 5;
-            }
-
-            // Assign commission if delivery successful regardless
-            else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
-            {
-                totalCommission = totalCommission + 5;
-            }
-
-            return totalCommission;
+            return TotalCommission;
         }
 
         public void confirmDelivery(Order o)
