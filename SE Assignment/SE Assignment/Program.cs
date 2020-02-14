@@ -18,30 +18,37 @@ namespace SE_Assignment
         static int ReceiptCount = 1;
         static List<Receipt> receiptList = new List<Receipt>();
 
+        static List<Dispatcher> dList = new List<Dispatcher>();
+        static List<Manager> mList = new List<Manager>();
+
+
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
         {
-
-            Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
-            Manager m2 = new Manager(1,"cheng en", "S6666667X", 'M',"On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
+            Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
+            Manager m2 = new Manager(2, "cheng en", "S6666667X", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
             mList.Add(m1);
             mList.Add(m2);
+
+            Dispatcher d1 = new Dispatcher("Nikko", 3, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
+            dList.Add(d1);
 
             Chef c1 = new Chef("Cheng Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
             Chef c2 = new Chef("Hian Hian", 1, "S7777777X", 'F', DateTime.UtcNow, "On Duty", oc);
             cList.Add(c1);
             cList.Add(c2);
-
-            Dispatcher d1 = new Dispatcher("Nikko", 2, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
-            dList.Add(d1);
-
-            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489");
-            customerList.Add(customer1);
             
+            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489");
+            customerList.Add(customer1);            
         }
 
         // EMPLOYEE SCREEN
         static void employeeScreen(Manager m, List<Manager> mList, Chef c, List<Chef> cList, Dispatcher d, List<Dispatcher> dList, MenuCollection setMenu, MenuCollection alcM)
         {
+            List<Customer> customerList = new List<Customer>();
+            List<Receipt> rList = new List<Receipt>();
+
+            initalizer(mList, dList, cList, customerList, rList);
+
             while (true)
             {
                 Console.WriteLine("\n ======= EMPLOYEE SCREEN =======");
@@ -54,6 +61,8 @@ namespace SE_Assignment
 
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
+
+                
 
                 // TO MANAGER SCREEN
                 if (option == "1")
@@ -84,11 +93,13 @@ namespace SE_Assignment
         // MANAGER SCREEN
         static void managerScreen(Manager m, List<Manager> mList, MenuCollection setMenu, MenuCollection alcM)
         {
+            List<Customer> customerList = new List<Customer>();
+            List<Receipt> rList = new List<Receipt>();
             List<Chef> cList = new List<Chef>();
             Chef c = new Chef();
             List<Dispatcher> dList = new List<Dispatcher>();
             Dispatcher d = new Dispatcher();
-
+            
             while (true)
             {
                 Console.WriteLine("\n ======= MANAGER SCREEN =======");
@@ -226,6 +237,9 @@ namespace SE_Assignment
             List<Chef> cList = new List<Chef>();
             Chef c = new Chef();
 
+            List<Customer> customerList = new List<Customer>();
+            List<Receipt> rList = new List<Receipt>();
+            
             while (true)
             {
                 Console.WriteLine("\n ======= DISPATCHER SCREEN =======");
@@ -241,6 +255,7 @@ namespace SE_Assignment
                 {
                     d.viewAllDispatchers(dList);
                 }
+
                 else if (option == "2")
                 {
                     if (oc.GetAllOrdersWhereState("ready").Count() != 0)
@@ -256,6 +271,7 @@ namespace SE_Assignment
                     else
                         Console.WriteLine("You have no orders!");
                 }
+
                 else if (option == "3")
                 {
                     if (oc.GetAllOrdersWhereState("dispatched").Count() != 0)
@@ -274,6 +290,7 @@ namespace SE_Assignment
                     else
                         Console.WriteLine("You have no orders!");
                 }
+
                 else if (option == "4")
                 {
                     employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
@@ -516,7 +533,6 @@ namespace SE_Assignment
             List<Food> fList = new List<Food>();
             Food f = new Food();
 
-
             FoodIterator fi_wombo = setMenu.CreateFoodIterator(1, "Wombo Combo", 5.5);
             FoodIterator fi_cnd = setMenu.CreateFoodIterator(2, "Chips n Dips", 7);
             FoodIterator fi_truff = setMenu.CreateFoodIterator(3, "Truffle Trouble", 4.5);
@@ -550,8 +566,6 @@ namespace SE_Assignment
             alacarte.AddFood(Dip);
             alacarte.AddFood(Truff);
             alacarte.AddFood(Pizza);
-
-            initalizer(mList, dList, cList, customerList, rList);
 
             string accountType;
 

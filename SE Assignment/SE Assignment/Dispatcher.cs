@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace SE_Assignment
 {
     public class Dispatcher : Employee
@@ -45,7 +44,7 @@ namespace SE_Assignment
                     "Date Joined : " + dateJoined + "\n" +
                     "Total comission : " + TotalCommission);
         }
-
+        
         public void viewAllDispatchers(List<Dispatcher> dList)
         {
             foreach (Dispatcher d in dList)
