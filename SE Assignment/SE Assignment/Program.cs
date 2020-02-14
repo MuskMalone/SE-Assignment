@@ -241,6 +241,7 @@ namespace SE_Assignment
                 {
                     d.viewAllDispatchers(dList);
                 }
+
                 else if (option == "2")
                 {
                     if (oc.GetAllOrdersWhereState("ready").Count() != 0)
@@ -254,8 +255,9 @@ namespace SE_Assignment
                         d.dispatchOrder(oc.GetOrder(Convert.ToInt32(input)));
                     }
                     else
-                        Console.WriteLine("\n You have no orders to dispatch! \n");
+                        Console.WriteLine("\n You have no orders to dispatch!");
                 }
+
                 else if (option == "3")
                 {
                     if (oc.GetAllOrdersWhereState("dispatched").Count() != 0)
@@ -266,11 +268,18 @@ namespace SE_Assignment
                         }
                         Console.WriteLine("Confirm a delivery: ");
                         string input = Console.ReadLine();
-                        d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));                        
+                        d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
+
+                        //Add commission after order is delivered
+                        d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
+                        
+                        //Console.WriteLine(d.TotalCommission);                        
                     }
+
                     else
                         Console.WriteLine("You have no orders!");
                 }
+
                 else if (option == "4")
                 {
                     employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
@@ -431,7 +440,7 @@ namespace SE_Assignment
                 else if (option == "2")
                 {
                     // show receipt details
-                    r.viewAllReceipt(rList);
+                    //r.viewAllReceipt(rList);
                 }
 
                 else if (option == "3")
@@ -485,6 +494,7 @@ namespace SE_Assignment
                             else
                                 Console.WriteLine("You have no past orders!");
                         }
+
                         else if (orderOption == "3")
                         {
                             break;

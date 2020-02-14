@@ -10,14 +10,16 @@ namespace SE_Assignment
     {
         private Order order;
         private OrderCollection orderCollection;
-        
-        private double totalCommision;
 
+        private double totalCommission;
+
+        //public double TotalCommission { get; set; }
+        
         public double TotalCommission
         {
-            get { return totalCommision; }
-            set { totalCommision = value; }
-        }
+            get { return totalCommission; }
+            set { totalCommission = value; }
+        }        
 
         public void dispatchOrder(Order order)
         {
@@ -58,27 +60,53 @@ namespace SE_Assignment
             }
         }
 
+        /*
         // Assuming dispatchers earn $5 per commission or something
-        public double calculateCommission(OrderCollection oc, double totalCommission)
-        {
-            // Reset commission if new month
-            if (DateTime.Now.Day == 1 && order.OrderStatus != "delivered")
+        public double addCommission(Order o, double totalCommission)
+        { 
+            // Reset commission if new month            
+            if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
             {
-                oc.GetAllOrdersWhereState("ready").Count();
                 totalCommission = 0;
             }
 
             // Assign commission if delivery successful on new month
-            else if (DateTime.Now.Day == 1 && order.OrderStatus == "delivered")
+            else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
             {
                 totalCommission = totalCommission + 5;
             }
 
-            // Assign commission if delivery successful regardless 
-            else if (DateTime.Now.Day != 1 && order.OrderStatus == "delivered")
+            // Assign commission if delivery successful regardless
+            else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
             {
                 totalCommission = totalCommission + 5;
             }
+
+            return totalCommission;
+        }
+        */
+
+        // Assuming dispatchers earn $5 per commission or something
+        public double addCommission(Order o, double TotalCommission)
+        {
+            // Reset commission if new month            
+            if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
+            {
+                totalCommission = 100;
+            }
+
+            // Assign commission if delivery successful on new month
+            else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
+            {
+                totalCommission = totalCommission + 5;
+            }
+
+            // Assign commission if delivery successful regardless
+            else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
+            {
+                totalCommission = totalCommission + 5;
+            }
+
             return totalCommission;
         }
 
