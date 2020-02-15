@@ -18,5 +18,7 @@ namespace SE_Assignment
         void confirmOrder();
 
         void archiveOrder();
+
+        void cancelOrder();
     }
 }

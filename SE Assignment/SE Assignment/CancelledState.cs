@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class DispatchedState : OrderState
+    class CancelledState: OrderState
     {
-        private string name = "dispatched";
+        private string name = "cancelled";
 
         private Order myOrder;
 
-        public DispatchedState(Order order)
+        public CancelledState(Order order)
         {
             myOrder = order;
         }
@@ -49,8 +49,7 @@ namespace SE_Assignment
 
         public void cancelOrder()
         {
-            myOrder.setState(myOrder.getCancelledState());
-            Console.WriteLine("Your order has been cancelled");
+            Console.WriteLine("Your order has already been cancelled");
         }
     }
 }
