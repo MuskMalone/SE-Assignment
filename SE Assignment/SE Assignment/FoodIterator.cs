@@ -20,6 +20,10 @@ namespace SE_Assignment
 
         MenuItem GetMenuItem(int id);
 
-        bool HasSetMeal();
+        bool HasSetMenu();
+
+        bool HasAvailableFood();
+
+        bool HasAvailableSetMenu();
     }
 }

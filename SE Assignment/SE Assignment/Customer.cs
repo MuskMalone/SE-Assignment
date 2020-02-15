@@ -19,8 +19,7 @@ namespace SE_Assignment
         private string email;
         private string address;
 
-        //public List<Food> custfoodList = new List<Food>();
-        //public List<FoodIterator> custmenuList = new List<FoodIterator>();
+        public List<MenuItem> custfoodList = new List<MenuItem>();
 
         public string Name
         {
@@ -60,32 +59,17 @@ namespace SE_Assignment
             Address = address;
         }
 
-        //public double GetcustfoodListTotalAmount()
-        //{
-        //    double amount = 0;
+        public double GetCartTotal()
+        {
+            double amount = 0;
 
-        //    foreach (Food food in custfoodList)
-        //    {
-        //        if (food != null)
-        //            amount += food.Price;
-        //    }
+            foreach (MenuItem item in custfoodList)
+            {
+                amount += item.Price;
+            }
 
-        //    return amount;
-        //}
-
-
-        //public double GetcustmenuListListTotalAmount()
-        //{
-        //    double amount = 0;
-
-        //    foreach (FoodIterator set in custmenuList)
-        //    {
-        //        if (set != null)
-        //            amount += set.GetPrice();
-        //    }
-
-        //    return amount;
-        //}
+            return amount;
+        }
 
         public void updateOrderStatus()
         {

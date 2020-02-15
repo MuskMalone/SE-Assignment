@@ -11,8 +11,7 @@ namespace SE_Assignment
         private int receiptNo;
         private DateTime receiptDateTime;
         private DateTime deliveryDateTime;
-        private List<FoodIterator> menuItem;
-        private List<Food> foodItem;
+        private List<MenuItem> foodList;
         private string paymentType;
         private double amount;
 
@@ -28,14 +27,9 @@ namespace SE_Assignment
             get { return deliveryDateTime; }
             set { deliveryDateTime = value; }
         }
-        public List<FoodIterator> MenuItem {
-            get { return menuItem; }
-            set { menuItem = value; }
-        }
-        public List<Food> FoodItem
-        {
-            get { return foodItem; }
-            set { foodItem = value; }
+        public List<MenuItem> FoodList {
+            get { return foodList; }
+            set { foodList = value; }
         }
         public string PaymentType {
             get { return paymentType; }
@@ -48,13 +42,12 @@ namespace SE_Assignment
 
         public Receipt() { }
 
-        public Receipt(int receiptNo, DateTime receiptDateTime, DateTime deliveryDateTime, List<FoodIterator> _menuItem, List<Food> _foodItem, string paymentType, double amount)
+        public Receipt(int receiptNo, DateTime receiptDateTime, DateTime deliveryDateTime, List<MenuItem> _foodList, string paymentType, double amount)
         {
             ReceiptNo = receiptNo;
             ReceiptDateTime = receiptDateTime;
             DeliveryDateTime = deliveryDateTime;
-            menuItem = _menuItem;
-            foodItem = _foodItem;
+            foodList = _foodList;
             PaymentType = paymentType;
             Amount = amount;
         }
@@ -66,14 +59,9 @@ namespace SE_Assignment
                     "Delivery Date & Time: " + DeliveryDateTime + "\n" +
                     "Payment method: " + PaymentType + "\n" +
                     "Amount: $" + Amount + "\n");
-            foreach (FoodIterator menu in menuItem)
+            foreach (MenuItem mi in foodList)
             {
-                receiptText += "\n" + menu.ToString();
-            }
-            
-            foreach (Food food in foodItem)
-            {
-                receiptText += "\n" + food.ToString();
+                receiptText += "\n" + mi.NewToString(false);
             }
             return receiptText;
         }

@@ -69,21 +69,27 @@ namespace SE_Assignment
             }
         }
 
-        public override string ToString()
+        public string NewToString(bool displayStatus)
         {
             string stringToToString = "";
             if (isSetMenu == true)
             {
                 stringToToString += stringToToString += "[" + itemID + "] " + title + " (" + category + ") - $" + price + ", " +
-                                    description + ", " + unit + ", Size: " + getSize() + " <" + status + ">\n"; ;
+                                    description + ", " + unit + ", Size: " + getSize();
+                if (displayStatus)
+                    stringToToString += " <" + status + ">\n";
                 foreach (Food p in foodList)
                 {
                     stringToToString += "   > " + p.Name + "\n";
                 }
             }
             else
+            {
                 stringToToString += stringToToString += "[" + itemID + "] " + title + " (" + category + ") - $" + price + ", " +
-                                    description + ", " + unit + " <" + status + ">"; ;
+                                    description + ", " + unit;
+                if (displayStatus)
+                    stringToToString += " <" + status + ">\n";
+            }
 
             return stringToToString;
         }

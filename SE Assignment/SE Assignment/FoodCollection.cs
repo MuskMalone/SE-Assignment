@@ -101,11 +101,31 @@ namespace SE_Assignment
             return null;
         }
 
-        public bool HasSetMeal()
+        public bool HasSetMenu()
         {
             foreach (MenuItem mi in itemList)
             {
                 if (mi.IsSetMenu == true)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool HasAvailableFood()
+        {
+            foreach(MenuItem mi in itemList)
+            {
+                if (mi.IsSetMenu == false && mi.Status == "Available")
+                    return true;
+            }
+            return false;
+        }
+
+        public bool HasAvailableSetMenu()
+        {
+            foreach (MenuItem mi in itemList)
+            {
+                if (mi.IsSetMenu == true && mi.Status == "Available")
                     return true;
             }
             return false;
