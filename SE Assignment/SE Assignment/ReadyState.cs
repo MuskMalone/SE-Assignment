@@ -44,8 +44,13 @@ namespace SE_Assignment
 
         public void archiveOrder()
         {
-            Console.WriteLine("Order has been cancelled");
-            // Code
+            Console.WriteLine("Order has been archived");
+        }
+
+        public void cancelOrder()
+        {
+            myOrder.setState(myOrder.getCancelledState());
+            Console.WriteLine("Your order has been cancelled");
         }
     }
 }

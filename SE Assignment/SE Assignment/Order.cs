@@ -16,6 +16,7 @@ namespace SE_Assignment
         private OrderState readyState;
         private OrderState dispatchedState;
         private OrderState deliveredState;
+        private OrderState cancelledState;
 
         private OrderState currentState;
         /*private string orderStatus;
@@ -38,6 +39,7 @@ namespace SE_Assignment
             readyState = new ReadyState(this);
             dispatchedState = new DispatchedState(this);
             deliveredState = new DeliveredState(this);
+            cancelledState = new CancelledState(this);
             setState(newState);
         }
         public void setState(OrderState os)
@@ -55,6 +57,7 @@ namespace SE_Assignment
         public OrderState getReadyState() { return readyState; }
         public OrderState getDispatchedState() { return dispatchedState; }
         public OrderState getDeliveredState() { return deliveredState; }
+        public OrderState getCancelledState() { return cancelledState; }
         
         public void registerCustomer()
         {
@@ -74,7 +77,7 @@ namespace SE_Assignment
             // Code
         }
 
-        public void registeCustomer(Customer c)
+        public void registerCustomer(Customer c)
         {
             c.update();
         }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CancelledState.cs" />
     <Compile Include="Chef.cs" />
     <Compile Include="DeliveredState.cs" />
     <Compile Include="DispatchedState.cs" />
