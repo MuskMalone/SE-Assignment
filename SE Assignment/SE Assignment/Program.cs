@@ -269,7 +269,7 @@ namespace SE_Assignment
                         d.dispatchOrder(oc.GetOrder(Convert.ToInt32(input)));
                     }
                     else
-                        Console.WriteLine("You have no orders!");
+                        Console.WriteLine("\n You have no orders to dispatch!");
                 }
 
                 else if (option == "3")
@@ -286,10 +286,9 @@ namespace SE_Assignment
                         d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
 
                         Console.WriteLine("\nTotal commission earned this month is now $" + d.TotalCommission);
-                        d.viewAllDispatchers(dList);
                     }
                     else
-                        Console.WriteLine("You have no orders!");
+                        Console.WriteLine("\n You have no orders that can be confirmed as delivered!");
                 }
 
                 else if (option == "4")

@@ -40,14 +40,14 @@ namespace SE_Assignment
                     "Gender : " + gender + "\n" +
                     "Status : " + status + "\n" +
                     "Date Joined : " + dateJoined + "\n" +
-                    "Company Start Date : " + companyStartDate);
+                    "Company Start Date : " + companyStartDate + "\n");
         }        
 
         public void viewAllManagers(List<Manager> mList)
         {
+            Console.WriteLine("\n======= MANAGER DETAILS =======");
             foreach (Manager m in mList)
             {
-                Console.WriteLine("==================================");
                 Console.WriteLine(m.getManagerDetails());
             }
         }

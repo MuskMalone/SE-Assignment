@@ -48,9 +48,10 @@ namespace SE_Assignment
         
         public void viewAllDispatchers(List<Dispatcher> dList)
         {
+            Console.WriteLine("\n======= DISPATCHER DETAILS =======");
             foreach (Dispatcher d in dList)
             {
-                Console.WriteLine("==================================");
+                
                 Console.WriteLine(d.getDispatcherDetails());
             }
         }
