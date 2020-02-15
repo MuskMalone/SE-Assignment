@@ -11,14 +11,15 @@ namespace SE_Assignment
         private Order order;
         private OrderCollection orderCollection;
 
-        private double totalCommission;
+        static private double totalCommission;
         
         public double TotalCommission
         {
             get { return totalCommission; }
             set { totalCommission = value; }
-        }       
+        }     
         
+
         public Dispatcher() { }
 
         public Dispatcher(string _name, int _employeeId, string _nric, 
@@ -66,16 +67,16 @@ namespace SE_Assignment
             // Assign commission if delivery successful on new month
             else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                TotalCommission = totalCommission + 5;
+                TotalCommission = tc + 5;
             }
 
             // Assign commission if delivery successful regardless
             else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                TotalCommission = totalCommission + 5;
+                TotalCommission = tc + 5;
             }
 
-            return totalCommission;
+            return TotalCommission;
         }
 
         public void dispatchOrder(Order o)
