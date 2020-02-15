@@ -8,6 +8,6 @@ namespace SE_Assignment
 {
     interface Observer
     {
-        void update();
+        void update(string orderstatus);
     }
 }

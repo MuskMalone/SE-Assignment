@@ -413,7 +413,7 @@ namespace SE_Assignment
                                     pay(new CreditCard(name, "1234567890123456", cvc, DOE), publicamount);
                                     Order newOrder = new Order(OrderCount, "New");
                                     OrderCount++;
-                                    oc.AddOrder(newOrder);
+                                    oc.AddOrder(newOrder, c);
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custmenuList, c.custfoodList, "Credit Card", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);
@@ -431,7 +431,7 @@ namespace SE_Assignment
                                     pay(new Paypal(name, curr), publicamount);
                                     Order newOrder = new Order(OrderCount, "New");
                                     OrderCount++;
-                                    oc.AddOrder(newOrder);
+                                    oc.AddOrder(newOrder, c);
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custmenuList, c.custfoodList, "Paypal", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);

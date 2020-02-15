@@ -44,5 +44,10 @@ namespace SE_Assignment
         {
             Console.WriteLine("Order has been archived");
         }
+
+        public void cancelOrder()
+        {
+            Console.WriteLine("Your order has already been delivered");
+        }
     }
 }
