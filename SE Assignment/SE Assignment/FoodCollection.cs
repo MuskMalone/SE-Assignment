@@ -51,14 +51,14 @@ namespace SE_Assignment
                 if (itemList[i].ItemID == id)
                 {
                     string removedFood = itemList[i].Title;
-                    cleanUpList(itemList[i]);   // Remove all other references to MenuItem
+                    CleanUpList(itemList[i]);   // Remove all other references to MenuItem
                     itemList.RemoveAt(i);
                     Console.WriteLine("Successfully Deleted " + removedFood + "!\n");
                 }
             }
         }
 
-        public void cleanUpList(MenuItem mi)
+        private void CleanUpList(MenuItem mi)
         {
             MenuItem currentFood = GetCurrent();
             if (currentFood.IsSetMenu == true)
