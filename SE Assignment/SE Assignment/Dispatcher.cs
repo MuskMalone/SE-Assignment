@@ -18,7 +18,7 @@ namespace SE_Assignment
             get { return totalCommission; }
             set { totalCommission = value; }
         }       
-
+        
         public Dispatcher() { }
 
         public Dispatcher(string _name, int _employeeId, string _nric, 
@@ -42,7 +42,7 @@ namespace SE_Assignment
                     "Gender : " + gender + "\n" +
                     "Status : " + status + "\n" +
                     "Date Joined : " + dateJoined + "\n" +
-                    "Total commission : " + TotalCommission);
+                    "Total commission earned this month: $" + TotalCommission);
         }
         
         public void viewAllDispatchers(List<Dispatcher> dList)
@@ -55,24 +55,24 @@ namespace SE_Assignment
         }
 
         // Assuming dispatchers earn $5 per commission or something
-        public double addCommission(Order o, double TotalCommission)
+        public double addCommission(Order o, double tc)
         {
             // Reset commission if new month            
             if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
             {
-                totalCommission = 0;
+                TotalCommission = 0;
             }
 
             // Assign commission if delivery successful on new month
             else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                totalCommission = totalCommission + 5;
+                TotalCommission = totalCommission + 5;
             }
 
             // Assign commission if delivery successful regardless
             else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                totalCommission = totalCommission + 5;
+                TotalCommission = totalCommission + 5;
             }
 
             return totalCommission;

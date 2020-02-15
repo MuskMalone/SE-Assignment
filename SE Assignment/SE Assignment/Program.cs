@@ -286,6 +286,7 @@ namespace SE_Assignment
                         d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
 
                         Console.WriteLine("\nTotal commission earned this month is now $" + d.TotalCommission);
+                        d.viewAllDispatchers(dList);
                     }
                     else
                         Console.WriteLine("You have no orders!");
