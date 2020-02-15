@@ -14,6 +14,5 @@ namespace SE_Assignment
         protected char gender;
         protected DateTime dateJoined;
         protected string status;
-        
     }
 }

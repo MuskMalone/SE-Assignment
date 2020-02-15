@@ -10,24 +10,21 @@ namespace SE_Assignment
     {
         private Order order;
         private OrderCollection orderCollection;
-        
-        private double totalCommision;
 
+        static private double totalCommission;
+        
         public double TotalCommission
         {
-            get { return totalCommision; }
-            set { totalCommision = value; }
-        }
-
-        public void dispatchOrder(Order order)
-        {
-            // Code
-            order.getCurrentState().dispatchOrder();
-        }
+            get { return totalCommission; }
+            set { totalCommission = value; }
+        }     
+        
 
         public Dispatcher() { }
 
-        public Dispatcher(string _name, int _employeeId, string _nric, char _gender, DateTime _datejoined, string _status, OrderCollection oc)
+        public Dispatcher(string _name, int _employeeId, string _nric, 
+                          char _gender, DateTime _datejoined, string _status, 
+                          OrderCollection oc)
         {
             name = _name;
             employeeID = _employeeId;
@@ -46,37 +43,48 @@ namespace SE_Assignment
                     "Gender : " + gender + "\n" +
                     "Status : " + status + "\n" +
                     "Date Joined : " + dateJoined + "\n" +
-                    "Total comission : " + TotalCommission);
+                    "Total commission earned this month: $" + TotalCommission);
         }
-
+        
         public void viewAllDispatchers(List<Dispatcher> dList)
         {
+            Console.WriteLine("\n======= DISPATCHER DETAILS =======");
             foreach (Dispatcher d in dList)
             {
-                Console.WriteLine("==================================");
+                
                 Console.WriteLine(d.getDispatcherDetails());
             }
         }
 
-        public double calculateCommission(Order o, double totalCommission)
+        // Assuming dispatchers earn $5 per commission or something
+        public double addCommission(Order o, double tc)
         {
-            // Reset commission if new month
-            if (DateTime.Now.Day == 1 && order.OrderStatus != "delivered")
+            // Reset commission if new month            
+            if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() != "delivered")
             {
-                totalCommission = 0;
+                TotalCommission = 0;
             }
+
             // Assign commission if delivery successful on new month
-            else if (DateTime.Now.Day == 1 && order.OrderStatus == "delivered")
+            else if (DateTime.Now.Day == 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                totalCommission = totalCommission + 1;
+                TotalCommission = tc + 5;
             }
-            // Assign commission if delivery successful regardless 
-            else if (DateTime.Now.Day != 1 && order.OrderStatus == "delivered")
+
+            // Assign commission if delivery successful regardless
+            else if (DateTime.Now.Day != 1 && o.getCurrentState().getStateName() == "delivered")
             {
-                totalCommission = totalCommission + 1;
+                TotalCommission = tc + 5;
             }
-            return totalCommission;
+
+            return TotalCommission;
         }
+
+        public void dispatchOrder(Order o)
+        {
+            o.getCurrentState().dispatchOrder();
+        }
+
         public void confirmDelivery(Order o)
         {
             o.getCurrentState().confirmOrder();

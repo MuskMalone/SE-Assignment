@@ -8,6 +8,9 @@ namespace SE_Assignment
 {
     public class Customer : Observer
     {
+        private OrderCollection orderCollection;
+        private List<Order> OrderList = new List<Order>();
+
         private Receipt receipt;
         
         private string name;
@@ -92,11 +95,12 @@ namespace SE_Assignment
         public void placeOrder()
         {
 
-        }
+        }        
 
-        public void viewOrderStatus()
+        public void viewAllOrderStatuses()
         {
-
+            Console.WriteLine("========= YOUR ORDER STATUSES ========\n");
+            // Code
         }
 
         public void update()
@@ -112,6 +116,11 @@ namespace SE_Assignment
         public void rateRestaurant()
         {
 
+        }
+
+        public void ConfirmdOrder(int orderid)
+        {
+            orderCollection.GetOrder(orderid).getCurrentState().confirmOrder();
         }
     }
 }

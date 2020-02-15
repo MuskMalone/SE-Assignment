@@ -8,24 +8,46 @@ namespace SE_Assignment
 {
     class Program
     {
-        static Manager me = new Manager(1, "Cheng En", "T0034912C", 'M', "Present", null, DateTime.UtcNow, DateTime.UtcNow);
-        static FoodIterator mainMenu = me.CreateFoodIterator();
-        static void Main(string[] args)
-        {
-            int globalFoodID = 1;
+        // OBJECTS CREATED HERE
+		static Manager me = new Manager(1, "Cheng En", "T0034912C", 'M', "Present", null, DateTime.UtcNow, DateTime.UtcNow);
+		static FoodIterator mainMenu = me.CreateFoodIterator();
+        static OrderCollection oc = new OrderCollection();
+        static int OrderCount = 1;
+        static int globalFoodID = 1;
+        static int ReceiptCount = 1;
+        static List<Receipt> receiptList = new List<Receipt>();
 
-            MenuItem m1 = new MenuItem(99, "Food 1", "desc 1", "Category 1", 98, "1 Calorie", "Available", false);
-            MenuItem m2 = new MenuItem(98, "Food 2", "desc 2", "Category 2", 24, "2 Calories", "Available", false);
-            MenuItem m3 = new MenuItem(97, "Food 3", "desc 3", "Category 3", 45, "3 Calories", "Unavailable", false);
-            Food f1 = new Food("Food 1", 98);
-            Food f2 = new Food("Food 2", 24);
-            Food f3 = new Food("Food 3", 45);
-            m1.addFood(f1);
-            m2.addFood(f2);
-            m3.addFood(f3);
-            mainMenu.AddFood(m1);
-            mainMenu.AddFood(m2);
-            mainMenu.AddFood(m3);
+        static List<Dispatcher> dList = new List<Dispatcher>();
+        static List<Manager> mList = new List<Manager>();
+
+
+        static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer>customerList, List<Receipt> rList)
+        {
+            Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
+            Manager m2 = new Manager(2, "cheng en", "S6666667X", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
+            mList.Add(m1);
+            mList.Add(m2);
+
+            Dispatcher d1 = new Dispatcher("Nikko", 3, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
+            dList.Add(d1);
+
+            Chef c1 = new Chef("Cheng Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
+            Chef c2 = new Chef("Hian Hian", 1, "S7777777X", 'F', DateTime.UtcNow, "On Duty", oc);
+            cList.Add(c1);
+            cList.Add(c2);
+            
+            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489");
+            customerList.Add(customer1);            
+        }
+
+        // EMPLOYEE SCREEN
+        static void employeeScreen(Manager m, List<Manager> mList, Chef c, List<Chef> cList, Dispatcher d, List<Dispatcher> dList, MenuCollection setMenu, MenuCollection alcM)
+        {
+            List<Customer> customerList = new List<Customer>();
+            List<Receipt> rList = new List<Receipt>();
+
+            initalizer(mList, dList, cList, customerList, rList);
+
             while (true)
             {
                 Console.WriteLine("[1] Customer");
@@ -34,29 +56,48 @@ namespace SE_Assignment
                 Console.WriteLine("Select Option:");
                 string option = Console.ReadLine();
 
+                // TO MANAGER SCREEN
                 if (option == "1")
                 {
-                    while (true)
-                    {
-                        Console.WriteLine("======== What Would You Like to Buy? ========");
-                        Console.WriteLine("[1] Set Meal");
-                        Console.WriteLine("[2] À la Carte");
-                        Console.WriteLine("[0] Back");
-                        Console.WriteLine("Select Option:");
-                        option = Console.ReadLine();
+                    managerScreen(m, mList, setMenu, alcM);
+                }
 
-                        if (option == "1")
-                        {
-                            // Display all Set Menus
-                            Console.WriteLine("========== Set Menus ===========");
-                            if (mainMenu.GetCurrent().IsSetMenu == true && mainMenu.GetCurrent().getSize() >= 2 && mainMenu.GetCurrent().Status == "Available")
-                                Console.WriteLine(mainMenu.GetCurrent().ToString());
-                            while (mainMenu.HasNextFood())
-                            {
-                                if (mainMenu.NextFood().IsSetMenu == true && mainMenu.GetCurrent().getSize() >= 2 && mainMenu.GetCurrent().Status == "Available")
+                // TO CHEF SCREEN
+                else if (option == "2")
+                {
+                    chefScreen(c, cList, setMenu, alcM);
+                }
 
-                                    Console.WriteLine("\n" + mainMenu.GetCurrent().ToString());
-                            }
+                // TO DISPATCHERS SCREEN
+                else if (option == "3")
+                {
+                    dispatcherScreen(d, dList, setMenu, alcM);
+                }
+
+                // HOMESCREEN
+                else if (option == "4")
+                {
+                    Main();
+                }
+            }
+        }
+
+        // MANAGER SCREEN
+        static void managerScreen(Manager m, List<Manager> mList, MenuCollection setMenu, MenuCollection alcM)
+        {
+            List<Customer> customerList = new List<Customer>();
+            List<Receipt> rList = new List<Receipt>();
+            List<Chef> cList = new List<Chef>();
+            Chef c = new Chef();
+            List<Dispatcher> dList = new List<Dispatcher>();
+            Dispatcher d = new Dispatcher();
+            
+            while (true)
+            {
+                Console.WriteLine("\n ======= MANAGER SCREEN =======");
+                Console.WriteLine("[1] View all manager details");
+                Console.WriteLine("[2] Manage Food & Menus");
+                Console.WriteLine("[3] Return to Employee Screen");
 
                             Console.WriteLine("Add to Cart: ");
                         }
@@ -212,7 +253,175 @@ namespace SE_Assignment
                             else
                                 Console.WriteLine("You need at least 2 Food to creat a Set Menu!\n");
                         }
-                        else if (option == "2") // Edit Food
+                    }
+
+                }
+                else if (option == "3")
+                {
+                    employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
+                }
+            }
+        }
+
+        // CHEF SCREEN
+        static void chefScreen(Chef c, List<Chef> cList, MenuCollection setMenu, MenuCollection alcM)
+        {
+            List<Manager> mList = new List<Manager>();
+            Manager m = new Manager();
+
+            List<Dispatcher> dList = new List<Dispatcher>();
+            Dispatcher d = new Dispatcher();
+
+            while (true)
+            {
+                Console.WriteLine("\n ======= CHEF SCREEN =======");
+                Console.WriteLine("[1] View New Orders");
+                Console.WriteLine("[2] Prepare an order");
+                Console.WriteLine("[3] Get preparing orders");
+                Console.WriteLine("[4] Finish an order");
+                Console.WriteLine("[5] Return to Employee Screen");
+
+                Console.Write("Select an option:");
+                string option = Console.ReadLine();
+
+                if (option == "1")
+                {
+                    cList[0].GetAllNewOrders();
+                    Console.WriteLine("\n");
+                }
+
+                if (option == "2")
+                {
+                    Console.WriteLine("Enter Order ID: ");
+                    int orderid = Int32.Parse(Console.ReadLine());
+                    cList[0].PrepareOrder(orderid);
+                    Console.WriteLine("\n");
+                }
+
+                if (option == "3")
+                {
+                    cList[0].GetAllPreparingOrders();
+                    Console.WriteLine("\n Current preparing orders");
+                }
+
+                if (option == "4")
+                {
+                    Console.WriteLine("Enter Order ID: ");
+                    int orderid = Int32.Parse(Console.ReadLine());
+                    cList[0].CompleteOrder(orderid);
+                }
+
+                else if (option == "5")
+                {
+                    employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
+                }
+
+            }
+        }
+
+        // DISPATCHER SCREEN
+        static void dispatcherScreen(Dispatcher d, List<Dispatcher> dList, MenuCollection setMenu, MenuCollection alcM)
+        {
+            List<Manager> mList = new List<Manager>();
+            Manager m = new Manager();
+
+            List<Chef> cList = new List<Chef>();
+            Chef c = new Chef();
+
+            List<Customer> customerList = new List<Customer>();
+            List<Receipt> rList = new List<Receipt>();
+            
+            while (true)
+            {
+                Console.WriteLine("\n ======= DISPATCHER SCREEN =======");
+                Console.WriteLine("[1] View all dispatcher details");
+                Console.WriteLine("[2] Dispatch an order");
+                Console.WriteLine("[3] Confirm a delivery");
+                Console.WriteLine("[4] Return to Employee Screen");
+
+                Console.Write("Select an option: ");
+                string option = Console.ReadLine();
+
+                if (option == "1")
+                {
+                    d.viewAllDispatchers(dList);
+                }
+
+                else if (option == "2")
+                {
+                    if (oc.GetAllOrdersWhereState("ready").Count() != 0)
+                    {
+                        foreach (Order order in oc.GetAllOrdersWhereState("ready"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID);
+                        }
+                        Console.WriteLine("Dispatch an order: ");
+                        string input = Console.ReadLine();
+                        d.dispatchOrder(oc.GetOrder(Convert.ToInt32(input)));
+                    }
+                    else
+                        Console.WriteLine("\n You have no orders to dispatch!");
+                }
+
+                else if (option == "3")
+                {
+                    if (oc.GetAllOrdersWhereState("dispatched").Count() != 0)
+                    {
+                        foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
+                        {
+                            Console.WriteLine("Order " + order.OrderID);
+                        }
+                        Console.WriteLine("Confirm a delivery: ");
+                        string input = Console.ReadLine();
+                        d.confirmDelivery(oc.GetOrder(Convert.ToInt32(input)));
+                        d.addCommission(oc.GetOrder(Convert.ToInt32(input)), d.TotalCommission);
+
+                        Console.WriteLine("\nTotal commission earned this month is now $" + d.TotalCommission);
+                    }
+                    else
+                        Console.WriteLine("\n You have no orders that can be confirmed as delivered!");
+                }
+
+                else if (option == "4")
+                {
+                    employeeScreen(m, mList, c, cList, d, dList, setMenu, alcM);
+                }
+            }
+        }
+
+        // CUSTOMER SCREEN
+        //static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, FoodIterator alacartefood)
+        static void customerScreen(Customer c, List<Customer> cList, Receipt r, List<Receipt> rList, Food f, List<Food> fList, MenuCollection setM, MenuCollection alcM)
+        {
+            void pay(PaymentStrategy paymentMethod, double amount)
+            {
+
+                paymentMethod.pay(amount);
+            }
+
+            while (true)
+            {
+                Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
+                Console.WriteLine("[1] Make New Order");
+                Console.WriteLine("[2] View Current & Past Orders");
+                Console.WriteLine("[0] Homepage");
+                double publicamount = 0.00;
+
+                Console.Write("Select an option: ");
+                string option = Console.ReadLine();
+
+                if (option == "1")
+                {
+                    Console.WriteLine("\n ======= select resteraunt =======");
+                    Console.WriteLine("[1] Krusty Krab");
+                    Console.Write("Select an option: ");
+                    string resterauntoption = Console.ReadLine();
+
+
+                    if (resterauntoption == "1")
+                    {
+
+                        while (true)
                         {
                             while (true)
                             {
@@ -378,38 +587,62 @@ namespace SE_Assignment
                                     Console.WriteLine("\n");
                             }
                         }
-                        else if (option == "3") // Delete Food
+                    }
+                }
+
+                else if (option == "2")
+                {
+                    while (true)
+                    {
+                        Console.WriteLine("\n ======= VIEW ORDERS =======");
+                        Console.WriteLine("[1] View Current Orders");
+                        Console.WriteLine("[2] View Past Orders");
+                        Console.WriteLine("[3] Return to customer screen");
+                        Console.Write("\nSelect an option: ");
+                        string orderOption = Console.ReadLine();
+
+                        if (orderOption == "1")
                         {
-                            if (mainMenu.GetCurrent() != null)
+                            Console.WriteLine("\n=============== CURRENT ORDERS ====================");
+                            if (oc.GetAllOrdersWhereState("dispatched").Count() != 0 || oc.GetAllOrdersWhereState("ready").Count() != 0 || oc.GetAllOrdersWhereState("preparing").Count() != 0
+                            || oc.GetAllOrdersWhereState("new").Count() != 0)
                             {
-                                // Display all existing Food
-                                Console.WriteLine("========== Existing Food ===========");
-                                Console.WriteLine(mainMenu.GetCurrent().ToString());
-                                while (mainMenu.HasNextFood())
+                                foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
                                 {
-                                    Console.WriteLine(mainMenu.NextFood().ToString());
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
                                 }
-                                Console.WriteLine("\n[0] Cancel");
-                                Console.WriteLine("\nFood to Delete: ");
-                                try
+                                foreach (Order order in oc.GetAllOrdersWhereState("ready"))
                                 {
-                                    int foodToDel = Convert.ToInt32(Console.ReadLine());
-                                    if (foodToDel != 0) // If Cancel option not selected
-                                    {
-                                        mainMenu.RemoveFood(foodToDel);
-                                    }
-                                    else
-                                        Console.WriteLine("\n");
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
                                 }
-                                catch
+                                foreach (Order order in oc.GetAllOrdersWhereState("preparing"))
                                 {
-                                    Console.WriteLine("Invalid Option!\n");
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                                foreach (Order order in oc.GetAllOrdersWhereState("new"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
                                 }
                             }
                             else
-                                Console.WriteLine("No Existing Food!\n");
+                                Console.WriteLine("You have no current orders!");
+
                         }
-                        else if (option == "0")
+                        else if (orderOption == "2")
+                        {
+                            Console.WriteLine("\n=============== PAST ORDERS ====================");
+                            if (oc.GetAllOrdersWhereState("delivered").Count() != 0)
+                            {
+                                foreach (Order order in oc.GetAllOrdersWhereState("delivered"))
+                                {
+                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                }
+                            }
+                            else
+                                Console.WriteLine("You have no past orders!");
+                        }
+
+                        else if (orderOption == "3")
                         {
                             break;
                         }
@@ -417,7 +650,82 @@ namespace SE_Assignment
                             continue;
                     }
                 }
+                else if (option == "0")
+                {
+                    Main();
+                }
             }
+        }
+
+        static void Main()
+        {
+            List<Manager> mList = new List<Manager>();
+            Manager m = new Manager();
+
+            List<Dispatcher> dList = new List<Dispatcher>();
+            Dispatcher d = new Dispatcher();
+
+            List<Chef> cList = new List<Chef>();
+            Chef c = new Chef();
+
+            List<Customer> customerList = new List<Customer>();
+            Customer customer = new Customer();
+
+            List<Receipt> rList = new List<Receipt>();
+            Receipt r = new Receipt();
+
+            List<Food> fList = new List<Food>();
+            Food f = new Food();
+
+            // MenuItem m1 = new MenuItem(99, "Food 1", "desc 1", "Category 1", 98, "1 Calorie", "Available", false);
+            // MenuItem m2 = new MenuItem(98, "Food 2", "desc 2", "Category 2", 24, "2 Calories", "Available", false);
+            // MenuItem m3 = new MenuItem(97, "Food 3", "desc 3", "Category 3", 45, "3 Calories", "Unavailable", false);
+            // Food f1 = new Food("Food 1", 98);
+            // Food f2 = new Food("Food 2", 24);
+            // Food f3 = new Food("Food 3", 45);
+            // m1.addFood(f1);
+            // m2.addFood(f2);
+            // m3.addFood(f3);
+            // mainMenu.AddFood(m1);
+            // mainMenu.AddFood(m2);
+            // mainMenu.AddFood(m3);
+
+            string accountType;
+
+            Console.WriteLine("======= SELECT AN ACCOUNT =======");
+            Console.WriteLine("[1] Employee");
+            Console.WriteLine("[2] Customer");
+            Console.WriteLine("\n ======= EXIT? =======");
+            Console.WriteLine("[0] Exit Application");
+
+            Console.Write("\n Select an Account type: ");
+
+            accountType = Console.ReadLine();
+
+            // EXIT APPLICATION
+            if (accountType == "0")
+            {
+                Environment.Exit(0);
+            }
+
+            // GOTO EMPLOYEE SCREEN
+            if (accountType == "1")
+            {
+                employeeScreen(m, mList, c, cList, d, dList, setMenu, alacarteMenu);
+            }
+            
+            // GOTO CUSTOMER SCREEN
+            else if (accountType == "2")
+            {
+            	customerScreen(customer, customerList, r, rList, f, fList, setMenu, alacarteMenu);
+            }
+            Console.ReadKey();
+            
+            //==== Required Function Number 5: View receipt details ====
+
+            //==== END OF Required Function Number 5: View receipt details ====
+
+            Console.ReadKey();
         }
     }
 }

@@ -38,13 +38,11 @@ namespace SE_Assignment
         public void confirmOrder()
         {
             Console.WriteLine("Order has already been received");
-            // Code
         }
 
         public void archiveOrder()
         {
             Console.WriteLine("Order has been archived");
-            // Code
         }
     }
 }

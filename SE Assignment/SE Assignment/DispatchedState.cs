@@ -9,6 +9,7 @@ namespace SE_Assignment
     class DispatchedState : OrderState
     {
         private string name = "dispatched";
+
         private Order myOrder;
 
         public DispatchedState(Order order)
@@ -39,13 +40,11 @@ namespace SE_Assignment
         {
             Console.WriteLine("Order has been received");
             myOrder.setState(myOrder.getDeliveredState());
-            // Code
         }
 
         public void archiveOrder()
         {
             Console.WriteLine("Order has been cancelled");
-            // Code
         }
     }
 }

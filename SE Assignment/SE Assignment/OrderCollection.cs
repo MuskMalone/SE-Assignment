@@ -78,6 +78,7 @@ namespace SE_Assignment
             }
             return null;
         }
+
         public List<Order> GetAllOrdersWhereState(string state)
         {
             List<Order> oL = new List<Order>();
@@ -89,6 +90,11 @@ namespace SE_Assignment
                 }
             }
             return oL;
+        }
+        
+        public void getAllOrderStates()
+        {
+            // Code
         }
     }
 }
