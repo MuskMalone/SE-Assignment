@@ -87,11 +87,6 @@ namespace SE_Assignment
             return amount;
         }
 
-        public void updateOrderStatus()
-        {
-
-        }
-
         public void placeOrder()
         {
 
@@ -103,9 +98,10 @@ namespace SE_Assignment
             // Code
         }
 
-        public void update()
+        public void update(string orderstatus)
         {
-            Console.WriteLine("Your order has advanced to the next phase");
+            string updateMessage = "Customer " + Convert.ToString(customerId) + ", " + name + ", your order is in " + orderstatus + " state.";
+            Console.WriteLine(updateMessage);
         }
 
         public void cancelOrder()

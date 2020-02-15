@@ -9,7 +9,7 @@ namespace SE_Assignment
     interface Subject
     {
         void registerCustomer(Customer c);
-        void removeCustomer(Customer c);
-        void notifyCustomer(Customer c);
+        void removeCustomer();
+        void notifyCustomer();
     }
 }
