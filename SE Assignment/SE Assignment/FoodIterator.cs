@@ -19,5 +19,7 @@ namespace SE_Assignment
         void RemoveFood(int id);
 
         MenuItem GetMenuItem(int id);
+
+        bool HasSetMeal();
     }
 }

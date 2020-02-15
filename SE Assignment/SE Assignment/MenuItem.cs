@@ -9,38 +9,81 @@ namespace SE_Assignment
     public class MenuItem
     {
         private int itemID;
-        private string name;
+        private string title;
+        private string description;
+        private string category;
         private double price;
-        private List<Product> foodList = new List<Product>();
+        private string unit;
+        private string status;
+        private List<Food> foodList = new List<Food>();
+        private bool isSetMenu;
         // Get Set
         public int ItemID { get { return itemID; } set { itemID = value; } }
-        public string Name { get { return name; } set { name = value; } }
+        public string Title { get { return title; } set { title = value; } }
+        public string Description { get { return description; } set { description = value; } }
+        public string Category { get { return category; } set { category = value; } }
         public double Price { get { return price; } set { price = value; } }
-        public List<Product> FoodList { get { return foodList; } set { foodList = value; } }
+        public string Unit { get { return unit; } set { unit = value; } }
+        public string Status { get { return status; } set { status = value; } }
+        public List<Food> FoodList { get { return foodList; } set { foodList = value; } }
+        public bool IsSetMenu { get { return isSetMenu; } set { isSetMenu = value; } }
 
         public MenuItem() { }
 
-        public MenuItem(int _itemID, string _name, double _price)
+        public MenuItem(int id, string _title, string _description, string _category, double _price, string _unit, string _status, bool _isSetMenu)
         {
-            itemID = _itemID;
-            name = _name;
+            itemID = id;
+            title = _title;
+            description = _description;
+            category = _category;
             price = _price;
+            unit = _unit;
+            status = _status;
+            isSetMenu = _isSetMenu;
         }
 
+        public void addFood(Food f)
+        {
+            foodList.Add(f);
+        }
+
+        public int getSize()
+        {
+            return foodList.Count();
+        }
+
+        public void listFood()
+        {
+            for (int i = 0; i < foodList.Count(); i++)
+            {
+                Console.WriteLine("[" + (i+1) + "] " + foodList[i].ToString());
+            }
+        }
+
+        public void removeFood(int id)
+        {
+            if (foodList[id - 1] != null)
+            {
+                foodList.RemoveAt(id - 1);
+                Console.WriteLine("Successfully Removed!\n");
+            }
+        }
 
         public override string ToString()
         {
             string stringToToString = "";
-            if (foodList.Count() > 1)
+            if (isSetMenu == true)
             {
-                stringToToString += "[" + itemID + "] " + name + " - $" + price + "\n";
-                foreach (Product p in foodList)
+                stringToToString += stringToToString += "[" + itemID + "] " + title + " (" + category + ") - $" + price + ", " +
+                                    description + ", " + unit + ", Size: " + getSize() + " <" + status + ">\n"; ;
+                foreach (Food p in foodList)
                 {
-                    stringToToString += "   > " + p.Title + "\n";
+                    stringToToString += "   > " + p.Name + "\n";
                 }
             }
             else
-                stringToToString += foodList[0].ToString() + "\n";
+                stringToToString += stringToToString += "[" + itemID + "] " + title + " (" + category + ") - $" + price + ", " +
+                                    description + ", " + unit + " <" + status + ">"; ;
 
             return stringToToString;
         }

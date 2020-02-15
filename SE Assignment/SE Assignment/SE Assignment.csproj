@@ -52,7 +52,7 @@
     <Compile Include="FoodAggregate.cs" />
     <Compile Include="FoodCollection.cs" />
     <Compile Include="FoodIterator.cs" />
-    <Compile Include="MenuCollection.cs" />
+    <Compile Include="MenuItem.cs" />
     <Compile Include="NewState.cs" />
     <Compile Include="Observer.cs" />
     <Compile Include="Order.cs" />

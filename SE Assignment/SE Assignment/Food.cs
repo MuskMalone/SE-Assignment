@@ -6,25 +6,29 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class Food : Product
+    public class Food
     {
-        public Food() { }
-        public Food(int id, string _title, string _description, string _category, double _price, string _unit, string _status)
-        {
-            foodID = id;
-            title = _title;
-            description = _description;
-            category = _category;
-            price = _price;
-            unit = _unit;
-            status = _status;
-        }
+        //private int foodID;
+        private string name;
+        private double price;
+        // Get Set
+        //public int FoodID { get { return foodID; } set { foodID = value; } }
+        public string Name { get { return name; } set { name = value; } }
+        public double Price { get { return price; } set { price = value; } }
 
+        public Food() { }
+
+        public Food(string _name, double _price)
+        {
+            //foodID = id;
+            name = _name;
+            price = _price;
+        }
 
         public override string ToString()
         {
-            return "[" + foodID + "] " + title + " (" + description + ") - $" + price
-                    + "\nCategory: " + category + ", Unit: " + unit + ", Status:" + status;
+            return name + " - $" + price;
         }
+
     }
 }
