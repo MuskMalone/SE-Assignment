@@ -102,7 +102,7 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= MANAGER SCREEN =======");
                 Console.WriteLine("[1] Add Food");
-                Console.WriteLine("[2] Edit Food (WIP)");
+                Console.WriteLine("[2] Edit Food");
                 Console.WriteLine("[3] Delete Food");
                 Console.WriteLine("[0] Back");
                 Console.WriteLine("Select Option:");
