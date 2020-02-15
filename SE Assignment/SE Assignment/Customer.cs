@@ -95,13 +95,7 @@ namespace SE_Assignment
         public void placeOrder()
         {
 
-        }        
-
-        public void viewAllOrderStatuses()
-        {
-            Console.WriteLine("========= YOUR ORDER STATUSES ========\n");
-            // Code
-        }
+        }      
 
         public void update()
         {
