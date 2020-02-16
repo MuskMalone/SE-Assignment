@@ -312,7 +312,7 @@ namespace SE_Assignment
             {
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
                 Console.WriteLine("[1] Make New Order");
-                Console.WriteLine("[2] View Current & Past Orders");
+                Console.WriteLine("[2] View Order Status");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -596,12 +596,6 @@ namespace SE_Assignment
             {
             	customerScreen(customer, customerList, r, rList, f, fList, setMenu, alacarteMenu);
             }
-            Console.ReadKey();
-            
-            //==== Required Function Number 5: View receipt details ====
-
-            //==== END OF Required Function Number 5: View receipt details ====
-
             Console.ReadKey();
         }
     }
