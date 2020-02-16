@@ -21,9 +21,10 @@ namespace SE_Assignment
             AddOrder(o3);
             AddOrder(o4);*/
         }
-        public void AddOrder(Order o)
+        public void AddOrder(Order o, Customer c)
         {
             OrderList.Add(o);
+            o.registerCustomer(c);
         }
         public bool HasNextOrder()
         {

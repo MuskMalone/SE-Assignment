@@ -8,28 +8,22 @@ namespace SE_Assignment
 {
     public interface FoodIterator
     {
-        int GetID();
+        MenuItem GetCurrent();
 
-        string GetName();
-
-        Food GetCurrent();
-
-        Food NextFood();
+        MenuItem NextFood();
 
         bool HasNextFood();
 
-        void AddFood(Food f);
-
-        void EditFood(int id, Food f);
+        void AddFood(MenuItem m);
 
         void RemoveFood(int id);
 
-        double GetTotalAmount();
+        MenuItem GetMenuItem(int id);
 
-        void ListAllFood();
+        bool HasSetMenu();
 
-        Food GetFood(int id);
+        bool HasAvailableFood();
 
-        double GetPrice();
+        bool HasAvailableSetMenu();
     }
 }

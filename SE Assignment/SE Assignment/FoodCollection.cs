@@ -7,46 +7,24 @@ using System.Threading.Tasks;
 namespace SE_Assignment
 {
     public class FoodCollection : FoodIterator
-    {
-        private int menuID;
-        private string name;
-        private int size = 0;
-        private double price;
-
-        public FoodCollection(int id, string menuName, double _price)
-        {
-            menuID = id;
-            name = menuName;
-            price = _price;
-        }
-
-        public double GetPrice()
-        {
-            return price;
-        }
-        public int GetID()
-        {
-            return menuID;
-        }
-        public string GetName()
-        {
-            return name;
-        }
-
-        public List<Food> foodList = new List<Food>();
+    {        
+        List<MenuItem> itemList = new List<MenuItem>();
         int position = 0;
 
-        public Food GetCurrent()
+        public MenuItem GetCurrent()
         {
-            return foodList[position];
+            if (itemList.Count() > 0)
+                return itemList[position];
+            else
+                return null;
         }
 
-        public Food NextFood()
+        public MenuItem NextFood()
         {
-            if (position < size-1)
+            if (position < itemList.Count()-1)
             {
                 position++;
-                return foodList[position];
+                return itemList[position];
             }
             position = 0;
             return null;
@@ -54,94 +32,103 @@ namespace SE_Assignment
 
         public bool HasNextFood()
         {
-            if (position < size-1)
+            if (position < itemList.Count()-1)
                 return true;
             position = 0;
             return false;
         }
 
-        public void AddFood(Food f)
+        public void AddFood(MenuItem m)
         {
-            foodList.Add(f);
-            size += 1;
-            Console.WriteLine(f.Title+" Added Successfully!");
-        }
-
-        public void EditFood(int id, Food f)
-        {
-            for (int i = 0; i < size-1; i++)
-            {
-                if (foodList[i].FoodID == id)
-                {
-                    foodList[i] = f;
-                    Console.WriteLine("Successfully Edited Food Item!");
-                }
-            }
+            itemList.Add(m);
+            Console.WriteLine(m.Title +" Added Successfully!\n");
         }
 
         public void RemoveFood(int id)
         {
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < itemList.Count(); i++)
             {
-                if (foodList[i].FoodID == id)
+                if (itemList[i].ItemID == id)
                 {
-                    string removedFood = foodList[i].Title;
-                    foodList.RemoveAt(i);
-                    size -= 1;
-                    Console.WriteLine("Successfully Deleted " + removedFood + "!");
+                    string removedFood = itemList[i].Title;
+                    CleanUpList(itemList[i]);   // Remove all other references to MenuItem
+                    itemList.RemoveAt(i);
+                    Console.WriteLine("Successfully Deleted " + removedFood + "!\n");
                 }
             }
         }
 
-        public override string ToString()
+        private void CleanUpList(MenuItem mi)
         {
-            string displayText = "[" + menuID + "] " + name + ", Size: " + size + ", Price: $" + price;
-            displayText += "\n> " + GetCurrent().Title;
+            MenuItem currentFood = GetCurrent();
+            if (currentFood.IsSetMenu == true)
+            {
+                for (int i = currentFood.getSize()-1; i > -1; i--)
+                {
+                    if (currentFood.FoodList[i] == mi.FoodList[0])
+                    {
+                        currentFood.FoodList.RemoveAt(i);
+                        Console.WriteLine("Since " + mi.Title + " was deleted, it will be removed from " + currentFood.Title + "\n");
+                    }
+                }
+            }
             while (HasNextFood())
             {
-                displayText += "\n> " + NextFood().Title;
-            }
-            
-            return displayText;
-        }
-        
-        public double GetTotalAmount()
-        {
-            double amount = 0;
-
-            for (int i = 0; i < size; i++)
-            {
-                amount += foodList[i].Price;
-            }
-
-            return amount;
-        }
-
-        public Food GetFood(int id)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                if (GetCurrent().FoodID == id)
-                    return GetCurrent();
-                else
+                currentFood = NextFood();
+                if (currentFood.IsSetMenu == true)
                 {
-                    while (HasNextFood())
+                    for (int i = currentFood.getSize()-1; i > -1; i--)
                     {
-                        if (NextFood().FoodID == id)
-                            return GetCurrent();
+                        if (currentFood.FoodList[i] == mi.FoodList[0])
+                        {
+                            currentFood.FoodList.RemoveAt(i);
+                            Console.WriteLine("Since " + mi.Title + " was deleted, it will be removed from " + currentFood.Title);
+                        }
                     }
+                }
+            }
+        }
+
+        public MenuItem GetMenuItem(int id)
+        {
+            for (int i = 0; i < itemList.Count(); i++)
+            {
+                if (itemList[i].ItemID == id)
+                {
+                    return itemList[i];
                 }
             }
             return null;
         }
 
-        public void ListAllFood()
+        public bool HasSetMenu()
         {
-            Console.WriteLine(GetCurrent());
-            while (HasNextFood())
+            foreach (MenuItem mi in itemList)
             {
-                Console.WriteLine(NextFood().ToString());
+                if (mi.IsSetMenu == true)
+                    return true;
             }
+            return false;
+        }
+
+        public bool HasAvailableFood()
+        {
+            foreach(MenuItem mi in itemList)
+            {
+                if (mi.IsSetMenu == false && mi.Status == "Available")
+                    return true;
+            }
+            return false;
+        }
+
+        public bool HasAvailableSetMenu()
+        {
+            foreach (MenuItem mi in itemList)
+            {
+                if (mi.IsSetMenu == true && mi.Status == "Available")
+                    return true;
+            }
+            return false;
         }
     }
 }

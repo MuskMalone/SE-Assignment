@@ -8,8 +8,8 @@ namespace SE_Assignment
 {
     interface Subject
     {
-        void registeCustomer(Customer c);
-        void removeCustomer(Customer c);
-        void notifyCustomer(Customer c);
+        void registerCustomer(Customer c);
+        void removeCustomer();
+        void notifyCustomer();
     }
 }

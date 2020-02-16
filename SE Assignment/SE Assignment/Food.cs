@@ -8,71 +8,27 @@ namespace SE_Assignment
 {
     public class Food
     {
-        private int foodID;
-        private string title;
-        private string category;
+        //private int foodID;
+        private string name;
         private double price;
-        private string status;
-       
+        // Get Set
+        //public int FoodID { get { return foodID; } set { foodID = value; } }
+        public string Name { get { return name; } set { name = value; } }
+        public double Price { get { return price; } set { price = value; } }
 
-        public int FoodID
-        {
-            get { return foodID; }
-            set { foodID = value; }
-        }
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
-        public string Category
-        {
-            get { return category; }
-            set { category = value; }
-        }
-        public double Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
-        public string Status
-        {
-            get { return status; }
-            set { status = value; }
-        }
+        public Food() { }
 
-       
-
-        public Food(int id, string _title, string _category, double _price, string _status)
+        public Food(string _name, double _price)
         {
-            foodID = id;
-            title = _title;
-            category = _category;
+            //foodID = id;
+            name = _name;
             price = _price;
-            status = _status;
-           
-        }
-
-        public Food()
-        {
         }
 
         public override string ToString()
         {
-            return "Food " + foodID + ": " + title + ", Category: " + category + ", Price: " + price;
+            return name + " - $" + price;
         }
 
-        public void viewAllFood(List<Food> fList)
-        {
-           
-            Console.WriteLine("==================================");
-            foreach (Food f in fList)
-            {
-              
-                Console.WriteLine(f.FoodID + " " + f.ToString());
-                
-            }
-           
-        }
     }
 }

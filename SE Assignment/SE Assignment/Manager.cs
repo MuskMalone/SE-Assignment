@@ -51,5 +51,12 @@ namespace SE_Assignment
                 Console.WriteLine(m.getManagerDetails());
             }
         }
+
+        public FoodIterator CreateFoodIterator()
+        {
+            FoodIterator mc = new FoodCollection();
+            Console.WriteLine("Created Menu Successfully!");
+            return mc;
+        }
     }
 }

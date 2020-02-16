@@ -27,7 +27,7 @@ namespace SE_Assignment
         public void GetAllNewOrders()
         {
             Console.WriteLine("\n");
-            Console.WriteLine("========= new owdews UwU ========\n");
+            Console.WriteLine("========= New orders ========\n");
             List<Order> oL = ordercollection.GetAllOrdersWhereState("new");
             for (int i = 0; i < oL.Count(); i++)
             {
@@ -37,7 +37,7 @@ namespace SE_Assignment
         public void GetAllPreparingOrders()
         {
             Console.WriteLine("\n");
-            Console.WriteLine("========= pwepawing owdews OwO ========\n");
+            Console.WriteLine("========= Orders in preparing state ========\n");
             List<Order> oL = ordercollection.GetAllOrdersWhereState("preparing");
             for (int i = 0; i < oL.Count(); i++)
             {
@@ -46,11 +46,26 @@ namespace SE_Assignment
         }
         public void PrepareOrder(int orderid)
         {
-            ordercollection.GetOrder(orderid).getCurrentState().prepareOrder();
+            try
+            {
+                ordercollection.GetOrder(orderid).getCurrentState().prepareOrder();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Order does not exist");
+            }
         }
         public void CompleteOrder(int orderid)
         {
-            ordercollection.GetOrder(orderid).getCurrentState().completeOrder();
+            try
+            {
+                ordercollection.GetOrder(orderid).getCurrentState().completeOrder();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("order does not exist");
+            }
+
         }
     }
 }
