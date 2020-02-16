@@ -715,7 +715,7 @@ namespace SE_Assignment
                                     Order newOrder = new Order(OrderCount, "New");
                                     OrderCount++;
                                     oc.AddOrder(newOrder, c);
-                                    Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custmenuList, c.custfoodList, "Credit Card", publicamount);
+                                    Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Credit Card", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);
                                     c.custfoodList.Clear();
@@ -734,7 +734,7 @@ namespace SE_Assignment
                                     Order newOrder = new Order(OrderCount, "New");
                                     OrderCount++;
                                     oc.AddOrder(newOrder, c);
-                                    Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custmenuList, c.custfoodList, "Paypal", publicamount);
+                                    Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Paypal", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);
                                     c.custfoodList.Clear();
