@@ -64,14 +64,12 @@ namespace SE_Assignment
         public void registerCustomer(Customer c)
         {
             customer = c;
-            // Code
         }
 
         public void removeCustomer()
         {
             customer = null;
             Console.WriteLine("Customer has been removed");
-            // Code
         }
 
         public void notifyCustomer()
@@ -81,7 +79,6 @@ namespace SE_Assignment
                 customer.update(OrderStatus);
             }
             Console.WriteLine("");
-            // Code
         }
     }
 }

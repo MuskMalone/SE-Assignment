@@ -8,7 +8,6 @@ namespace SE_Assignment
 {
     public class Dispatcher : Employee
     {
-        private Order order;
         private OrderCollection orderCollection;
 
         static private double totalCommission;
@@ -50,8 +49,7 @@ namespace SE_Assignment
         {
             Console.WriteLine("\n======= DISPATCHER DETAILS =======");
             foreach (Dispatcher d in dList)
-            {
-                
+            {                
                 Console.WriteLine(d.getDispatcherDetails());
             }
         }
