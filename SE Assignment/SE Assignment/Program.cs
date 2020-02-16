@@ -196,15 +196,9 @@ namespace SE_Assignment
                                         {
                                             try
                                             {
+                                                // Display all A la Carte
                                                 Console.WriteLine("========== Choose Food for " + newTitle + " ===========");
-                                                if (mainMenu.GetCurrent().IsSetMenu == false)
-                                                    Console.WriteLine(mainMenu.GetCurrent().NewToString(true));
-                                                while (mainMenu.HasNextFood())
-                                                {
-                                                    if (mainMenu.NextFood().IsSetMenu == false)
-                                                        Console.WriteLine(mainMenu.GetCurrent().NewToString(true));
-                                                }
-
+                                                m1.displayAllFood(mainMenu, 2);
                                                 Console.WriteLine("\n\nFood to Add:");
                                                 string idToAdd = Console.ReadLine();
                                                 // Add Food to New Set Menu
@@ -247,12 +241,7 @@ namespace SE_Assignment
                             {
                                 // Display all existing Food
                                 Console.WriteLine("========== Existing Food ===========");
-                                Console.WriteLine(mainMenu.GetCurrent().NewToString(true));
-                                while (mainMenu.HasNextFood())
-                                {
-                                    Console.WriteLine(mainMenu.NextFood().NewToString(true));
-
-                                }
+                                m1.displayAllFood(mainMenu, 0);
                                 Console.WriteLine("\n[0] Cancel");
                                 Console.WriteLine("Note: Set Menus with Less than 2 items will not be displayed on the menu");
                                 string input = "";
@@ -288,9 +277,7 @@ namespace SE_Assignment
                                         Console.WriteLine("\nSelect Option: ");
                                         input = Console.ReadLine();
                                         // Store current values
-                                        string currentTitle = foodToEdit.Title; string currentDesc = foodToEdit.Description;
-                                        string currentCat = foodToEdit.Category; double currentPrice = foodToEdit.Price;
-                                        string currentUnit = foodToEdit.Unit; string currentStatus = foodToEdit.Status;
+                                        string currentTitle = foodToEdit.Title;
                                         if (input == "1")   // Edit Title
                                         {
                                             Console.WriteLine("Current Title: " + currentTitle);
@@ -302,6 +289,7 @@ namespace SE_Assignment
                                         }
                                         else if (input == "2")  // Edit Description
                                         {
+                                            string currentDesc = foodToEdit.Description;
                                             Console.WriteLine("Current Description: " + currentDesc);
                                             Console.WriteLine("\nChange to:");
                                             currentDesc = Console.ReadLine();
@@ -309,6 +297,7 @@ namespace SE_Assignment
                                         }
                                         else if (input == "3")  // Edit Category
                                         {
+                                            string currentCat = foodToEdit.Category;
                                             Console.WriteLine("Current Category: " + currentCat);
                                             Console.WriteLine("\nChange to:");
                                             currentCat = Console.ReadLine();
@@ -316,6 +305,7 @@ namespace SE_Assignment
                                         }
                                         else if (input == "4")  // Edit Price
                                         {
+                                            double currentPrice = foodToEdit.Price;
                                             string inputPrice = "";
                                             while (!double.TryParse(inputPrice, out currentPrice))   // Check if input is valid
                                             {
@@ -332,6 +322,7 @@ namespace SE_Assignment
                                         }
                                         else if (input == "5")  // Edit Unit
                                         {
+                                            string currentUnit = foodToEdit.Unit;
                                             Console.WriteLine("Current Unit: " + currentUnit);
                                             Console.WriteLine("\nChange to:");
                                             currentUnit = Console.ReadLine();
@@ -339,6 +330,7 @@ namespace SE_Assignment
                                         }
                                         else if (input == "6")  // Change Status
                                         {
+                                            string currentStatus = foodToEdit.Status;
                                             // Swap status
                                             if (foodToEdit.Status == "Available")
                                                 currentStatus = "Unavailable";
@@ -366,13 +358,7 @@ namespace SE_Assignment
                                                 {
                                                     Console.WriteLine("\n========== Add Food to " + currentTitle + " ===========");
                                                     // Display all À la Carte items
-                                                    if (mainMenu.GetCurrent().IsSetMenu == false)
-                                                        Console.WriteLine(mainMenu.GetCurrent().NewToString(true));
-                                                    while (mainMenu.HasNextFood())
-                                                    {
-                                                        if (mainMenu.NextFood().IsSetMenu == false)
-                                                            Console.WriteLine(mainMenu.GetCurrent().NewToString(true));
-                                                    }
+                                                    m1.displayAllFood(mainMenu, 1);
                                                     Console.WriteLine("\n\nFood to Add:");
                                                     try   // Check if input is valid
                                                     {
@@ -541,7 +527,7 @@ namespace SE_Assignment
                     {
                         foreach (Order order in oc.GetAllOrdersWhereState("ready"))
                         {
-                            Console.WriteLine("Order " + order.OrderID);
+                            Console.WriteLine(order.displayOrderDetails());
                         }
                         Console.WriteLine("Dispatch an order: ");
                         string input = Console.ReadLine();
@@ -557,7 +543,7 @@ namespace SE_Assignment
                     {
                         foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
                         {
-                            Console.WriteLine("Order " + order.OrderID);
+                            Console.WriteLine(order.displayOrderDetails());
                         }
                         Console.WriteLine("Confirm a delivery: ");
                         string input = Console.ReadLine();
@@ -728,8 +714,8 @@ namespace SE_Assignment
                                     Console.WriteLine("Credit Card selected");
                                     Console.Write("Credit Card Name: ");
                                     string name = Console.ReadLine();
-                                    //Console.WriteLine("Credit Card Number: ");
-                                    //string creditcardnumber = Console.ReadLine();
+                                    Console.WriteLine("Credit Card Number: ");
+                                    string creditcardnumber = Console.ReadLine();
                                     Console.Write("Cvc: ");
                                     string cvc = Console.ReadLine();
                                     Console.Write("Date of expiry: ");
@@ -799,19 +785,19 @@ namespace SE_Assignment
                             {
                                 foreach (Order order in oc.GetAllOrdersWhereState("dispatched"))
                                 {
-                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                    Console.WriteLine(order.displayOrderDetails());
                                 }
                                 foreach (Order order in oc.GetAllOrdersWhereState("ready"))
                                 {
-                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                    Console.WriteLine(order.displayOrderDetails());
                                 }
                                 foreach (Order order in oc.GetAllOrdersWhereState("preparing"))
                                 {
-                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                    Console.WriteLine(order.displayOrderDetails());
                                 }
                                 foreach (Order order in oc.GetAllOrdersWhereState("new"))
                                 {
-                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                    Console.WriteLine(order.displayOrderDetails());
                                 }
                             }
                             else
@@ -825,7 +811,7 @@ namespace SE_Assignment
                             {
                                 foreach (Order order in oc.GetAllOrdersWhereState("delivered"))
                                 {
-                                    Console.WriteLine("Order " + order.OrderID + " " + order.getCurrentState().getStateName());
+                                    Console.WriteLine(order.displayOrderDetails());
                                 }
                             }
                             else
