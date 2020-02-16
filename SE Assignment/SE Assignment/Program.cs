@@ -714,8 +714,8 @@ namespace SE_Assignment
                                     Console.WriteLine("Credit Card selected");
                                     Console.Write("Credit Card Name: ");
                                     string name = Console.ReadLine();
-                                    //Console.WriteLine("Credit Card Number: ");
-                                    //string creditcardnumber = Console.ReadLine();
+                                    Console.WriteLine("Credit Card Number: ");
+                                    string creditcardnumber = Console.ReadLine();
                                     Console.Write("Cvc: ");
                                     string cvc = Console.ReadLine();
                                     Console.Write("Date of expiry: ");
