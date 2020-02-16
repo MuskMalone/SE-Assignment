@@ -72,11 +72,6 @@ namespace SE_Assignment
             return amount;
         }
 
-        public void placeOrder()
-        {
-
-        }      
-
         public void update(string orderstatus)
         {
             string updateMessage = "Customer " + Convert.ToString(customerId) + ", " + name + ", your order is in " + orderstatus + " state.";
@@ -112,16 +107,6 @@ namespace SE_Assignment
                 Console.WriteLine("order does not exist!!!");
             }
 
-        }
-
-        public void rateRestaurant()
-        {
-
-        }
-
-        public void ConfirmdOrder(int orderid)
-        {
-            orderCollection.GetOrder(orderid).getCurrentState().confirmOrder();
         }
     }
 }

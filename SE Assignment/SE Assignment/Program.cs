@@ -11,6 +11,9 @@ namespace SE_Assignment
         // OBJECTS CREATED HERE
         static OrderCollection oc = new OrderCollection();
         static Manager m1 = new Manager(1, "Cheng En", "T0034912C", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
+        static Dispatcher d1 = new Dispatcher("Nikko", 3, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
+        static Chef c1 = new Chef("Cheng Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
+
         static FoodIterator mainMenu = m1.CreateFoodIterator();
         static int OrderCount = 1;
         static int globalFoodID = 1;
@@ -22,19 +25,10 @@ namespace SE_Assignment
 
         static void initalizer(List<Manager> mList, List<Dispatcher> dList, List<Chef> cList, List<Customer> customerList, List<Receipt> rList)
         {
-            //Manager m1 = new Manager(1, "Cheng En", "S6666666X", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
-            //Manager m2 = new Manager(2, "cheng en", "S6666667X", 'M', "On Duty", oc, DateTime.UtcNow, DateTime.UtcNow);
             mList.Add(m1);
-            //mList.Add(m2);
-
-            Dispatcher d1 = new Dispatcher("Nikko", 3, "S3333333X", 'M', DateTime.UtcNow, "On Duty", oc);
             dList.Add(d1);
-
-            Chef c1 = new Chef("Cheng Hian", 1, "S7777777X", 'M', DateTime.UtcNow, "On Duty", oc);
-            Chef c2 = new Chef("Hian Hian", 1, "S7777777X", 'F', DateTime.UtcNow, "On Duty", oc);
             cList.Add(c1);
-            cList.Add(c2);
-
+            
             Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489", oc);
             customerList.Add(customer1);
         }
@@ -59,9 +53,7 @@ namespace SE_Assignment
 
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
-
-
-
+                
                 // TO MANAGER SCREEN
                 if (option == "1")
                 {
@@ -682,17 +674,7 @@ namespace SE_Assignment
                                 {
                                     // No extra charge
                                     publicamount = c.GetCartTotal();
-                                    Console.WriteLine("total to pay is " + publicamount.ToString());
-                                    //double alcmpaymentamount = alcM.GetCurrent().GetTotalAmount();
-                                    // Console.WriteLine("[alcm amount is " + alcmpaymentamount);
-
-
-                                    //double setmpaymentamount = setM.GetCurrent().GetPrice();
-                                    // Console.WriteLine("setm amount is " + setmpaymentamount);
-                                    //no express fee, delivery
-                                    //publicamount = alcmpaymentamount + setmpaymentamount;
-                                    //Console.WriteLine("total to pay is " + publicamount.ToString());
-
+                                    Console.WriteLine("total to pay is " + publicamount.ToString());                                   
                                 }
 
                                 else if (deliveryoption == "2")
@@ -722,9 +704,7 @@ namespace SE_Assignment
                                     string DOE = Console.ReadLine();
                                     pay(new CreditCard(name, "1234567890123456", cvc, DOE), publicamount);
                                     c.sendOrder(OrderCount);
-                                    //Order newOrder = new Order(OrderCount, "New", c.);
                                     OrderCount++;
-                                    //oc.AddOrder(newOrder, c);
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Credit Card", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);
@@ -849,19 +829,6 @@ namespace SE_Assignment
             List<Receipt> rList = new List<Receipt>();
             Receipt r = new Receipt();
 
-            //MenuItem m1 = new MenuItem(99, "Food 1", "desc 1", "Category 1", 98, "1 Calorie", "Available", false);
-            //MenuItem m2 = new MenuItem(98, "Food 2", "desc 2", "Category 2", 24, "2 Calories", "Available", false);
-            //MenuItem m3 = new MenuItem(97, "Food 3", "desc 3", "Category 3", 45, "3 Calories", "Unavailable", false);
-            //Food f1 = new Food("Food 1", 98);
-            //Food f2 = new Food("Food 2", 24);
-            //Food f3 = new Food("Food 3", 45);
-            //m1.addFood(f1);
-            //m2.addFood(f2);
-            //m3.addFood(f3);
-            //mainMenu.AddFood(m1);
-            //mainMenu.AddFood(m2);
-            //mainMenu.AddFood(m3);
-
             string accountType;
 
             Console.WriteLine("======= SELECT AN ACCOUNT =======");
@@ -891,12 +858,6 @@ namespace SE_Assignment
             {
                 customerScreen(customer, customerList, r, rList);
             }
-            Console.ReadKey();
-
-            //==== Required Function Number 5: View receipt details ====
-
-            //==== END OF Required Function Number 5: View receipt details ====
-
             Console.ReadKey();
         }
     }

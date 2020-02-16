@@ -8,7 +8,6 @@ namespace SE_Assignment
 {
     public class Dispatcher : Employee
     {
-        private Order order;
         private OrderCollection orderCollection;
 
         static private double totalCommission;

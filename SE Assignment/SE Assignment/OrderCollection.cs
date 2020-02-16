@@ -92,10 +92,5 @@ namespace SE_Assignment
             }
             return oL;
         }
-        
-        public void getAllOrderStates()
-        {
-            // Code
-        }
     }
 }
