@@ -35,7 +35,7 @@ namespace SE_Assignment
             cList.Add(c1);
             cList.Add(c2);
 
-            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489");
+            Customer customer1 = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489", oc);
             customerList.Add(customer1);
         }
 
@@ -592,6 +592,7 @@ namespace SE_Assignment
                 Console.WriteLine("\n ======= CUSTOMER SCREEN =======");
                 Console.WriteLine("[1] Make New Order");
                 Console.WriteLine("[2] View Current & Past Orders");
+                Console.WriteLine("[3] Cancel an Order");
                 Console.WriteLine("[0] Homepage");
                 double publicamount = 0.00;
 
@@ -639,7 +640,7 @@ namespace SE_Assignment
                                         Console.WriteLine("Add to Cart: ");
                                         int foodChoice = Convert.ToInt32(Console.ReadLine());
                                         if (mainMenu.GetMenuItem(foodChoice) != null)
-                                            c.custfoodList.Add(mainMenu.GetMenuItem(foodChoice));
+                                            c.addToCart(mainMenu.GetMenuItem(foodChoice));
                                         else
                                             Console.WriteLine("Invalid Selection!");
                                     }
@@ -670,7 +671,7 @@ namespace SE_Assignment
                                         Console.Write("Add to Cart: ");
                                         int foodChoice = Convert.ToInt32(Console.ReadLine());
                                         if (mainMenu.GetMenuItem(foodChoice) != null)
-                                            c.custfoodList.Add(mainMenu.GetMenuItem(foodChoice));
+                                            c.addToCart(mainMenu.GetMenuItem(foodChoice));
                                         else
                                             Console.WriteLine("Invalid Selection!");
                                     }
@@ -734,9 +735,10 @@ namespace SE_Assignment
                                     Console.Write("Date of expiry: ");
                                     string DOE = Console.ReadLine();
                                     pay(new CreditCard(name, "1234567890123456", cvc, DOE), publicamount);
-                                    Order newOrder = new Order(OrderCount, "New");
+                                    c.sendOrder(OrderCount);
+                                    //Order newOrder = new Order(OrderCount, "New", c.);
                                     OrderCount++;
-                                    oc.AddOrder(newOrder, c);
+                                    //oc.AddOrder(newOrder, c);
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Credit Card", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);
@@ -753,15 +755,21 @@ namespace SE_Assignment
                                     Console.Write("Currency: ");
                                     string curr = Console.ReadLine();
                                     pay(new Paypal(name, curr), publicamount);
-                                    Order newOrder = new Order(OrderCount, "New");
+                                    c.sendOrder(OrderCount);
                                     OrderCount++;
-                                    oc.AddOrder(newOrder, c);
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Paypal", publicamount);
                                     rList.Add(newReceipt);
                                     newReceipt.viewAllReceipt(rList);
                                     c.custfoodList.Clear();
                                     break;
                                 }
+                            }
+
+                            else if (orderOption == "3")
+                            {
+                                Console.WriteLine("Enter the order id of the order u wish to cancel");
+                                string id = Console.ReadLine();
+                                c.cancelOrder(Int32.Parse(id));
                             }
 
                             else if (orderOption == "0")
@@ -850,7 +858,7 @@ namespace SE_Assignment
             Chef c = new Chef();
 
             List<Customer> customerList = new List<Customer>();
-            Customer customer = new Customer();
+            Customer customer = new Customer("Victor", 100, 94204209, "Victor@np.com", "535 Clementi Rd, Singapore 599489", oc);
 
             List<Receipt> rList = new List<Receipt>();
             Receipt r = new Receipt();

@@ -20,6 +20,10 @@ namespace SE_Assignment
 
         private OrderState currentState;
         private Customer customer;
+        private List<MenuItem> foodList = new List<MenuItem>();
+        private DateTime dateCreated;
+        private DateTime eta;
+        private double totalPrice;
         /*private string orderStatus;
         public String OrderStatus { get; set; }
         public readonly int OrderID;
@@ -31,7 +35,7 @@ namespace SE_Assignment
             //OrderStatus = "new";
         }*/
 
-        public Order(int id, string status) //status should be removed 
+        public Order(int id, string status, List<MenuItem> fL, DateTime created, DateTime estimated, double tP) //status should be removed 
         {
             OrderID = id;
             OrderStatus = "new";
@@ -42,6 +46,10 @@ namespace SE_Assignment
             deliveredState = new DeliveredState(this);
             cancelledState = new CancelledState(this);
             setState(newState);
+            foodList = fL;
+            dateCreated = created;
+            eta = estimated;
+            totalPrice = tP;
         }
         public void setState(OrderState os)
         {
@@ -67,6 +75,12 @@ namespace SE_Assignment
             // Code
         }
 
+        public bool isCancelValid()
+        {
+            if (DateTime.Compare(dateCreated, eta) > 0)
+                return true;
+            return false;
+        }
         public void removeCustomer()
         {
             customer = null;
@@ -82,6 +96,20 @@ namespace SE_Assignment
             }
             Console.WriteLine("");
             // Code
+        }
+
+        public string displayOrderDetails()
+        {
+            string detailsText = ("Order No: " + OrderID + "\n" +
+                    "Payment method: " + OrderStatus + "\n" +
+                    "Order Date & Time: " + dateCreated + "\n" +
+                    "Delivery Date & Time: " + eta + "\n" +
+                    "Amount: $" + totalPrice + "\n");
+            foreach (MenuItem mi in foodList)
+            {
+                detailsText += "\n" + mi.NewToString(false);
+            }
+            return detailsText;
         }
     }
 }

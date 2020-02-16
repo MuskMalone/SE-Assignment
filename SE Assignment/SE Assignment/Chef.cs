@@ -31,7 +31,7 @@ namespace SE_Assignment
             List<Order> oL = ordercollection.GetAllOrdersWhereState("new");
             for (int i = 0; i < oL.Count(); i++)
             {
-                Console.WriteLine(oL[i].OrderID + "      " + oL[i].getCurrentState().getStateName());
+                Console.WriteLine(oL[i].displayOrderDetails());
             }
         }
         public void GetAllPreparingOrders()
@@ -41,7 +41,7 @@ namespace SE_Assignment
             List<Order> oL = ordercollection.GetAllOrdersWhereState("preparing");
             for (int i = 0; i < oL.Count(); i++)
             {
-                Console.WriteLine(oL[i].OrderID + "      " + oL[i].getCurrentState().getStateName());
+                Console.WriteLine(oL[i].displayOrderDetails());
             }
         }
         public void PrepareOrder(int orderid)

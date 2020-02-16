@@ -50,13 +50,14 @@ namespace SE_Assignment
 
         public Customer(){ }
 
-        public Customer(string name, int customerId, int phoneNumber, string email, string address)
+        public Customer(string name, int customerId, int phoneNumber, string email, string address, OrderCollection oc)
         {
             Name = name;
             CustomerId = customerId;
             PhoneNumber = phoneNumber;
             Email = email;
             Address = address;
+            orderCollection = oc;
         }
 
         public double GetCartTotal()
@@ -81,9 +82,35 @@ namespace SE_Assignment
             string updateMessage = "Customer " + Convert.ToString(customerId) + ", " + name + ", your order is in " + orderstatus + " state.";
             Console.WriteLine(updateMessage);
         }
-
-        public void cancelOrder()
+        public void addToCart(MenuItem food)
         {
+            custfoodList.Add(food);
+        }
+        public Order sendOrder(int orderid) 
+        {
+            List<MenuItem> ol = new List<MenuItem>();
+            for(int i = 0; i < custfoodList.Count(); i++)
+            {
+                ol.Add(custfoodList[i]);
+            }
+            Order o = new Order(orderid, "new", ol, DateTime.UtcNow, DateTime.Now.AddHours(1), GetCartTotal());
+            orderCollection.AddOrder(o, this);
+            return o;
+        }
+        public void cancelOrder(int orderid)
+        {
+            try
+            {
+                Order o = orderCollection.GetOrder(orderid);
+                if (o.isCancelValid())
+                {
+                    o.getCurrentState().cancelOrder();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("order does not exist!!!");
+            }
 
         }
 
