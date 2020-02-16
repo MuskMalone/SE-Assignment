@@ -52,11 +52,11 @@ namespace SE_Assignment
             Amount = amount;
         }
         
-        public string getReceiptDetails()
+        public string getReceiptDetails(Order o)
         {
             string receiptText = ("Receipt No: " + ReceiptNo + "\n" +
                     "Receipt Date & Time: " + ReceiptDateTime + "\n" +
-                    "Delivery Date & Time: " + DeliveryDateTime + "\n" +
+                    "Delivery Date & Time: " + o.Eta + "\n" +
                     "Payment method: " + PaymentType + "\n" +
                     "Amount: $" + Amount + "\n");
             foreach (MenuItem mi in foodList)
@@ -66,12 +66,12 @@ namespace SE_Assignment
             return receiptText;
         }
 
-        public void viewAllReceipt(List<Receipt> rList)
+        public void viewAllReceipt(List<Receipt> rList, Order o)
         {
             foreach (Receipt r in rList)
             {
                 Console.WriteLine("==================================");
-                Console.WriteLine(r.getReceiptDetails());
+                Console.WriteLine(r.getReceiptDetails(o));
             }
         }
     }

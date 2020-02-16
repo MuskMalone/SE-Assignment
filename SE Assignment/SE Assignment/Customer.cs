@@ -88,8 +88,11 @@ namespace SE_Assignment
             {
                 ol.Add(custfoodList[i]);
             }
-            Order o = new Order(orderid, "new", ol, DateTime.UtcNow, DateTime.Now.AddHours(1), GetCartTotal());
+            Order o = new Order(orderid, "new", ol, DateTime.UtcNow, DateTime.UtcNow.AddHours(1), GetCartTotal());
             orderCollection.AddOrder(o, this);
+
+
+
             return o;
         }
         public void cancelOrder(int orderid)
@@ -104,7 +107,7 @@ namespace SE_Assignment
             }
             catch(Exception e)
             {
-                Console.WriteLine("order does not exist!!!");
+                Console.WriteLine("Order can only be cancelled 1 hour after it has been made!!!");
             }
 
         }

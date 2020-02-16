@@ -556,7 +556,6 @@ namespace SE_Assignment
         }
 
         // CUSTOMER SCREEN
-        //static void customerScreen(Customer c, Receipt r, List<Receipt> rList, Food f, List<Food> fList, FoodIterator alacartefood)
         static void customerScreen(Customer c, List<Customer> cList, Receipt r, List<Receipt> rList)
         {
             void pay(PaymentStrategy paymentMethod, double amount)
@@ -606,15 +605,7 @@ namespace SE_Assignment
                                     {
                                         // Display all Set Menus
                                         Console.WriteLine("========== Set Menus ===========");
-                                        if (mainMenu.GetCurrent().IsSetMenu == true && mainMenu.GetCurrent().getSize() >= 2 && mainMenu.GetCurrent().Status == "Available")
-                                            Console.WriteLine(mainMenu.GetCurrent().NewToString(false));
-                                        while (mainMenu.HasNextFood())
-                                        {
-                                            if (mainMenu.NextFood().IsSetMenu == true && mainMenu.GetCurrent().getSize() >= 2 && mainMenu.GetCurrent().Status == "Available")
-
-                                                Console.WriteLine("\n" + mainMenu.GetCurrent().NewToString(false));
-                                        }
-
+                                        m1.displayAllFood(mainMenu, 2);
                                         Console.WriteLine("Add to Cart: ");
                                         int foodChoice = Convert.ToInt32(Console.ReadLine());
                                         if (mainMenu.GetMenuItem(foodChoice) != null)
@@ -638,14 +629,7 @@ namespace SE_Assignment
                                     {
                                         // Display all À la Carte
                                         Console.WriteLine("========== À la Carte ===========");
-                                        if (mainMenu.GetCurrent().IsSetMenu == false && mainMenu.GetCurrent().Status == "Available")
-                                            Console.WriteLine(mainMenu.GetCurrent().NewToString(false));
-                                        while (mainMenu.HasNextFood())
-                                        {
-                                            if (mainMenu.NextFood().IsSetMenu == false && mainMenu.GetCurrent().Status == "Available")
-
-                                                Console.WriteLine("\n" + mainMenu.GetCurrent().NewToString(false));
-                                        }
+                                        m1.displayAllFood(mainMenu, 1);
                                         Console.Write("Add to Cart: ");
                                         int foodChoice = Convert.ToInt32(Console.ReadLine());
                                         if (mainMenu.GetMenuItem(foodChoice) != null)
@@ -703,11 +687,11 @@ namespace SE_Assignment
                                     Console.Write("Date of expiry: ");
                                     string DOE = Console.ReadLine();
                                     pay(new CreditCard(name, "1234567890123456", cvc, DOE), publicamount);
-                                    c.sendOrder(OrderCount);
+                                    Order newOrder = c.sendOrder(OrderCount);
                                     OrderCount++;
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Credit Card", publicamount);
                                     rList.Add(newReceipt);
-                                    newReceipt.viewAllReceipt(rList);
+                                    newReceipt.viewAllReceipt(rList, newOrder);
                                     c.custfoodList.Clear();
                                     break;
 
@@ -721,23 +705,15 @@ namespace SE_Assignment
                                     Console.Write("Currency: ");
                                     string curr = Console.ReadLine();
                                     pay(new Paypal(name, curr), publicamount);
-                                    c.sendOrder(OrderCount);
+                                    Order newOrder = c.sendOrder(OrderCount);
                                     OrderCount++;
                                     Receipt newReceipt = new Receipt(ReceiptCount, DateTime.UtcNow, DateTime.UtcNow, c.custfoodList, "Paypal", publicamount);
                                     rList.Add(newReceipt);
-                                    newReceipt.viewAllReceipt(rList);
+                                    newReceipt.viewAllReceipt(rList, newOrder);
                                     c.custfoodList.Clear();
                                     break;
                                 }
                             }
-
-                            else if (orderOption == "3")
-                            {
-                                Console.WriteLine("Enter the order id of the order u wish to cancel");
-                                string id = Console.ReadLine();
-                                c.cancelOrder(Int32.Parse(id));
-                            }
-
                             else if (orderOption == "0")
                             {
                                 break;
@@ -803,6 +779,12 @@ namespace SE_Assignment
                             break;
                         }
                     }
+                }
+                else if (option == "3")
+                {
+                    Console.WriteLine("Enter the order id of the order u wish to cancel");
+                    string id = Console.ReadLine();
+                    c.cancelOrder(Int32.Parse(id));
                 }
 
                 else if (option == "0")

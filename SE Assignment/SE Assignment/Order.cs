@@ -24,16 +24,6 @@ namespace SE_Assignment
         private DateTime dateCreated;
         private DateTime eta;
         private double totalPrice;
-        /*private string orderStatus;
-        public String OrderStatus { get; set; }
-        public readonly int OrderID;
-
-        public Order(int id, string status) //status should be removed 
-        {
-            OrderID = id;
-            OrderStatus = status;
-            //OrderStatus = "new";
-        }*/
 
         public Order(int id, string status, List<MenuItem> fL, DateTime created, DateTime estimated, double tP) //status should be removed 
         {
@@ -68,7 +58,8 @@ namespace SE_Assignment
         public OrderState getDispatchedState() { return dispatchedState; }
         public OrderState getDeliveredState() { return deliveredState; }
         public OrderState getCancelledState() { return cancelledState; }
-        
+        public DateTime Eta { get { return eta; } set { eta = value; } }
+
         public void registerCustomer(Customer c)
         {
             customer = c;

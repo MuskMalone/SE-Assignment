@@ -61,7 +61,7 @@ namespace SE_Assignment
 
         public void displayAllFood(FoodIterator menu, int type)
         {
-            // 1 - Alacarte 2 - SetMenus 0 - All
+            // 1 - Alacarte | 2 - SetMenus | 0 - All
             if (type == 1)
             {
                 if (menu.GetCurrent().IsSetMenu == false)
